@@ -5,6 +5,7 @@ import { ROSNodeDetails } from './ros/models/node-details.model';
 import { ROSNodeService } from './ros/ros-node.service';
 import { Observable } from 'rxjs';
 import { ROSServiceService } from './ros/ros-service.service';
+import { ROSClientService } from './ros/rosclient.service';
 
 @Component({
   selector: 'app-root',
@@ -27,10 +28,12 @@ export class AppComponent {
   nodes: string[] = [];
 
   constructor(
+    private rosClient: ROSClientService,
     private rosTopicService: ROSTopicService,
     private rosServiceService: ROSServiceService,
     private rosParamService: ROSParamService,
     private rosNodeService: ROSNodeService) {
+      /*
       this.rosTopicService.topics.subscribe((topics) => {
         for (let topic of topics) {
           this.topics.push({
@@ -56,5 +59,6 @@ export class AppComponent {
       this.rosNodeService.nodes.subscribe((nodes) => {
         this.nodes = nodes;
       });
+      */
   }
 }

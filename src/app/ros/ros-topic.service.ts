@@ -3,13 +3,14 @@ import { Observable, Subject, Observer } from 'rxjs';
 import { Topic, Message } from 'roslib';
 import { ROSService } from './ros.service';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
+import { ROSClientService } from './rosclient.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ROSTopicService {
 
-  constructor(private rosService: ROSService) { }
+  constructor(private _rosClient: ROSClientService, private rosService: ROSService) { }
 
   create(options: {
     name: string,
@@ -34,14 +35,14 @@ export class ROSTopicService {
     };
 
     const destination: Observer<Message> = {
-      next:(value) => {
+      next: (value) => {
         const message = new Message(value);
         topic.publish(message);
       },
       error: (err) => {
         teardown();
       },
-      complete:() => {
+      complete: () => {
         teardown();
       }
     };
@@ -50,6 +51,30 @@ export class ROSTopicService {
   }
 
   get topics() {
+
+    const param = {
+      linear: {
+        x: 0.1,
+        y: 0.2,
+        z: 0.3
+      },
+      angular: {
+        x: -0.1,
+        y: -0.2,
+        z: -0.3
+      }
+    };
+    const sub = this._rosClient.transceive({ "op": "publish", "id": "test", "topic": "/turtle1/cmd_vel", "type": "geometry_msgs/Twist", "msg": param }).subscribe((response) => {
+      console.log('response', response);
+    }, (err) => {
+      console.log('err', err);
+    }, () => {
+      console.log('complete');
+    });
+    this._rosClient.messages$.subscribe((message) => {
+      console.log(message);
+    });
+
     return new Observable<string[]>((observer) => {
       this.rosService.instance.getTopics((response) => {
         observer.next((<any>response).topics);
@@ -58,9 +83,10 @@ export class ROSTopicService {
         observer.error(err);
       });
     });
+
   }
 
-  
+
   getTopicType(name: string) {
     return new Observable<string>((observer) => {
       this.rosService.instance.getTopicType(name, (topicType) => {

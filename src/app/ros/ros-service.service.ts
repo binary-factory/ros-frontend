@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ROSService } from './ros.service';
 import { ServiceRequest, Service, ServiceResponse } from 'roslib';
 import { Observable } from 'rxjs';
+import { ROSServiceRequest } from './models/ros-service-request';
 
 @Injectable({
   providedIn: 'root'

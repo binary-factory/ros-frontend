@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
+    "class-transformer": "^0.2.0",
     "core-js": "^2.5.4",
     "roslib": "^0.20.0",
     "rxjs": "~6.3.3",
