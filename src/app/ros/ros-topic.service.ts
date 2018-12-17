@@ -64,7 +64,6 @@ export class ROSTopicService {
   getTopicType(name: string) {
     return new Observable<string>((observer) => {
       this.rosService.instance.getTopicType(name, (topicType) => {
-        console.log(topicType);
         observer.next(topicType);
         observer.complete();
       }, (err) => {

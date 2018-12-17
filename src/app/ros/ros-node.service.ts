@@ -9,7 +9,7 @@ import { ROSNodeDetails } from './models/node-details.model';
 export class ROSNodeService {
 
   constructor(private rosService: ROSService) { }
-  
+
   get nodes() {
     return new Observable<string[]>((observer) => {
       this.rosService.instance.getNodes((nodes) => {
@@ -23,7 +23,7 @@ export class ROSNodeService {
 
   getNodeDetails(name: string) {
     return new Observable<ROSNodeDetails>((observer) => {
-      this.rosService.instance.getNodeDetails(name, (publications, subscriptions , services ) => {
+      this.rosService.instance.getNodeDetails(name, (publications, subscriptions, services) => {
         const nodeDetails: ROSNodeDetails = {
           publications,
           subscriptions,
