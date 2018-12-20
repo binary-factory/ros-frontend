@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ROSService } from './ros.service';
+import { ROSClientService } from './ros-client.service';
 import { ROSNodeDetails } from './models/node-details.model';
+import { ROSRequestResponseOptions } from './models/request-response-options';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ROSNodeService {
 
-  constructor(private rosService: ROSService) { }
-  
-  get nodes() {
-    return new Observable<string[]>((observer) => {
-      this.rosService.instance.getNodes((nodes) => {
+  constructor(private _rosClient: ROSClientService) { }
+
+  getNodes(options?: ROSRequestResponseOptions) {
+    const source = new Observable<string[]>((observer) => {
+      this._rosClient.instance.getNodes((nodes) => {
         observer.next(nodes);
         observer.complete();
       }, (err) => {
         observer.error(err);
       });
     });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
   }
 
-  getNodeDetails(name: string) {
-    return new Observable<ROSNodeDetails>((observer) => {
-      this.rosService.instance.getNodeDetails(name, (publications, subscriptions , services ) => {
+  getNodeDetails(name: string, options?: ROSRequestResponseOptions) {
+    const source = new Observable<ROSNodeDetails>((observer) => {
+      this._rosClient.instance.getNodeDetails(name, (publications, subscriptions, services) => {
         const nodeDetails: ROSNodeDetails = {
           publications,
           subscriptions,
@@ -35,5 +38,7 @@ export class ROSNodeService {
         observer.error(err);
       });
     });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
   }
 }

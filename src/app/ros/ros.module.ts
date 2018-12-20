@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ROSService } from './ros.service';
+import { ROSClientService } from './ros-client.service';
 import { ROSTopicService } from './ros-topic.service';
 import { ROSServiceService } from './ros-service.service';
 import { ROSParamService } from './ros-param.service';
 
-import './ros-extended';
+import './ros-typings';
 import { ROSNodeService } from './ros-node.service';
 
 @NgModule({
@@ -14,7 +14,7 @@ import { ROSNodeService } from './ros-node.service';
     CommonModule
   ],
   providers: [
-    ROSService,
+    ROSClientService,
     ROSNodeService,
     ROSParamService,
     ROSServiceService,

@@ -21,7 +21,7 @@ import { ROSServiceConfig } from './ros/ros-config.model';
     {
       provide: ROSServiceConfig,
       useValue: {
-        url: 'ws://172.18.178.214:9090'
+        url: 'ws://192.168.0.34:9090'
       }
     }
   ],

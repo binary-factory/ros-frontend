@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ROSService } from './ros.service';
+import { ROSClientService } from './ros-client.service';
 
-describe('ROSService', () => {
+describe('ROSClientService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ROSService = TestBed.get(ROSService);
+    const service: ROSClientService = TestBed.get(ROSClientService);
     expect(service).toBeTruthy();
   });
 });

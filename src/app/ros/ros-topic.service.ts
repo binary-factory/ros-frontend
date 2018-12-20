@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Observer } from 'rxjs';
 import { Topic, Message } from 'roslib';
-import { ROSService } from './ros.service';
+import { ROSClientService } from './ros-client.service';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
+import { ROSRequestResponseOptions } from './models/request-response-options';
+import { ROSRequestOptions, ROSDefaultRequestOptions } from './models/request-options';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ROSTopicService {
 
-  constructor(private rosService: ROSService) { }
+  constructor(private _rosClient: ROSClientService) { }
 
-  create(options: {
+  createTopicSubject<T>(topicOptions: {
     name: string,
     messageType: string,
     compression?: string,
@@ -19,13 +21,26 @@ export class ROSTopicService {
     queue_size?: number,
     latch?: boolean,
     queue_length?: number
-  }) {
+  }, options?: ROSRequestOptions) {
 
-    const topic = new Topic(Object.assign(options, { ros: this.rosService.instance }));
-    const source: Observable<Message> = new Observable((observer) => {
+    options = Object.assign(ROSDefaultRequestOptions, options || {});
+
+    const topic = new Topic(Object.assign(topicOptions, { ros: this._rosClient.instance }));
+
+    const source = new Observable<T>((observer) => {
       topic.subscribe((message) => {
-        observer.next(message);
+        observer.next(message as T);
       });
+
+      const sub = this._rosClient.connected$.subscribe((connected) => {
+        if (!connected) {
+          observer.error('connection lost!');
+        }
+      });
+
+      return () => {
+        sub.unsubscribe();
+      }
     });
 
     const teardown = () => {
@@ -33,37 +48,43 @@ export class ROSTopicService {
       topic.unadvertise();
     };
 
-    const destination: Observer<Message> = {
-      next:(value) => {
+    const destination: Observer<T> = {
+      next: (value) => {
         const message = new Message(value);
+        if (!options.enqueue	&& !this._rosClient.connected) {
+          return;
+        }
+
         topic.publish(message);
       },
       error: (err) => {
         teardown();
       },
-      complete:() => {
+      complete: () => {
         teardown();
       }
     };
 
-    return new AnonymousSubject(destination, source);
+    return new AnonymousSubject<T>(destination, source);
   }
 
-  get topics() {
-    return new Observable<string[]>((observer) => {
-      this.rosService.instance.getTopics((response) => {
+  getTopicNames(options?: ROSRequestResponseOptions) {
+    const source = new Observable<string[]>((observer) => {
+      this._rosClient.instance.getTopics((response) => {
         observer.next((<any>response).topics);
         observer.complete();
       }, (err) => {
         observer.error(err);
       });
     });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
   }
 
-  
-  getTopicType(name: string) {
-    return new Observable<string>((observer) => {
-      this.rosService.instance.getTopicType(name, (topicType) => {
+
+  getTopicType(name: string, options?: ROSRequestResponseOptions) {
+    const source = new Observable<string>((observer) => {
+      this._rosClient.instance.getTopicType(name, (topicType) => {
         console.log(topicType);
         observer.next(topicType);
         observer.complete();
@@ -71,5 +92,7 @@ export class ROSTopicService {
         observer.error(err);
       });
     });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
   }
 }
