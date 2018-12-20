@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { Ros } from 'roslib';
 import { ROSModule } from './ros/ros.module';
 import { ROSServiceConfig } from './ros/ros-config.model';
+import { GamepadModule } from './gamepad/gamepad.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ROSServiceConfig } from './ros/ros-config.model';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ROSModule
+    ROSModule,
+    GamepadModule
   ],
   providers: [
     {

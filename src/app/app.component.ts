@@ -6,8 +6,8 @@ import { ROSNodeService } from './ros/ros-node.service';
 import { Observable } from 'rxjs';
 import { ROSServiceService } from './ros/ros-service.service';
 import { ROSClientService } from './ros/ros-client.service';
-import { TestBed } from '@angular/core/testing';
 import { retry } from 'rxjs/operators';
+import { GamepadService } from './gamepad/gamepad.service';
 
 @Component({
   selector: 'app-root',
@@ -34,14 +34,31 @@ export class AppComponent {
     private rosTopicService: ROSTopicService,
     private rosServiceService: ROSServiceService,
     private rosParamService: ROSParamService,
-    private rosNodeService: ROSNodeService) {
+    private rosNodeService: ROSNodeService,
+    private gamepadService: GamepadService) {
 
 
     this.rosClient.connected$.subscribe((connected) => {
       if (connected) {
         this.test();
       }
+
+
     });
+    let timer: NodeJS.Timer;
+    this.gamepadService.gamepads$.subscribe((gamepads) => {
+      if (gamepads[0] && gamepads[0].connected) {
+        timer = setInterval(() => {
+          const gamepad = navigator.getGamepads()[0];
+
+          for (var i = 0; i < gamepad.axes.length; i += 2) {
+            console.log("Stick " + (Math.ceil(i / 2) + 1) + ": " + gamepad.axes[i] + "," + gamepad.axes[i + 1]);
+          }
+        }, 100);
+      } else {
+        clearInterval(timer);
+      }
+    })
   }
 
   test() {
@@ -80,5 +97,6 @@ export class AppComponent {
     topic.pipe(retry(5)).subscribe((pos) => {
       console.log(pos);
     });
+
   }
 }
