@@ -16,7 +16,7 @@ import { Component, Input } from '@angular/core';
         <div class="status">{{ on ? 'ON' : 'OFF' }}</div>
       </div>
     </nb-card>
-  `,
+  `
 })
 export class StatusCardComponent {
 

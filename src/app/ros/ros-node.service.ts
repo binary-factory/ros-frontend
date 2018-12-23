@@ -9,7 +9,8 @@ import { ROSRequestResponseOptions } from './models/request-response-options';
 })
 export class ROSNodeService {
 
-  constructor(private _rosClient: ROSClientService) { }
+  constructor(private _rosClient: ROSClientService) {
+  }
 
   getNodes(options?: ROSRequestResponseOptions) {
     const source = new Observable<string[]>((observer) => {
@@ -31,7 +32,7 @@ export class ROSNodeService {
           publications,
           subscriptions,
           services
-        }
+        };
         observer.next(nodeDetails);
         observer.complete();
       }, (err) => {

@@ -9,36 +9,36 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'ROS',
-    group: true,
+    group: true
   },
   {
     title: 'Übersicht',
     icon: 'nb-home',
-    link: '/pages/iot-dashboard',
+    link: '/pages/iot-dashboard'
   },
   {
     title: 'Nodes',
     icon: 'nb-home',
-    link: '/pages/iot-dashboard',
+    link: '/pages/iot-dashboard'
   },
   {
     title: 'Topics',
     icon: 'nb-home',
-    link: '/pages/iot-dashboard',
+    link: '/pages/iot-dashboard'
   },
   {
     title: 'Services',
     icon: 'nb-home',
-    link: '/pages/iot-dashboard',
+    link: '/pages/iot-dashboard'
   },
   {
     title: 'Params',
     icon: 'nb-home',
-    link: '/pages/iot-dashboard',
+    link: '/pages/iot-dashboard'
   },
   {
     title: 'FEATURES',
-    group: true,
+    group: true
   },
   {
     title: 'Extra Components',
@@ -46,33 +46,33 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Stepper',
-        link: '/pages/extra-components/stepper',
+        link: '/pages/extra-components/stepper'
       },
       {
         title: 'List',
-        link: '/pages/extra-components/list',
+        link: '/pages/extra-components/list'
       },
       {
         title: 'Accordion',
-        link: '/pages/extra-components/accordion',
+        link: '/pages/extra-components/accordion'
       },
       {
         title: 'Progress Bar',
-        link: '/pages/extra-components/progress-bar',
+        link: '/pages/extra-components/progress-bar'
       },
       {
         title: 'Spinner',
-        link: '/pages/extra-components/spinner',
+        link: '/pages/extra-components/spinner'
       },
       {
         title: 'Alert',
-        link: '/pages/extra-components/alert',
+        link: '/pages/extra-components/alert'
       },
       {
         title: 'Tabs',
-        link: '/pages/extra-components/tabs',
-      },
-    ],
+        link: '/pages/extra-components/tabs'
+      }
+    ]
   },
   {
     title: 'Forms',
@@ -80,21 +80,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Form Inputs',
-        link: '/pages/forms/inputs',
+        link: '/pages/forms/inputs'
       },
       {
         title: 'Form Layouts',
-        link: '/pages/forms/layouts',
+        link: '/pages/forms/layouts'
       },
       {
         title: 'Buttons',
-        link: '/pages/forms/buttons',
+        link: '/pages/forms/buttons'
       },
       {
         title: 'Datepicker',
-        link: '/pages/forms/datepicker',
-      },
-    ],
+        link: '/pages/forms/datepicker'
+      }
+    ]
   },
   {
     title: 'Modal & Overlays',
@@ -102,25 +102,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Dialog',
-        link: '/pages/modal-overlays/dialog',
+        link: '/pages/modal-overlays/dialog'
       },
       {
         title: 'Window',
-        link: '/pages/modal-overlays/window',
+        link: '/pages/modal-overlays/window'
       },
       {
         title: 'Popover',
-        link: '/pages/modal-overlays/popover',
+        link: '/pages/modal-overlays/popover'
       },
       {
         title: 'Toastr',
-        link: '/pages/modal-overlays/toastr',
+        link: '/pages/modal-overlays/toastr'
       },
       {
         title: 'Tooltip',
-        link: '/pages/modal-overlays/tooltip',
-      },
-    ],
+        link: '/pages/modal-overlays/tooltip'
+      }
+    ]
   },
   {
     title: 'Bootstrap',
@@ -128,17 +128,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Form Inputs',
-        link: '/pages/bootstrap/inputs',
+        link: '/pages/bootstrap/inputs'
       },
       {
         title: 'Buttons',
-        link: '/pages/bootstrap/buttons',
+        link: '/pages/bootstrap/buttons'
       },
       {
         title: 'Modal',
-        link: '/pages/bootstrap/modal',
-      },
-    ],
+        link: '/pages/bootstrap/modal'
+      }
+    ]
   },
   {
     title: 'Charts',
@@ -146,17 +146,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Echarts',
-        link: '/pages/charts/echarts',
+        link: '/pages/charts/echarts'
       },
       {
         title: 'Charts.js',
-        link: '/pages/charts/chartjs',
+        link: '/pages/charts/chartjs'
       },
       {
         title: 'D3',
-        link: '/pages/charts/d3',
-      },
-    ],
+        link: '/pages/charts/d3'
+      }
+    ]
   },
   {
     title: 'Tables',
@@ -164,9 +164,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-    ],
+        link: '/pages/tables/smart-table'
+      }
+    ]
   },
   {
     title: 'Miscellaneous',
@@ -174,9 +174,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '404',
-        link: '/pages/miscellaneous/404',
-      },
-    ],
+        link: '/pages/miscellaneous/404'
+      }
+    ]
   },
   {
     title: 'Auth',
@@ -184,20 +184,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Login',
-        link: '/auth/login',
+        link: '/auth/login'
       },
       {
         title: 'Register',
-        link: '/auth/register',
+        link: '/auth/register'
       },
       {
         title: 'Request Password',
-        link: '/auth/request-password',
+        link: '/auth/request-password'
       },
       {
         title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
+        link: '/auth/reset-password'
+      }
+    ]
+  }
 ];

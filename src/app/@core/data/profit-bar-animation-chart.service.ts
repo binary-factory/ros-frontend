@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf,  Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 
 @Injectable()
 export class ProfitBarAnimationChartService {
@@ -9,7 +9,7 @@ export class ProfitBarAnimationChartService {
   constructor() {
     this.data = {
       firstLine: this.getDataForFirstLine(),
-      secondLine: this.getDataForSecondLine(),
+      secondLine: this.getDataForSecondLine()
     };
   }
 

@@ -10,7 +10,8 @@ import { ROSRequestResponseOptions } from './models/request-response-options';
 })
 export class ROSParamService {
 
-  constructor(private _rosClient: ROSClientService, private rosServiceService: ROSServiceService) { }
+  constructor(private _rosClient: ROSClientService, private rosServiceService: ROSServiceService) {
+  }
 
   getParam(name: string, options?: ROSRequestResponseOptions) {
     const serviceArgs = {

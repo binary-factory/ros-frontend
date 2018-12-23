@@ -29,20 +29,19 @@ import { takeWhile } from 'rxjs/operators';
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
     </nb-layout>
-  `,
+  `
 })
 export class OneColumnLayoutComponent implements OnDestroy {
 
-  private alive = true;
-
   currentTheme: string;
+  private alive = true;
 
   constructor(protected themeService: NbThemeService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.currentTheme = theme.name;
-    });
+      });
   }
 
   ngOnDestroy() {

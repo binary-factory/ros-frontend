@@ -14,22 +14,21 @@ const points = [300, 520, 435, 530, 730, 620, 660, 860];
          class="echart"
          (chartInit)="onChartInit($event)">
     </div>
-  `,
+  `
 })
 export class TrafficChartComponent implements AfterViewInit, OnDestroy {
-
-  private alive = true;
 
   type = 'month';
   types = ['week', 'month', 'year'];
   option: any = {};
   echartsIntance: any;
+  private alive = true;
 
   constructor(private theme: NbThemeService,
               private layoutService: LayoutService) {
     this.layoutService.onChangeLayoutSize()
       .pipe(
-        takeWhile(() => this.alive),
+        takeWhile(() => this.alive)
       )
       .subscribe(() => this.resizeChart());
   }
@@ -38,7 +37,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
     this.theme.getJsTheme()
       .pipe(
         delay(1),
-        takeWhile(() => this.alive),
+        takeWhile(() => this.alive)
       )
       .subscribe(config => {
         const trafficTheme: any = config.variables.traffic;
@@ -48,48 +47,48 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
             left: 0,
             top: 0,
             right: 0,
-            bottom: 0,
+            bottom: 0
           },
           xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: points,
+            data: points
           },
           yAxis: {
             boundaryGap: [0, '5%'],
             axisLine: {
-              show: false,
+              show: false
             },
             axisLabel: {
-              show: false,
+              show: false
             },
             axisTick: {
-              show: false,
+              show: false
             },
             splitLine: {
               show: true,
               lineStyle: {
                 color: trafficTheme.colorBlack,
                 opacity: 0.06,
-                width: '1',
-              },
-            },
+                width: '1'
+              }
+            }
           },
           tooltip: {
             axisPointer: {
-              type: 'shadow',
+              type: 'shadow'
             },
             textStyle: {
               color: trafficTheme.tooltipTextColor,
               fontWeight: trafficTheme.tooltipFontWeight,
-              fontSize: 16,
+              fontSize: 16
             },
             position: 'top',
             backgroundColor: trafficTheme.tooltipBg,
             borderColor: trafficTheme.tooltipBorderColor,
             borderWidth: 3,
             formatter: '{c0} MB',
-            extraCssText: trafficTheme.tooltipExtraCss,
+            extraCssText: trafficTheme.tooltipExtraCss
           },
           series: [
             {
@@ -100,21 +99,21 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
               silent: true,
               itemStyle: {
                 normal: {
-                  color: trafficTheme.shadowLineDarkBg,
+                  color: trafficTheme.shadowLineDarkBg
                 },
                 emphasis: {
                   color: 'rgba(0,0,0,0)',
                   borderColor: 'rgba(0,0,0,0)',
-                  borderWidth: 0,
-                },
+                  borderWidth: 0
+                }
               },
               lineStyle: {
                 normal: {
                   width: 2,
-                  color: trafficTheme.shadowLineDarkBg,
-                },
+                  color: trafficTheme.shadowLineDarkBg
+                }
               },
-              data: points.map(p => p - 15),
+              data: points.map(p => p - 15)
             },
             {
               type: 'line',
@@ -125,39 +124,39 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
                 normal: {
                   color: trafficTheme.itemColor,
                   borderColor: trafficTheme.itemBorderColor,
-                  borderWidth: 2,
+                  borderWidth: 2
                 },
                 emphasis: {
                   color: 'white',
                   borderColor: trafficTheme.itemEmphasisBorderColor,
-                  borderWidth: 2,
-                },
+                  borderWidth: 2
+                }
               },
               lineStyle: {
                 normal: {
                   width: 2,
                   color: trafficTheme.lineBg,
                   shadowColor: trafficTheme.lineBg,
-                  shadowBlur: trafficTheme.lineShadowBlur,
-                },
+                  shadowBlur: trafficTheme.lineShadowBlur
+                }
               },
               areaStyle: {
                 normal: {
                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: trafficTheme.gradFrom,
+                    color: trafficTheme.gradFrom
                   }, {
                     offset: 1,
-                    color: trafficTheme.gradTo,
+                    color: trafficTheme.gradTo
                   }]),
-                  opacity: 1,
-                },
+                  opacity: 1
+                }
               },
-              data: points,
-            },
-          ],
+              data: points
+            }
+          ]
         });
-    });
+      });
   }
 
   onChartInit(echarts) {

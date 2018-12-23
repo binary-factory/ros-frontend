@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ngx-spinner-in-tabs',
   templateUrl: 'spinner-in-tabs.component.html',
-  styleUrls: ['spinner-in-tabs.component.scss'],
+  styleUrls: ['spinner-in-tabs.component.scss']
 })
 
 export class SpinnerInTabsComponent {

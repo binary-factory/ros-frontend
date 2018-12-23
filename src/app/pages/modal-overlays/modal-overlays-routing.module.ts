@@ -13,30 +13,30 @@ const routes: Routes = [{
   children: [
     {
       path: 'dialog',
-      component: DialogComponent,
+      component: DialogComponent
     },
     {
       path: 'window',
-      component: WindowComponent,
+      component: WindowComponent
     },
     {
       path: 'popover',
-      component: PopoversComponent,
+      component: PopoversComponent
     },
     {
       path: 'tooltip',
-      component: TooltipComponent,
+      component: TooltipComponent
     },
     {
       path: 'toastr',
-      component: ToastrComponent,
-    },
-  ],
+      component: ToastrComponent
+    }
+  ]
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class ModalOverlaysRoutingModule {
 }

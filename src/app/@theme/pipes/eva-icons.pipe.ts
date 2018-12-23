@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Pipe, PipeTransform } from '@angular/core';
 import { icons } from 'eva-icons';
 
-@Pipe({ name: 'eva' })
+@Pipe({name: 'eva'})
 export class EvaIconsPipe implements PipeTransform {
 
   private defaultOptions = {
@@ -16,10 +16,11 @@ export class EvaIconsPipe implements PipeTransform {
     width: 24,
     fill: 'inherit',
     animationHover: true,
-    animationInfinity: false,
+    animationInfinity: false
   };
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer) {
+  }
 
   transform(icon: string,
             options: {
@@ -29,22 +30,22 @@ export class EvaIconsPipe implements PipeTransform {
               animationType?: string;
               animationHover?: boolean;
               animationInfinity?: boolean;
-            },
+            }
   ) {
     const mergedOptions = {
       ...this.defaultOptions,
-      ...options,
+      ...options
     };
-    const { width, height, fill, animationType, animationHover, animationInfinity } = mergedOptions;
+    const {width, height, fill, animationType, animationHover, animationInfinity} = mergedOptions;
     const animation = animationType ?
-      { type: animationType, hover: animationHover, infinite: animationInfinity } :
+      {type: animationType, hover: animationHover, infinite: animationInfinity} :
       null;
 
     return this.sanitizer.bypassSecurityTrustHtml(icons[icon].toSvg({
       width,
       height,
       fill,
-      animation,
+      animation
     }));
   }
 }

@@ -45,11 +45,12 @@ const components = [
   EchartsMultipleXaxisComponent,
   EchartsAreaStackComponent,
   EchartsBarAnimationComponent,
-  EchartsRadarComponent,
+  EchartsRadarComponent
 ];
 
 @NgModule({
   imports: [ThemeModule, ChartsRoutingModule, NgxEchartsModule, NgxChartsModule, ChartModule],
-  declarations: [...routedComponents, ...components],
+  declarations: [...routedComponents, ...components]
 })
-export class ChartsModule {}
+export class ChartsModule {
+}

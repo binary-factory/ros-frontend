@@ -1,6 +1,6 @@
-import {Component, OnDestroy} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators' ;
+import { takeWhile } from 'rxjs/operators';
 
 interface CardSettings {
   title: string;
@@ -11,42 +11,37 @@ interface CardSettings {
 @Component({
   selector: 'ngx-dashboard',
   styleUrls: ['./dashboard.component.scss'],
-  templateUrl: './dashboard.component.html',
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnDestroy {
-
-  private alive = true;
 
   lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
-    type: 'primary',
+    type: 'primary'
   };
   rollerShadesCard: CardSettings = {
     title: 'Roller Shades',
     iconClass: 'nb-roller-shades',
-    type: 'success',
+    type: 'success'
   };
   wirelessAudioCard: CardSettings = {
     title: 'Wireless Audio',
     iconClass: 'nb-audio',
-    type: 'info',
+    type: 'info'
   };
   coffeeMakerCard: CardSettings = {
     title: 'Coffee Maker',
     iconClass: 'nb-coffee-maker',
-    type: 'warning',
+    type: 'warning'
   };
-
   statusCards: string;
-
   commonStatusCardsSet: CardSettings[] = [
     this.lightCard,
     this.rollerShadesCard,
     this.wirelessAudioCard,
-    this.coffeeMakerCard,
+    this.coffeeMakerCard
   ];
-
   statusCardsByThemes: {
     default: CardSettings[];
     cosmic: CardSettings[];
@@ -57,29 +52,30 @@ export class DashboardComponent implements OnDestroy {
     corporate: [
       {
         ...this.lightCard,
-        type: 'warning',
+        type: 'warning'
       },
       {
         ...this.rollerShadesCard,
-        type: 'primary',
+        type: 'primary'
       },
       {
         ...this.wirelessAudioCard,
-        type: 'danger',
+        type: 'danger'
       },
       {
         ...this.coffeeMakerCard,
-        type: 'secondary',
-      },
-    ],
+        type: 'secondary'
+      }
+    ]
   };
+  private alive = true;
 
   constructor(private themeService: NbThemeService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
         this.statusCards = this.statusCardsByThemes[theme.name];
-    });
+      });
   }
 
   ngOnDestroy() {

@@ -12,15 +12,14 @@ import { LayoutService } from '../../../../@core/data/layout.service';
          class="echart"
          (chartInit)="onChartInit($event)">
     </div>
-  `,
+  `
 })
 export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
-
-  private alive = true;
 
   option: any;
   data: Array<any>;
   echartsIntance: any;
+  private alive = true;
 
   constructor(private theme: NbThemeService,
               private layoutService: LayoutService) {
@@ -32,12 +31,12 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
 
     this.data = points.map((p, index) => ({
       label: (index % 5 === 3) ? `${Math.round(index / 5)}` : '',
-      value: p,
+      value: p
     }));
 
     this.layoutService.onChangeLayoutSize()
       .pipe(
-        takeWhile(() => this.alive),
+        takeWhile(() => this.alive)
       )
       .subscribe(() => this.resizeChart());
   }
@@ -46,7 +45,7 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
     this.theme.getJsTheme()
       .pipe(
         takeWhile(() => this.alive),
-        delay(1),
+        delay(1)
       )
       .subscribe(config => {
         const eTheme: any = config.variables.electricity;
@@ -56,7 +55,7 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
             left: 0,
             top: 0,
             right: 0,
-            bottom: 80,
+            bottom: 80
           },
           tooltip: {
             trigger: 'axis',
@@ -64,20 +63,20 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
               type: 'line',
               lineStyle: {
                 color: eTheme.tooltipLineColor,
-                width: eTheme.tooltipLineWidth,
-              },
+                width: eTheme.tooltipLineWidth
+              }
             },
             textStyle: {
               color: eTheme.tooltipTextColor,
               fontSize: 20,
-              fontWeight: eTheme.tooltipFontWeight,
+              fontWeight: eTheme.tooltipFontWeight
             },
             position: 'top',
             backgroundColor: eTheme.tooltipBg,
             borderColor: eTheme.tooltipBorderColor,
             borderWidth: 3,
             formatter: '{c0} kWh',
-            extraCssText: eTheme.tooltipExtraCss,
+            extraCssText: eTheme.tooltipExtraCss
           },
           xAxis: {
             type: 'category',
@@ -85,37 +84,37 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
             offset: 25,
             data: this.data.map(i => i.label),
             axisTick: {
-              show: false,
+              show: false
             },
             axisLabel: {
               color: eTheme.xAxisTextColor,
-              fontSize: 18,
+              fontSize: 18
             },
             axisLine: {
               lineStyle: {
                 color: eTheme.axisLineColor,
-                width: '2',
-              },
-            },
+                width: '2'
+              }
+            }
           },
           yAxis: {
             boundaryGap: [0, '5%'],
             axisLine: {
-              show: false,
+              show: false
             },
             axisLabel: {
-              show: false,
+              show: false
             },
             axisTick: {
-              show: false,
+              show: false
             },
             splitLine: {
               show: true,
               lineStyle: {
                 color: eTheme.yAxisSplitLine,
-                width: '1',
-              },
-            },
+                width: '1'
+              }
+            }
           },
           series: [
             {
@@ -124,14 +123,14 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
               symbolSize: 20,
               itemStyle: {
                 normal: {
-                  opacity: 0,
+                  opacity: 0
                 },
                 emphasis: {
                   color: '#ffffff',
                   borderColor: eTheme.itemBorderColor,
                   borderWidth: 2,
-                  opacity: 1,
-                },
+                  opacity: 1
+                }
               },
               lineStyle: {
                 normal: {
@@ -139,28 +138,28 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
                   type: eTheme.lineStyle,
                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: eTheme.lineGradFrom,
+                    color: eTheme.lineGradFrom
                   }, {
                     offset: 1,
-                    color: eTheme.lineGradTo,
+                    color: eTheme.lineGradTo
                   }]),
                   shadowColor: eTheme.lineShadow,
                   shadowBlur: 6,
-                  shadowOffsetY: 12,
-                },
+                  shadowOffsetY: 12
+                }
               },
               areaStyle: {
                 normal: {
                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: eTheme.areaGradFrom,
+                    color: eTheme.areaGradFrom
                   }, {
                     offset: 1,
-                    color: eTheme.areaGradTo,
-                  }]),
-                },
+                    color: eTheme.areaGradTo
+                  }])
+                }
               },
-              data: this.data.map(i => i.value),
+              data: this.data.map(i => i.value)
             },
 
             {
@@ -173,21 +172,21 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
                   type: eTheme.lineStyle,
                   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
-                    color: eTheme.lineGradFrom,
+                    color: eTheme.lineGradFrom
                   }, {
                     offset: 1,
-                    color: eTheme.lineGradTo,
+                    color: eTheme.lineGradTo
                   }]),
                   shadowColor: eTheme.shadowLineDarkBg,
                   shadowBlur: 14,
-                  opacity: 1,
-                },
+                  opacity: 1
+                }
               },
-              data: this.data.map(i => i.value),
-            },
-          ],
+              data: this.data.map(i => i.value)
+            }
+          ]
         };
-    });
+      });
   }
 
   onChartInit(echarts) {

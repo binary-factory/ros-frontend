@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'ngx-stepper',
   templateUrl: 'stepper.component.html',
-  styleUrls: ['stepper.component.scss'],
+  styleUrls: ['stepper.component.scss']
 })
 export class StepperComponent implements OnInit {
 
@@ -17,15 +17,15 @@ export class StepperComponent implements OnInit {
 
   ngOnInit() {
     this.firstForm = this.fb.group({
-      firstCtrl: ['', Validators.required],
+      firstCtrl: ['', Validators.required]
     });
 
     this.secondForm = this.fb.group({
-      secondCtrl: ['', Validators.required],
+      secondCtrl: ['', Validators.required]
     });
 
     this.thirdForm = this.fb.group({
-      thirdCtrl: ['', Validators.required],
+      thirdCtrl: ['', Validators.required]
     });
   }
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { BootstrapComponent } from './bootstrap.component';
 import { ModalsComponent } from './modals/modals.component';
@@ -13,21 +13,22 @@ const routes: Routes = [{
   children: [
     {
       path: 'inputs',
-      component: FormInputsComponent,
+      component: FormInputsComponent
     },
     {
       path: 'buttons',
-      component: ButtonsComponent,
+      component: ButtonsComponent
     },
     {
       path: 'modal',
-      component: ModalsComponent,
-    },
-  ],
+      component: ModalsComponent
+    }
+  ]
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class BootstrapRoutingModule { }
+export class BootstrapRoutingModule {
+}

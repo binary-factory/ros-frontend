@@ -16,7 +16,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     <div class="modal-footer">
       <button class="btn btn-md btn-primary" (click)="closeModal()">Save changes</button>
     </div>
-  `,
+  `
 })
 export class ModalComponent {
 
@@ -25,7 +25,8 @@ export class ModalComponent {
     nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis
     nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.`;
 
-  constructor(private activeModal: NgbActiveModal) { }
+  constructor(private activeModal: NgbActiveModal) {
+  }
 
   closeModal() {
     this.activeModal.close();

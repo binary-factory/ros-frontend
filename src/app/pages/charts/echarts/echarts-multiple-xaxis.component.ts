@@ -1,11 +1,11 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-echarts-multiple-xaxis',
   template: `
     <div echarts [options]="options" class="echart"></div>
-  `,
+  `
 })
 export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
   options: any = {};
@@ -26,35 +26,35 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
         tooltip: {
           trigger: 'none',
           axisPointer: {
-            type: 'cross',
-          },
+            type: 'cross'
+          }
         },
         legend: {
           data: ['2015 Precipitation', '2016 Precipitation'],
           textStyle: {
-            color: echarts.textColor,
-          },
+            color: echarts.textColor
+          }
         },
         grid: {
           top: 70,
-          bottom: 50,
+          bottom: 50
         },
         xAxis: [
           {
             type: 'category',
             axisTick: {
-              alignWithLabel: true,
+              alignWithLabel: true
             },
             axisLine: {
               onZero: false,
               lineStyle: {
-                color: colors.info,
-              },
+                color: colors.info
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
+                color: echarts.textColor
+              }
             },
             axisPointer: {
               label: {
@@ -62,8 +62,8 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
                   return (
                     'Precipitation  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
                   );
-                },
-              },
+                }
+              }
             },
             data: [
               '2016-1',
@@ -77,24 +77,24 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
               '2016-9',
               '2016-10',
               '2016-11',
-              '2016-12',
-            ],
+              '2016-12'
+            ]
           },
           {
             type: 'category',
             axisTick: {
-              alignWithLabel: true,
+              alignWithLabel: true
             },
             axisLine: {
               onZero: false,
               lineStyle: {
-                color: colors.success,
-              },
+                color: colors.success
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
+                color: echarts.textColor
+              }
             },
             axisPointer: {
               label: {
@@ -102,8 +102,8 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
                   return (
                     'Precipitation  ' + params.value + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
                   );
-                },
-              },
+                }
+              }
             },
             data: [
               '2015-1',
@@ -117,29 +117,29 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
               '2015-9',
               '2015-10',
               '2015-11',
-              '2015-12',
-            ],
-          },
+              '2015-12'
+            ]
+          }
         ],
         yAxis: [
           {
             type: 'value',
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             splitLine: {
               lineStyle: {
-                color: echarts.splitLineColor,
-              },
+                color: echarts.splitLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         series: [
           {
@@ -147,15 +147,15 @@ export class EchartsMultipleXaxisComponent implements AfterViewInit, OnDestroy {
             type: 'line',
             xAxisIndex: 1,
             smooth: true,
-            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
           },
           {
             name: '2016 Precipitation',
             type: 'line',
             smooth: true,
-            data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7],
-          },
-        ],
+            data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+          }
+        ]
       };
     });
   }

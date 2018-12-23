@@ -16,7 +16,7 @@ import { NbThemeService } from '@nebular/theme';
       [yAxisLabel]="yAxisLabel"
       [autoScale]="autoScale">
     </ngx-charts-polar-chart>
-  `,
+  `
 })
 export class D3PolarComponent implements OnDestroy {
   multi = [
@@ -25,52 +25,52 @@ export class D3PolarComponent implements OnDestroy {
       series: [
         {
           name: '1990',
-          value: 31476,
+          value: 31476
         },
         {
           name: '2000',
-          value: 36953,
+          value: 36953
         },
         {
           name: '2010',
-          value: 40632,
-        },
-      ],
+          value: 40632
+        }
+      ]
     },
     {
       name: 'USA',
       series: [
         {
           name: '1990',
-          value: 37060,
+          value: 37060
         },
         {
           name: '2000',
-          value: 45986,
+          value: 45986
         },
         {
           name: '2010',
-          value: 49737,
-        },
-      ],
+          value: 49737
+        }
+      ]
     },
     {
       name: 'France',
       series: [
         {
           name: '1990',
-          value: 29476,
+          value: 29476
         },
         {
           name: '2000',
-          value: 34774,
+          value: 34774
         },
         {
           name: '2010',
-          value: 36240,
-        },
-      ],
-    },
+          value: 36240
+        }
+      ]
+    }
   ];
   showLegend = true;
   autoScale = true;
@@ -87,7 +87,7 @@ export class D3PolarComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight]
       };
     });
   }

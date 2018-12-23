@@ -15,7 +15,7 @@ import { NbThemeService } from '@nebular/theme';
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel">
     </ngx-charts-line-chart>
-  `,
+  `
 })
 export class D3LineComponent implements OnDestroy {
   multi = [
@@ -24,40 +24,40 @@ export class D3LineComponent implements OnDestroy {
       series: [
         {
           name: '2010',
-          value: 7300,
+          value: 7300
         },
         {
           name: '2011',
-          value: 8940,
-        },
-      ],
+          value: 8940
+        }
+      ]
     },
     {
       name: 'USA',
       series: [
         {
           name: '2010',
-          value: 7870,
+          value: 7870
         },
         {
           name: '2011',
-          value: 8270,
-        },
-      ],
+          value: 8270
+        }
+      ]
     },
     {
       name: 'France',
       series: [
         {
           name: '2010',
-          value: 5002,
+          value: 5002
         },
         {
           name: '2011',
-          value: 5800,
-        },
-      ],
-    },
+          value: 5800
+        }
+      ]
+    }
   ];
   showLegend = true;
   showXAxis = true;
@@ -73,7 +73,7 @@ export class D3LineComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight]
       };
     });
   }

@@ -10,13 +10,13 @@ import { NbThemeService } from '@nebular/theme';
       [legend]="showLegend"
       [labels]="showLabels">
     </ngx-charts-pie-chart>
-  `,
+  `
 })
 export class D3PieComponent implements OnDestroy {
   results = [
-    { name: 'Germany', value: 8940 },
-    { name: 'USA', value: 5000 },
-    { name: 'France', value: 7200 },
+    {name: 'Germany', value: 8940},
+    {name: 'USA', value: 5000},
+    {name: 'France', value: 7200}
   ];
   showLegend = true;
   showLabels = true;
@@ -27,7 +27,7 @@ export class D3PieComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight]
       };
     });
   }

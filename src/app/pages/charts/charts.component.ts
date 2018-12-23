@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'ngx-charts',
   template: `
     <router-outlet></router-outlet>
-  `,
+  `
 })
 export class ChartsComponent {
 }

@@ -11,10 +11,11 @@ import { NbWindowRef } from '@nebular/theme';
       <textarea nbInput id="text"></textarea>
     </form>
   `,
-  styleUrls: ['window-form.component.scss'],
+  styleUrls: ['window-form.component.scss']
 })
 export class WindowFormComponent {
-  constructor(public windowRef: NbWindowRef) {}
+  constructor(public windowRef: NbWindowRef) {
+  }
 
   close() {
     this.windowRef.close();

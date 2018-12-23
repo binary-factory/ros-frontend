@@ -1,11 +1,11 @@
 import { Component, OnDestroy } from '@angular/core';
-import { NbThemeService, NbColorHelper } from '@nebular/theme';
+import { NbColorHelper, NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-chartjs-radar',
   template: `
     <chart type="radar" [data]="data" [options]="options"></chart>
-  `,
+  `
 })
 export class ChartjsRadarComponent implements OnDestroy {
   options: any;
@@ -24,13 +24,13 @@ export class ChartjsRadarComponent implements OnDestroy {
           data: [65, 59, 90, 81, 56, 55, 40],
           label: 'Series A',
           borderColor: colors.danger,
-          backgroundColor: NbColorHelper.hexToRgbA(colors.dangerLight, 0.5),
+          backgroundColor: NbColorHelper.hexToRgbA(colors.dangerLight, 0.5)
         }, {
           data: [28, 48, 40, 19, 96, 27, 100],
           label: 'Series B',
           borderColor: colors.warning,
-          backgroundColor: NbColorHelper.hexToRgbA(colors.warningLight, 0.5),
-        }],
+          backgroundColor: NbColorHelper.hexToRgbA(colors.warningLight, 0.5)
+        }]
       };
 
       this.options = {
@@ -39,21 +39,21 @@ export class ChartjsRadarComponent implements OnDestroy {
         scaleFontColor: 'white',
         legend: {
           labels: {
-            fontColor: chartjs.textColor,
-          },
+            fontColor: chartjs.textColor
+          }
         },
         scale: {
           pointLabels: {
             fontSize: 14,
-            fontColor: chartjs.textColor,
+            fontColor: chartjs.textColor
           },
           gridLines: {
-            color: chartjs.axisLineColor,
+            color: chartjs.axisLineColor
           },
           angleLines: {
-            color: chartjs.axisLineColor,
-          },
-        },
+            color: chartjs.axisLineColor
+          }
+        }
       };
     });
   }

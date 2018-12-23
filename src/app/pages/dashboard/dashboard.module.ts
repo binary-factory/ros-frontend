@@ -24,7 +24,7 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
 @NgModule({
   imports: [
     ThemeModule,
-    NgxEchartsModule,
+    NgxEchartsModule
   ],
   declarations: [
     DashboardComponent,
@@ -43,7 +43,8 @@ import { TrafficChartComponent } from './traffic/traffic-chart.component';
     PlayerComponent,
     SolarComponent,
     TrafficComponent,
-    TrafficChartComponent,
-  ],
+    TrafficChartComponent
+  ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

@@ -8,22 +8,22 @@ import { NbThemeService } from '@nebular/theme';
       [scheme]="colorScheme"
       [results]="single">
     </ngx-charts-advanced-pie-chart>
-  `,
+  `
 })
 export class D3AdvancedPieComponent implements OnDestroy {
   single = [
     {
       name: 'Germany',
-      value: 8940000,
+      value: 8940000
     },
     {
       name: 'USA',
-      value: 5000000,
+      value: 5000000
     },
     {
       name: 'France',
-      value: 7200000,
-    },
+      value: 7200000
+    }
   ];
   colorScheme: any;
   themeSubscription: any;
@@ -32,7 +32,7 @@ export class D3AdvancedPieComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
       const colors: any = config.variables;
       this.colorScheme = {
-        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight],
+        domain: [colors.primaryLight, colors.infoLight, colors.successLight, colors.warningLight, colors.dangerLight]
       };
     });
   }

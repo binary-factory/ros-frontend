@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'ngx-bootstrap',
   template: `
     <router-outlet></router-outlet>
-  `,
+  `
 })
 export class BootstrapComponent {
 }

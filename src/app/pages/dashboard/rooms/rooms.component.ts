@@ -1,5 +1,5 @@
 import { Component, HostBinding, OnDestroy } from '@angular/core';
-import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
+import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-rooms',
@@ -10,17 +10,16 @@ import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@n
       <ngx-room-selector (select)="select($event)"></ngx-room-selector>
       <ngx-player [collapsed]="isCollapsed() && breakpoint.width <= breakpoints.md"></ngx-player>
     </nb-card>
-  `,
+  `
 })
 export class RoomsComponent implements OnDestroy {
-
-  @HostBinding('class.expanded')
-  private expanded: boolean;
-  private selected: number;
 
   breakpoint: NbMediaBreakpoint;
   breakpoints: any;
   themeSubscription: any;
+  @HostBinding('class.expanded')
+  private expanded: boolean;
+  private selected: number;
 
   constructor(private themeService: NbThemeService,
               private breakpointService: NbMediaBreakpointsService) {
@@ -54,11 +53,11 @@ export class RoomsComponent implements OnDestroy {
     return !this.expanded;
   }
 
-  private isSelected(roomNumber): boolean {
-    return this.selected === roomNumber;
-  }
-
   ngOnDestroy() {
     this.themeSubscription.unsubscribe();
+  }
+
+  private isSelected(roomNumber): boolean {
+    return this.selected === roomNumber;
   }
 }

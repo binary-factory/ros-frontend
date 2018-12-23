@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-chartjs-multiple-xaxis',
   template: `
     <chart type="line" [data]="data" [options]="options"></chart>
-  `,
+  `
 })
 export class ChartjsMultipleXaxisComponent implements OnDestroy {
   data: {};
@@ -28,7 +28,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           fill: false,
           borderDash: [5, 5],
           pointRadius: 8,
-          pointHoverRadius: 10,
+          pointHoverRadius: 10
         }, {
           label: 'dataset - individual point sizes',
           data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
@@ -37,7 +37,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           fill: false,
           borderDash: [5, 5],
           pointRadius: 8,
-          pointHoverRadius: 10,
+          pointHoverRadius: 10
         }, {
           label: 'dataset - large pointHoverRadius',
           data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
@@ -45,7 +45,7 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           backgroundColor: colors.info,
           fill: false,
           pointRadius: 8,
-          pointHoverRadius: 10,
+          pointHoverRadius: 10
         }, {
           label: 'dataset - large pointHitRadius',
           data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
@@ -53,8 +53,8 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
           backgroundColor: colors.success,
           fill: false,
           pointRadius: 8,
-          pointHoverRadius: 10,
-        }],
+          pointHoverRadius: 10
+        }]
       };
 
       this.options = {
@@ -63,11 +63,11 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
         legend: {
           position: 'bottom',
           labels: {
-            fontColor: chartjs.textColor,
-          },
+            fontColor: chartjs.textColor
+          }
         },
         hover: {
-          mode: 'index',
+          mode: 'index'
         },
         scales: {
           xAxes: [
@@ -75,34 +75,34 @@ export class ChartjsMultipleXaxisComponent implements OnDestroy {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Month',
+                labelString: 'Month'
               },
               gridLines: {
                 display: true,
-                color: chartjs.axisLineColor,
+                color: chartjs.axisLineColor
               },
               ticks: {
-                fontColor: chartjs.textColor,
-              },
-            },
+                fontColor: chartjs.textColor
+              }
+            }
           ],
           yAxes: [
             {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Value',
+                labelString: 'Value'
               },
               gridLines: {
                 display: true,
-                color: chartjs.axisLineColor,
+                color: chartjs.axisLineColor
               },
               ticks: {
-                fontColor: chartjs.textColor,
-              },
-            },
-          ],
-        },
+                fontColor: chartjs.textColor
+              }
+            }
+          ]
+        }
       };
     });
   }

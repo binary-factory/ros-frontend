@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ExtraComponentsComponent } from './extra-components.component';
 import { AlertComponent } from './alert/alert.component';
@@ -17,31 +17,31 @@ const routes: Routes = [{
   children: [
     {
       path: 'stepper',
-      component: StepperComponent,
+      component: StepperComponent
     },
     {
       path: 'list',
-      component: ListComponent,
+      component: ListComponent
     },
     {
       path: 'form-inputs',
-      component: NebularFormInputsComponent,
+      component: NebularFormInputsComponent
     },
     {
       path: 'accordion',
-      component: AccordionComponent,
+      component: AccordionComponent
     },
     {
       path: 'progress-bar',
-      component: ProgressBarComponent,
+      component: ProgressBarComponent
     },
     {
       path: 'spinner',
-      component: SpinnerComponent,
+      component: SpinnerComponent
     },
     {
       path: 'alert',
-      component: AlertComponent,
+      component: AlertComponent
     },
     {
       path: 'tabs',
@@ -50,24 +50,24 @@ const routes: Routes = [{
         {
           path: '',
           redirectTo: 'tab1',
-          pathMatch: 'full',
+          pathMatch: 'full'
         },
         {
           path: 'tab1',
-          component: Tab1Component,
+          component: Tab1Component
         },
         {
           path: 'tab2',
-          component: Tab2Component,
-        },
-      ],
-    },
-  ],
+          component: Tab2Component
+        }
+      ]
+    }
+  ]
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class ExtraComponentsRoutingModule {
 }

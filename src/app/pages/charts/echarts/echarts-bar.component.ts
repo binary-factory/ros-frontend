@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-echarts-bar',
   template: `
     <div echarts [options]="options" class="echart"></div>
-  `,
+  `
 })
 export class EchartsBarComponent implements AfterViewInit, OnDestroy {
   options: any = {};
@@ -26,62 +26,62 @@ export class EchartsBarComponent implements AfterViewInit, OnDestroy {
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'shadow',
-          },
+            type: 'shadow'
+          }
         },
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true,
+          containLabel: true
         },
         xAxis: [
           {
             type: 'category',
             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             axisTick: {
-              alignWithLabel: true,
+              alignWithLabel: true
             },
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         yAxis: [
           {
             type: 'value',
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             splitLine: {
               lineStyle: {
-                color: echarts.splitLineColor,
-              },
+                color: echarts.splitLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         series: [
           {
             name: 'Score',
             type: 'bar',
             barWidth: '60%',
-            data: [10, 52, 200, 334, 390, 330, 220],
-          },
-        ],
+            data: [10, 52, 200, 334, 390, 330, 220]
+          }
+        ]
       };
     });
   }

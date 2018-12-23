@@ -16,17 +16,21 @@ export class ProfitChartService {
     '2015',
     '2016',
     '2017',
-    '2018',
+    '2018'
   ];
 
-  private data = { };
+  private data = {};
 
   constructor(private period: PeriodsService) {
     this.data = {
       week: this.getDataForWeekPeriod(),
       month: this.getDataForMonthPeriod(),
-      year: this.getDataForYearPeriod(),
+      year: this.getDataForYearPeriod()
     };
+  }
+
+  getProfitChartData(period: string): ProfitChart {
+    return this.data[period];
   }
 
   private getDataForWeekPeriod(): ProfitChart {
@@ -37,8 +41,8 @@ export class ProfitChartService {
       data: [
         this.getRandomData(nPoint),
         this.getRandomData(nPoint),
-        this.getRandomData(nPoint),
-      ],
+        this.getRandomData(nPoint)
+      ]
     };
   }
 
@@ -50,8 +54,8 @@ export class ProfitChartService {
       data: [
         this.getRandomData(nPoint),
         this.getRandomData(nPoint),
-        this.getRandomData(nPoint),
-      ],
+        this.getRandomData(nPoint)
+      ]
     };
   }
 
@@ -63,8 +67,8 @@ export class ProfitChartService {
       data: [
         this.getRandomData(nPoint),
         this.getRandomData(nPoint),
-        this.getRandomData(nPoint),
-      ],
+        this.getRandomData(nPoint)
+      ]
     };
   }
 
@@ -72,9 +76,5 @@ export class ProfitChartService {
     return Array.from(Array(nPoints)).map(() => {
       return Math.round(Math.random() * 500);
     });
-  }
-
-  getProfitChartData(period: string): ProfitChart {
-    return this.data[period];
   }
 }

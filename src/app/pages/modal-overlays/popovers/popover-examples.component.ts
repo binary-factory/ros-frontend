@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
         </div>
       </nb-tab>
     </nb-tabset>
-  `,
+  `
 })
 export class NgxPopoverTabsComponent {
 }
@@ -37,7 +37,7 @@ export class NgxPopoverTabsComponent {
         <button type="submit" class="btn btn-primary w-100">Send</button>
       </form>
     </div>
-  `,
+  `
 })
 export class NgxPopoverFormComponent {
 }
@@ -55,7 +55,7 @@ export class NgxPopoverFormComponent {
         Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
       </nb-card-body>
     </nb-card>
-  `,
+  `
 })
 export class NgxPopoverCardComponent {
 }

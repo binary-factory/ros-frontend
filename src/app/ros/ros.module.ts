@@ -21,4 +21,5 @@ import { ROSNodeService } from './ros-node.service';
     ROSTopicService
   ]
 })
-export class ROSModule { }
+export class ROSModule {
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf,  Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { PeriodsService } from './periods.service';
 
 export class TrafficList {
@@ -27,8 +27,12 @@ export class TrafficListService {
     this.data = {
       week: this.getDataWeek(),
       month: this.getDataMonth(),
-      year: this.getDataYear(),
+      year: this.getDataYear()
     };
+  }
+
+  getTrafficListData(period: string): Observable<TrafficList> {
+    return observableOf(this.data[period]);
   }
 
   private getDataWeek(): TrafficList[] {
@@ -80,21 +84,17 @@ export class TrafficListService {
         value: this.getRandom(1000),
         delta: {
           up: deltaValue <= 0,
-          value: Math.abs(deltaValue),
+          value: Math.abs(deltaValue)
         },
         comparison: {
           prevDate,
           prevValue,
           nextDate: timePeriod,
-          nextValue,
-        },
+          nextValue
+        }
       };
 
       return [...result, item];
     }, []);
-  }
-
-  getTrafficListData(period: string): Observable<TrafficList> {
-    return observableOf(this.data[period]);
   }
 }

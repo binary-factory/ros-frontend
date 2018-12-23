@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf,  Observable } from 'rxjs';
+import { Observable, of as observableOf } from 'rxjs';
 import { PeriodsService } from './periods.service';
 
 export class UserActive {
@@ -12,16 +12,19 @@ export class UserActive {
 @Injectable()
 export class UserActivityService {
 
-  private getRandom = (roundTo: number) => Math.round(Math.random() * roundTo);
-
   data = {};
+  private getRandom = (roundTo: number) => Math.round(Math.random() * roundTo);
 
   constructor(private periods: PeriodsService) {
     this.data = {
       week: this.getDataWeek(),
       month: this.getDataMonth(),
-      year: this.getDataYear(),
+      year: this.getDataYear()
     };
+  }
+
+  getUserActivityData(period: string): Observable<UserActive[]> {
+    return observableOf(this.data[period]);
   }
 
   private getDataWeek(): UserActive[] {
@@ -30,7 +33,7 @@ export class UserActivityService {
         date: week,
         pagesVisitCount: this.getRandom(1000),
         deltaUp: this.getRandom(1) % 2 === 0,
-        newVisits: this.getRandom(100),
+        newVisits: this.getRandom(100)
       };
     });
   }
@@ -45,7 +48,7 @@ export class UserActivityService {
         date: `${index + 1} ${month}`,
         pagesVisitCount: this.getRandom(1000),
         deltaUp: this.getRandom(1) % 2 === 0,
-        newVisits: this.getRandom(100),
+        newVisits: this.getRandom(100)
       };
     });
   }
@@ -56,12 +59,8 @@ export class UserActivityService {
         date: year,
         pagesVisitCount: this.getRandom(1000),
         deltaUp: this.getRandom(1) % 2 === 0,
-        newVisits: this.getRandom(100),
+        newVisits: this.getRandom(100)
       };
     });
-  }
-
-  getUserActivityData(period: string): Observable<UserActive[]> {
-    return observableOf(this.data[period]);
   }
 }

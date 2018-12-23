@@ -8,10 +8,11 @@ import { ButtonsModule } from './buttons/buttons.module';
   imports: [
     ThemeModule,
     FormsRoutingModule,
-    ButtonsModule,
+    ButtonsModule
   ],
   declarations: [
-    ...routedComponents,
-  ],
+    ...routedComponents
+  ]
 })
-export class FormsModule { }
+export class FormsModule {
+}

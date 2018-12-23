@@ -6,19 +6,21 @@ import { ModalComponent } from './modal/modal.component';
 @Component({
   selector: 'ngx-modals',
   styleUrls: ['./modals.component.scss'],
-  templateUrl: './modals.component.html',
+  templateUrl: './modals.component.html'
 })
 export class ModalsComponent {
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal) {
+  }
 
   showLargeModal() {
-    const activeModal = this.modalService.open(ModalComponent, { size: 'lg', container: 'nb-layout' });
+    const activeModal = this.modalService.open(ModalComponent, {size: 'lg', container: 'nb-layout'});
 
     activeModal.componentInstance.modalHeader = 'Large Modal';
   }
+
   showSmallModal() {
-    const activeModal = this.modalService.open(ModalComponent, { size: 'sm', container: 'nb-layout' });
+    const activeModal = this.modalService.open(ModalComponent, {size: 'sm', container: 'nb-layout'});
 
     activeModal.componentInstance.modalHeader = 'Small Modal';
   }
@@ -27,7 +29,7 @@ export class ModalsComponent {
     const activeModal = this.modalService.open(ModalComponent, {
       size: 'sm',
       backdrop: 'static',
-      container: 'nb-layout',
+      container: 'nb-layout'
     });
 
     activeModal.componentInstance.modalHeader = 'Static modal';

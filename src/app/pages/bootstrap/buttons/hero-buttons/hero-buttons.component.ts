@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'ngx-hero-buttons',
   styleUrls: ['./hero-buttons.component.scss'],
-  templateUrl: './hero-buttons.component.html',
+  templateUrl: './hero-buttons.component.html'
 })
 export class HeroButtonComponent implements OnDestroy {
 
@@ -28,14 +28,14 @@ export class HeroButtonComponent implements OnDestroy {
       buttonTitle: 'Primary',
       default: {
         gradientLeft: `adjust-hue(${colors.primary}, 20deg)`,
-        gradientRight: colors.primary,
+        gradientRight: colors.primary
       },
       corporate: {
         color: colors.primary,
         glow: {
           params: '0 0 20px 0',
-          color: 'rgba (115, 161, 255, 0.5)',
-        },
+          color: 'rgba (115, 161, 255, 0.5)'
+        }
       },
       cosmic: {
         gradientLeft: `adjust-hue(${colors.primary}, 20deg)`,
@@ -44,9 +44,9 @@ export class HeroButtonComponent implements OnDestroy {
         shadow: 'rgba (6, 7, 64, 0.5)',
         glow: {
           params: '0 2px 12px 0',
-          color: `adjust-hue(${colors.primary}, 10deg)`,
-        },
-      },
+          color: `adjust-hue(${colors.primary}, 10deg)`
+        }
+      }
     }, {
       class: 'btn-hero-warning',
       container: 'warning-container',
@@ -54,14 +54,14 @@ export class HeroButtonComponent implements OnDestroy {
       buttonTitle: 'Warning',
       default: {
         gradientLeft: `adjust-hue(${colors.warning}, 10deg)`,
-        gradientRight: colors.warning,
+        gradientRight: colors.warning
       },
       corporate: {
         color: colors.warning,
         glow: {
           params: '0 0 20px 0',
-          color: 'rgba (256, 163, 107, 0.5)',
-        },
+          color: 'rgba (256, 163, 107, 0.5)'
+        }
       },
       cosmic: {
         gradientLeft: `adjust-hue(${colors.warning}, 10deg)`,
@@ -70,9 +70,9 @@ export class HeroButtonComponent implements OnDestroy {
         shadow: 'rgba (33, 7, 77, 0.5)',
         glow: {
           params: '0 2px 12px 0',
-          color: `adjust-hue(${colors.warning}, 5deg)`,
-        },
-      },
+          color: `adjust-hue(${colors.warning}, 5deg)`
+        }
+      }
     }, {
       class: 'btn-hero-success',
       container: 'success-container',
@@ -80,14 +80,14 @@ export class HeroButtonComponent implements OnDestroy {
       buttonTitle: 'Success',
       default: {
         gradientLeft: `adjust-hue(${colors.success}, 20deg)`,
-        gradientRight: colors.success,
+        gradientRight: colors.success
       },
       corporate: {
         color: colors.success,
         glow: {
           params: '0 0 20px 0',
-          color: 'rgba (93, 207, 227, 0.5)',
-        },
+          color: 'rgba (93, 207, 227, 0.5)'
+        }
       },
       cosmic: {
         gradientLeft: `adjust-hue(${colors.success}, 20deg)`,
@@ -96,9 +96,9 @@ export class HeroButtonComponent implements OnDestroy {
         shadow: 'rgba (33, 7, 77, 0.5)',
         glow: {
           params: '0 2px 12px 0',
-          color: `adjust-hue(${colors.success}, 10deg)`,
-        },
-      },
+          color: `adjust-hue(${colors.success}, 10deg)`
+        }
+      }
     }, {
       class: 'btn-hero-info',
       container: 'info-container',
@@ -106,14 +106,14 @@ export class HeroButtonComponent implements OnDestroy {
       buttonTitle: 'Info',
       default: {
         gradientLeft: `adjust-hue(${colors.info}, -10deg)`,
-        gradientRight: colors.info,
+        gradientRight: colors.info
       },
       corporate: {
         color: colors.info,
         glow: {
           params: '0 0 20px 0',
-          color: 'rgba (186, 127, 236, 0.5)',
-        },
+          color: 'rgba (186, 127, 236, 0.5)'
+        }
       },
       cosmic: {
         gradientLeft: `adjust-hue(${colors.info}, -10deg)`,
@@ -122,9 +122,9 @@ export class HeroButtonComponent implements OnDestroy {
         shadow: 'rgba (33, 7, 77, 0.5)',
         glow: {
           params: '0 2px 12px 0',
-          color: `adjust-hue(${colors.info}, -5deg)`,
-        },
-      },
+          color: `adjust-hue(${colors.info}, -5deg)`
+        }
+      }
     }, {
       class: 'btn-hero-danger',
       container: 'danger-container',
@@ -132,14 +132,14 @@ export class HeroButtonComponent implements OnDestroy {
       buttonTitle: 'Danger',
       default: {
         gradientLeft: `adjust-hue(${colors.danger}, -20deg)`,
-        gradientRight: colors.danger,
+        gradientRight: colors.danger
       },
       corporate: {
         color: colors.danger,
         glow: {
           params: '0 0 20px 0',
-          color: 'rgba (255, 107, 131, 0.5)',
-        },
+          color: 'rgba (255, 107, 131, 0.5)'
+        }
       },
       cosmic: {
         gradientLeft: `adjust-hue(${colors.danger}, -20deg)`,
@@ -148,19 +148,19 @@ export class HeroButtonComponent implements OnDestroy {
         shadow: 'rgba (33, 7, 77, 0.5)',
         glow: {
           params: '0 2px 12px 0',
-          color: `adjust-hue(${colors.danger}, -10deg)`,
-        },
-      },
+          color: `adjust-hue(${colors.danger}, -10deg)`
+        }
+      }
     }, {
       class: 'btn-hero-secondary',
       container: 'secondary-container',
       title: 'Ghost Button',
       buttonTitle: 'Ghost',
       default: {
-        border: '#dadfe6',
+        border: '#dadfe6'
       },
       corporate: {
-        color: '#edf2f5',
+        color: '#edf2f5'
       },
       cosmic: {
         border: colors.primary,
@@ -168,9 +168,9 @@ export class HeroButtonComponent implements OnDestroy {
         shadow: 'rgba (33, 7, 77, 0.5)',
         glow: {
           params: '0 2px 12px 0',
-          color: 'rgba (146, 141, 255, 1)',
-        },
-      },
+          color: 'rgba (146, 141, 255, 1)'
+        }
+      }
     }];
   }
 

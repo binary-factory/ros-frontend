@@ -4,58 +4,45 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
+  NbAccordionModule,
   NbActionsModule,
-  NbCardModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbRouteTabsetModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbTabsetModule,
-  NbThemeModule,
-  NbUserModule,
-  NbCheckboxModule,
-  NbPopoverModule,
-  NbContextMenuModule,
-  NbProgressBarModule,
+  NbAlertModule,
+  NbButtonModule,
+  NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
-  NbStepperModule,
-  NbButtonModule,
-  NbInputModule,
-  NbAccordionModule,
+  NbCardModule,
+  NbChatModule,
+  NbCheckboxModule,
+  NbContextMenuModule,
   NbDatepickerModule,
   NbDialogModule,
-  NbWindowModule,
+  NbInputModule,
+  NbLayoutModule,
   NbListModule,
-  NbToastrModule,
-  NbAlertModule,
-  NbSpinnerModule,
+  NbMenuModule,
+  NbPopoverModule,
+  NbProgressBarModule,
   NbRadioModule,
+  NbRouteTabsetModule,
+  NbSearchModule,
   NbSelectModule,
-  NbChatModule,
+  NbSidebarModule,
+  NbSpinnerModule,
+  NbStepperModule,
+  NbTabsetModule,
+  NbThemeModule,
+  NbToastrModule,
   NbTooltipModule,
-  NbCalendarKitModule,
+  NbUserModule,
+  NbWindowModule
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
 
-import {
-  FooterComponent,
-  HeaderComponent,
-  SearchInputComponent,
-} from './components';
-import {
-  CapitalizePipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe,
-  NumberWithCommasPipe,
-  EvaIconsPipe,
-} from './pipes';
-import {
-  OneColumnLayoutComponent
-} from './layouts';
+import { FooterComponent, HeaderComponent, SearchInputComponent } from './components';
+import { CapitalizePipe, EvaIconsPipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
+import { OneColumnLayoutComponent } from './layouts';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
@@ -93,19 +80,17 @@ const NB_MODULES = [
   NbSelectModule,
   NbChatModule,
   NbTooltipModule,
-  NbCalendarKitModule,
+  NbCalendarKitModule
 ];
 
 const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
-  OneColumnLayoutComponent,
+  OneColumnLayoutComponent
 ];
 
-const ENTRY_COMPONENTS = [
-
-];
+const ENTRY_COMPONENTS = [];
 
 const PIPES = [
   CapitalizePipe,
@@ -113,15 +98,15 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
-  EvaIconsPipe,
+  EvaIconsPipe
 ];
 
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'cosmic',
+      name: 'cosmic'
     },
-    [COSMIC_THEME],
+    [COSMIC_THEME]
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
@@ -130,21 +115,21 @@ const NB_THEME_PROVIDERS = [
   ...NbWindowModule.forRoot().providers,
   ...NbToastrModule.forRoot().providers,
   ...NbChatModule.forRoot({
-    messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
-  }).providers,
+    messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY'
+  }).providers
 ];
 
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
-  entryComponents: [...ENTRY_COMPONENTS],
+  entryComponents: [...ENTRY_COMPONENTS]
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
-      providers: [...NB_THEME_PROVIDERS],
+      providers: [...NB_THEME_PROVIDERS]
     };
   }
 }

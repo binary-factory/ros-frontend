@@ -19,11 +19,16 @@ declare const echarts: any;
         </div>
       </nb-card-body>
     </nb-card>
-  `,
+  `
 })
 export class SolarComponent implements AfterViewInit, OnDestroy {
 
+  option: any = {};
+  themeSubscription: any;
   private value = 0;
+
+  constructor(private theme: NbThemeService) {
+  }
 
   @Input('chartValue')
   set chartValue(value: number) {
@@ -35,12 +40,6 @@ export class SolarComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  option: any = {};
-  themeSubscription: any;
-
-  constructor(private theme: NbThemeService) {
-  }
-
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().pipe(delay(1)).subscribe(config => {
 
@@ -49,7 +48,7 @@ export class SolarComponent implements AfterViewInit, OnDestroy {
       this.option = Object.assign({}, {
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         series: [
           {
@@ -71,51 +70,51 @@ export class SolarComponent implements AfterViewInit, OnDestroy {
                       fontSize: '22',
                       fontFamily: config.variables.fontSecondary,
                       fontWeight: '600',
-                      color: config.variables.fgHeading,
-                    },
-                  },
+                      color: config.variables.fgHeading
+                    }
+                  }
                 },
                 tooltip: {
-                  show: false,
+                  show: false
                 },
                 itemStyle: {
                   normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                       {
                         offset: 0,
-                        color: solarTheme.gradientLeft,
+                        color: solarTheme.gradientLeft
                       },
                       {
                         offset: 1,
-                        color: solarTheme.gradientRight,
-                      },
+                        color: solarTheme.gradientRight
+                      }
                     ]),
                     shadowColor: solarTheme.shadowColor,
                     shadowBlur: 0,
                     shadowOffsetX: 0,
-                    shadowOffsetY: 3,
-                  },
+                    shadowOffsetY: 3
+                  }
                 },
-                hoverAnimation: false,
+                hoverAnimation: false
               },
               {
                 value: 100 - this.value,
                 name: ' ',
                 tooltip: {
-                  show: false,
+                  show: false
                 },
                 label: {
                   normal: {
-                    position: 'inner',
-                  },
+                    position: 'inner'
+                  }
                 },
                 itemStyle: {
                   normal: {
-                    color: config.variables.layoutBg,
-                  },
-                },
-              },
-            ],
+                    color: config.variables.layoutBg
+                  }
+                }
+              }
+            ]
           },
           {
             name: ' ',
@@ -131,50 +130,50 @@ export class SolarComponent implements AfterViewInit, OnDestroy {
                 label: {
                   normal: {
                     position: 'inner',
-                    show: false,
-                  },
+                    show: false
+                  }
                 },
                 tooltip: {
-                  show: false,
+                  show: false
                 },
                 itemStyle: {
                   normal: {
                     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                       {
                         offset: 0,
-                        color: solarTheme.gradientLeft,
+                        color: solarTheme.gradientLeft
                       },
                       {
                         offset: 1,
-                        color: solarTheme.gradientRight,
-                      },
+                        color: solarTheme.gradientRight
+                      }
                     ]),
                     shadowColor: solarTheme.shadowColor,
-                    shadowBlur: 7,
-                  },
+                    shadowBlur: 7
+                  }
                 },
-                hoverAnimation: false,
+                hoverAnimation: false
               },
               {
                 value: 28,
                 name: ' ',
                 tooltip: {
-                  show: false,
+                  show: false
                 },
                 label: {
                   normal: {
-                    position: 'inner',
-                  },
+                    position: 'inner'
+                  }
                 },
                 itemStyle: {
                   normal: {
-                    color: 'none',
-                  },
-                },
-              },
-            ],
-          },
-        ],
+                    color: 'none'
+                  }
+                }
+              }
+            ]
+          }
+        ]
       });
     });
   }

@@ -13,24 +13,25 @@ const COMPONENTS = [
   BootstrapComponent,
   ModalsComponent,
   ModalComponent,
-  FormInputsComponent,
+  FormInputsComponent
 ];
 
 const ENTRY_COMPONENTS = [
-  ModalComponent,
+  ModalComponent
 ];
 
 @NgModule({
   imports: [
     ThemeModule,
     BootstrapRoutingModule,
-    ButtonsModule,
+    ButtonsModule
   ],
   declarations: [
-    ...COMPONENTS,
+    ...COMPONENTS
   ],
   entryComponents: [
-    ...ENTRY_COMPONENTS,
-  ],
+    ...ENTRY_COMPONENTS
+  ]
 })
-export class BootstrapModule { }
+export class BootstrapModule {
+}

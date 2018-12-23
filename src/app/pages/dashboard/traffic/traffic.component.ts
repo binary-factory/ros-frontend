@@ -22,7 +22,7 @@ import { NbThemeService } from '@nebular/theme';
         <ngx-traffic-chart></ngx-traffic-chart>
       </nb-card-body>
     </nb-card>
-  `,
+  `
 })
 export class TrafficComponent implements OnDestroy {
   type = 'month';

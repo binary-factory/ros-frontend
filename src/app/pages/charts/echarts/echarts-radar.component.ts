@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-echarts-radar',
   template: `
     <div echarts [options]="options" class="echart"></div>
-  `,
+  `
 })
 export class EchartsRadarComponent implements AfterViewInit, OnDestroy {
   options: any = {};
@@ -27,28 +27,28 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy {
         legend: {
           data: ['Allocated Budget', 'Actual Spending'],
           textStyle: {
-            color: echarts.textColor,
-          },
+            color: echarts.textColor
+          }
         },
         radar: {
           name: {
             textStyle: {
-              color: echarts.textColor,
-            },
+              color: echarts.textColor
+            }
           },
           indicator: [
-            { name: 'Sales', max: 6500 },
-            { name: 'Administration', max: 16000 },
-            { name: 'Information Techology', max: 30000 },
-            { name: 'Customer Support', max: 38000 },
-            { name: 'Development', max: 52000 },
-            { name: 'Marketing', max: 25000 },
+            {name: 'Sales', max: 6500},
+            {name: 'Administration', max: 16000},
+            {name: 'Information Techology', max: 30000},
+            {name: 'Customer Support', max: 38000},
+            {name: 'Development', max: 52000},
+            {name: 'Marketing', max: 25000}
           ],
           splitArea: {
             areaStyle: {
-              color: 'transparent',
-            },
-          },
+              color: 'transparent'
+            }
+          }
         },
         series: [
           {
@@ -57,15 +57,15 @@ export class EchartsRadarComponent implements AfterViewInit, OnDestroy {
             data: [
               {
                 value: [4300, 10000, 28000, 35000, 50000, 19000],
-                name: 'Allocated Budget',
+                name: 'Allocated Budget'
               },
               {
                 value: [5000, 14000, 28000, 31000, 42000, 21000],
-                name: 'Actual Spending',
-              },
-            ],
-          },
-        ],
+                name: 'Actual Spending'
+              }
+            ]
+          }
+        ]
       };
     });
   }

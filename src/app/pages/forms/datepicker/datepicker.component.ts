@@ -4,7 +4,7 @@ import { NbDateService } from '@nebular/theme';
 @Component({
   selector: 'ngx-datepicker',
   templateUrl: 'datepicker.component.html',
-  styleUrls: ['datepicker.component.scss'],
+  styleUrls: ['datepicker.component.scss']
 })
 export class DatepickerComponent {
 

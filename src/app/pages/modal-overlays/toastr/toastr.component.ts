@@ -8,13 +8,10 @@ import { NbToastStatus } from '@nebular/theme/components/toastr/model';
 @Component({
   selector: 'ngx-toastr',
   styleUrls: ['./toastr.component.scss'],
-  templateUrl: './toastr.component.html',
+  templateUrl: './toastr.component.html'
 })
 export class ToastrComponent {
-  constructor(private toastrService: NbToastrService) {}
-
   config: ToasterConfig;
-
   index = 1;
   destroyByClick = true;
   duration = 2000;
@@ -22,17 +19,15 @@ export class ToastrComponent {
   position: NbGlobalPosition = NbGlobalPhysicalPosition.TOP_RIGHT;
   preventDuplicates = false;
   status: NbToastStatus = NbToastStatus.SUCCESS;
-
   title = 'HI there!';
   content = `I'm cool toaster!`;
-
   types: NbToastStatus[] = [
     NbToastStatus.DEFAULT,
     NbToastStatus.DANGER,
     NbToastStatus.INFO,
     NbToastStatus.PRIMARY,
     NbToastStatus.SUCCESS,
-    NbToastStatus.WARNING,
+    NbToastStatus.WARNING
   ];
   positions: string[] = [
     NbGlobalPhysicalPosition.TOP_RIGHT,
@@ -42,20 +37,22 @@ export class ToastrComponent {
     NbGlobalLogicalPosition.TOP_END,
     NbGlobalLogicalPosition.TOP_START,
     NbGlobalLogicalPosition.BOTTOM_END,
-    NbGlobalLogicalPosition.BOTTOM_START,
+    NbGlobalLogicalPosition.BOTTOM_START
+  ];
+  quotes = [
+    {title: null, body: 'We rock at Angular'},
+    {title: null, body: 'Titles are not always needed'},
+    {title: null, body: 'Toastr rock!'}
   ];
 
-  quotes = [
-    { title: null, body: 'We rock at Angular' },
-    { title: null, body: 'Titles are not always needed' },
-    { title: null, body: 'Toastr rock!' },
-  ];
+  constructor(private toastrService: NbToastrService) {
+  }
 
   makeToast() {
     this.showToast(this.status, this.title, this.content);
   }
 
-  openRandomToast () {
+  openRandomToast() {
     const typeIndex = Math.floor(Math.random() * this.types.length);
     const quoteIndex = Math.floor(Math.random() * this.quotes.length);
     const type: NbToastStatus = this.types[typeIndex];
@@ -71,7 +68,7 @@ export class ToastrComponent {
       duration: this.duration,
       hasIcon: this.hasIcon,
       position: this.position,
-      preventDuplicates: this.preventDuplicates,
+      preventDuplicates: this.preventDuplicates
     };
     const titleContent = title ? `. ${title}` : '';
 

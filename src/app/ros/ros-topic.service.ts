@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, Observer } from 'rxjs';
-import { Topic, Message } from 'roslib';
+import { Observable, Observer } from 'rxjs';
+import { Message, Topic } from 'roslib';
 import { ROSClientService } from './ros-client.service';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { ROSRequestResponseOptions } from './models/request-response-options';
-import { ROSRequestOptions, ROSDefaultRequestOptions } from './models/request-options';
+import { ROSDefaultRequestOptions, ROSRequestOptions } from './models/request-options';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ROSTopicService {
 
-  constructor(private _rosClient: ROSClientService) { }
+  constructor(private _rosClient: ROSClientService) {
+  }
 
   createTopicSubject<T>(topicOptions: {
     name: string,
@@ -25,7 +26,7 @@ export class ROSTopicService {
 
     options = Object.assign(ROSDefaultRequestOptions, options || {});
 
-    const topic = new Topic(Object.assign(topicOptions, { ros: this._rosClient.instance }));
+    const topic = new Topic(Object.assign(topicOptions, {ros: this._rosClient.instance}));
 
     const source = new Observable<T>((observer) => {
       topic.subscribe((message) => {
@@ -40,7 +41,7 @@ export class ROSTopicService {
 
       return () => {
         sub.unsubscribe();
-      }
+      };
     });
 
     const teardown = () => {
@@ -51,7 +52,7 @@ export class ROSTopicService {
     const destination: Observer<T> = {
       next: (value) => {
         const message = new Message(value);
-        if (!options.enqueue	&& !this._rosClient.connected) {
+        if (!options.enqueue && !this._rosClient.connected) {
           return;
         }
 

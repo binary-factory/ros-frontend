@@ -1,7 +1,7 @@
 export interface ROSRequestOptions {
-    enqueue: boolean;
+  enqueue: boolean;
 };
 
 export const ROSDefaultRequestOptions: ROSRequestOptions = {
-    enqueue: false
+  enqueue: false
 };

@@ -8,7 +8,7 @@ import { LayoutService } from '../../../@core/data/layout.service';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
-  templateUrl: './header.component.html',
+  templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
 
   user: any;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,

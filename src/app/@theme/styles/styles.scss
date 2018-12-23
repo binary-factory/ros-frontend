@@ -1,15 +1,12 @@
 // themes - our custom or/and out of the box themes
 @import 'themes';
-
 // framework component themes (styles tied to theme variables)
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/all';
 @import '~@nebular/bootstrap/styles/globals';
 // ...
-
 // global app font size
 @import './font-size';
-
 // loading progress bar theme
 @import './pace.theme';
 
@@ -28,4 +25,6 @@
   .custom-control .custom-control-indicator {
     border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
   }
-};
+}
+
+;

@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserService } from './users.service';
@@ -32,24 +32,24 @@ const SERVICES = [
   OrdersProfitChartService,
   TrafficBarService,
   ProfitBarAnimationChartService,
-  LayoutService,
+  LayoutService
 ];
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule
   ],
   providers: [
-    ...SERVICES,
-  ],
+    ...SERVICES
+  ]
 })
 export class DataModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: DataModule,
       providers: [
-        ...SERVICES,
-      ],
+        ...SERVICES
+      ]
     };
   }
 }

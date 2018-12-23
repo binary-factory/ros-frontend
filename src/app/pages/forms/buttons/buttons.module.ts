@@ -20,19 +20,20 @@ const components = [
   SizeButtonsComponent,
   ActionGroupsComponent,
   LabeledActionsGroupComponent,
-  ButtonElementsComponent,
+  ButtonElementsComponent
 ];
 
 @NgModule({
   imports: [
-    ThemeModule,
+    ThemeModule
   ],
   exports: [
-    ...components,
+    ...components
   ],
   declarations: [
-    ...components,
+    ...components
   ],
-  providers: [],
+  providers: []
 })
-export class ButtonsModule { }
+export class ButtonsModule {
+}

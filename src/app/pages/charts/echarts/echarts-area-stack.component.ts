@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-echarts-area-stack',
   template: `
     <div echarts [options]="options" class="echart"></div>
-  `,
+  `
 })
 export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
   options: any = {};
@@ -28,21 +28,21 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
           axisPointer: {
             type: 'cross',
             label: {
-              backgroundColor: echarts.tooltipBackgroundColor,
-            },
-          },
+              backgroundColor: echarts.tooltipBackgroundColor
+            }
+          }
         },
         legend: {
           data: ['Mail marketing', 'Affiliate advertising', 'Video ad', 'Direct interview', 'Search engine'],
           textStyle: {
-            color: echarts.textColor,
-          },
+            color: echarts.textColor
+          }
         },
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true,
+          containLabel: true
         },
         xAxis: [
           {
@@ -50,68 +50,68 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
             boundaryGap: false,
             data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             axisTick: {
-              alignWithLabel: true,
+              alignWithLabel: true
             },
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         yAxis: [
           {
             type: 'value',
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             splitLine: {
               lineStyle: {
-                color: echarts.splitLineColor,
-              },
+                color: echarts.splitLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         series: [
           {
             name: 'Mail marketing',
             type: 'line',
             stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [120, 132, 101, 134, 90, 230, 210],
+            areaStyle: {normal: {opacity: echarts.areaOpacity}},
+            data: [120, 132, 101, 134, 90, 230, 210]
           },
           {
             name: 'Affiliate advertising',
             type: 'line',
             stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [220, 182, 191, 234, 290, 330, 310],
+            areaStyle: {normal: {opacity: echarts.areaOpacity}},
+            data: [220, 182, 191, 234, 290, 330, 310]
           },
           {
             name: 'Video ad',
             type: 'line',
             stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [150, 232, 201, 154, 190, 330, 410],
+            areaStyle: {normal: {opacity: echarts.areaOpacity}},
+            data: [150, 232, 201, 154, 190, 330, 410]
           },
           {
             name: 'Direct interview',
             type: 'line',
             stack: 'Total amount',
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [320, 332, 301, 334, 390, 330, 320],
+            areaStyle: {normal: {opacity: echarts.areaOpacity}},
+            data: [320, 332, 301, 334, 390, 330, 320]
           },
           {
             name: 'Search engine',
@@ -122,14 +122,14 @@ export class EchartsAreaStackComponent implements AfterViewInit, OnDestroy {
                 show: true,
                 position: 'top',
                 textStyle: {
-                  color: echarts.textColor,
-                },
-              },
+                  color: echarts.textColor
+                }
+              }
             },
-            areaStyle: { normal: { opacity: echarts.areaOpacity } },
-            data: [820, 932, 901, 934, 1290, 1330, 1320],
-          },
-        ],
+            areaStyle: {normal: {opacity: echarts.areaOpacity}},
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+          }
+        ]
       };
     });
   }

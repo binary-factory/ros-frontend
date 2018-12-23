@@ -1,5 +1,5 @@
 export interface ROSNodeDetails {
-    publications: string[],
-    subscriptions: string[],
-    services: string[]
+  publications: string[],
+  subscriptions: string[],
+  services: string[]
 }

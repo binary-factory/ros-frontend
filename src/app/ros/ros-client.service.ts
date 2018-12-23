@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ROSServiceConfig } from './ros-config.model';
 import { Ros } from 'roslib';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { ROSRequestOptions, ROSDefaultRequestOptions } from './models/request-options';
-import { ROSRequestResponseOptions, ROSDefaultRequestResponseOptions } from './models/request-response-options';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { ROSDefaultRequestOptions, ROSRequestOptions } from './models/request-options';
+import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from './models/request-response-options';
 import { timeout } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +12,6 @@ import { throwError } from 'rxjs';
 export class ROSClientService {
 
   private _ros: Ros;
-
-  private _config: ROSServiceConfig;
-
-  private _connected: boolean;
-
   private _connectedSource$ = new BehaviorSubject<boolean>(false);
 
   constructor(config: ROSServiceConfig) {
@@ -29,32 +23,20 @@ export class ROSClientService {
     this._ros.on('error', this._handleError.bind(this));
   }
 
-  private _handleConnection(event: Event) {
-    console.info('ROS-Client: Connected.', event);
-    this._connected = true;
-    this._connectedSource$.next(this._connected);
-  }
-
-  private _handleClose(event: CloseEvent) {
-    console.info('ROS-Client: Disconnected.', event);
-    this._connected = false;
-    this._connectedSource$.next(this._connected);
-  }
-
-  private _handleError(err: ErrorEvent) {
-    console.log('ROS-Error', err);
-  }
-
-  get instance() {
-    return this._ros;
-  }
+  private _config: ROSServiceConfig;
 
   get config() {
     return this._config;
   }
 
+  private _connected: boolean;
+
   get connected() {
     return this._connected;
+  }
+
+  get instance() {
+    return this._ros;
   }
 
   get connected$() {
@@ -79,5 +61,21 @@ export class ROSClientService {
     } else {
       return source;
     }
+  }
+
+  private _handleConnection(event: Event) {
+    console.info('ROS-Client: Connected.', event);
+    this._connected = true;
+    this._connectedSource$.next(this._connected);
+  }
+
+  private _handleClose(event: CloseEvent) {
+    console.info('ROS-Client: Disconnected.', event);
+    this._connected = false;
+    this._connectedSource$.next(this._connected);
+  }
+
+  private _handleError(err: ErrorEvent) {
+    console.log('ROS-Error', err);
   }
 }

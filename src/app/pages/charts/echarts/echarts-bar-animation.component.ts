@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-echarts-bar-animation',
   template: `
     <div echarts [options]="options" class="echart"></div>
-  `,
+  `
 })
 export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy {
   options: any = {};
@@ -30,63 +30,63 @@ export class EchartsBarAnimationComponent implements AfterViewInit, OnDestroy {
           data: ['bar', 'bar2'],
           align: 'left',
           textStyle: {
-            color: echarts.textColor,
-          },
+            color: echarts.textColor
+          }
         },
         xAxis: [
           {
             data: xAxisData,
             silent: false,
             axisTick: {
-              alignWithLabel: true,
+              alignWithLabel: true
             },
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         yAxis: [
           {
             axisLine: {
               lineStyle: {
-                color: echarts.axisLineColor,
-              },
+                color: echarts.axisLineColor
+              }
             },
             splitLine: {
               lineStyle: {
-                color: echarts.splitLineColor,
-              },
+                color: echarts.splitLineColor
+              }
             },
             axisLabel: {
               textStyle: {
-                color: echarts.textColor,
-              },
-            },
-          },
+                color: echarts.textColor
+              }
+            }
+          }
         ],
         series: [
           {
             name: 'bar',
             type: 'bar',
             data: data1,
-            animationDelay: idx => idx * 10,
+            animationDelay: idx => idx * 10
           },
           {
             name: 'bar2',
             type: 'bar',
             data: data2,
-            animationDelay: idx => idx * 10 + 100,
-          },
+            animationDelay: idx => idx * 10 + 100
+          }
         ],
         animationEasing: 'elasticOut',
-        animationDelayUpdate: idx => idx * 5,
+        animationDelayUpdate: idx => idx * 5
       };
 
       for (let i = 0; i < 100; i++) {

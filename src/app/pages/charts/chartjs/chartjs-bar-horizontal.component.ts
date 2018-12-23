@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-chartjs-bar-horizontal',
   template: `
     <chart type="horizontalBar" [data]="data" [options]="options"></chart>
-  `,
+  `
 })
 export class ChartjsBarHorizontalComponent implements OnDestroy {
   data: any;
@@ -21,16 +21,16 @@ export class ChartjsBarHorizontalComponent implements OnDestroy {
       this.data = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [{
-            label: 'Dataset 1',
-            backgroundColor: colors.infoLight,
-            borderWidth: 1,
-            data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
-          }, {
-            label: 'Dataset 2',
-            backgroundColor: colors.successLight,
-            data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()],
-          },
-        ],
+          label: 'Dataset 1',
+          backgroundColor: colors.infoLight,
+          borderWidth: 1,
+          data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()]
+        }, {
+          label: 'Dataset 2',
+          backgroundColor: colors.successLight,
+          data: [this.random(), this.random(), this.random(), this.random(), this.random(), this.random()]
+        }
+        ]
       };
 
       this.options = {
@@ -38,39 +38,39 @@ export class ChartjsBarHorizontalComponent implements OnDestroy {
         maintainAspectRatio: false,
         elements: {
           rectangle: {
-            borderWidth: 2,
-          },
+            borderWidth: 2
+          }
         },
         scales: {
           xAxes: [
             {
               gridLines: {
                 display: true,
-                color: chartjs.axisLineColor,
+                color: chartjs.axisLineColor
               },
               ticks: {
-                fontColor: chartjs.textColor,
-              },
-            },
+                fontColor: chartjs.textColor
+              }
+            }
           ],
           yAxes: [
             {
               gridLines: {
                 display: false,
-                color: chartjs.axisLineColor,
+                color: chartjs.axisLineColor
               },
               ticks: {
-                fontColor: chartjs.textColor,
-              },
-            },
-          ],
+                fontColor: chartjs.textColor
+              }
+            }
+          ]
         },
         legend: {
           position: 'right',
           labels: {
-            fontColor: chartjs.textColor,
-          },
-        },
+            fontColor: chartjs.textColor
+          }
+        }
       };
     });
   }

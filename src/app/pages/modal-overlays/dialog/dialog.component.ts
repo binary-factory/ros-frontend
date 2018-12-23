@@ -6,26 +6,27 @@ import { DialogNamePromptComponent } from './dialog-name-prompt/dialog-name-prom
 @Component({
   selector: 'ngx-dialog',
   templateUrl: 'dialog.component.html',
-  styleUrls: ['dialog.component.scss'],
+  styleUrls: ['dialog.component.scss']
 })
 export class DialogComponent {
 
   names: string[] = [];
 
-  constructor(private dialogService: NbDialogService) {}
+  constructor(private dialogService: NbDialogService) {
+  }
 
   open() {
     this.dialogService.open(ShowcaseDialogComponent, {
       context: {
-        title: 'This is a title passed to the dialog component',
-      },
+        title: 'This is a title passed to the dialog component'
+      }
     });
   }
 
   open2(dialog: TemplateRef<any>) {
     this.dialogService.open(
       dialog,
-      { context: 'this is some additional data passed to dialog' });
+      {context: 'this is some additional data passed to dialog'});
   }
 
   open3() {
@@ -38,7 +39,7 @@ export class DialogComponent {
       dialog,
       {
         context: 'this is some additional data passed to dialog',
-        hasBackdrop: false,
+        hasBackdrop: false
       });
   }
 
@@ -47,7 +48,7 @@ export class DialogComponent {
       dialog,
       {
         context: 'this is some additional data passed to dialog',
-        closeOnBackdropClick: false,
+        closeOnBackdropClick: false
       });
   }
 
@@ -56,7 +57,7 @@ export class DialogComponent {
       dialog,
       {
         context: 'this is some additional data passed to dialog',
-        closeOnEsc: false,
+        closeOnEsc: false
       });
   }
 }

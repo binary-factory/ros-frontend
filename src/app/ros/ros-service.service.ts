@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ROSClientService } from './ros-client.service';
-import { ServiceRequest, Service } from 'roslib';
+import { Service, ServiceRequest } from 'roslib';
 import { Observable } from 'rxjs';
 import { ROSRequestOptions } from './models/request-options';
-import { ROSRequestResponseOptions, ROSDefaultRequestResponseOptions } from './models/request-response-options';
+import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from './models/request-response-options';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ROSServiceService {
 
-  constructor(private _rosClient: ROSClientService) { }
+  constructor(private _rosClient: ROSClientService) {
+  }
 
   callService(name: string, type: string, args: any, options?: ROSRequestResponseOptions) {
     options = Object.assign(options || {}, ROSDefaultRequestResponseOptions);
@@ -44,9 +45,9 @@ export class ROSServiceService {
     };
 
     const service = new Service(serviceOptions);
-    const source = new Observable<any>((observer)=>{
+    const source = new Observable<any>((observer) => {
       service.advertise((request, response) => {
-        observer.next({ request, response });
+        observer.next({request, response});
         observer.complete();
       });
 

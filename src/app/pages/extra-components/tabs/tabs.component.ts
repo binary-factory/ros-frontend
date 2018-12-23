@@ -10,34 +10,36 @@ import { Component } from '@angular/core';
       </a> and led to the introduction of washing machines (1904), water heaters (1889), refrigerators, sewing machines,
       dishwashers, and clothes dryers.
     </p>
-  `,
+  `
 })
-export class Tab1Component { }
+export class Tab1Component {
+}
 
 @Component({
   selector: 'ngx-tab2',
   template: `
     <p>Tab 2 works!</p>
-  `,
+  `
 })
-export class Tab2Component { }
+export class Tab2Component {
+}
 
 @Component({
   selector: 'ngx-tabs',
   styleUrls: ['./tabs.component.scss'],
-  templateUrl: './tabs.component.html',
+  templateUrl: './tabs.component.html'
 })
 export class TabsComponent {
 
   tabs: any[] = [
     {
       title: 'Route tab #1',
-      route: '/pages/extra-components/tabs/tab1',
+      route: '/pages/extra-components/tabs/tab1'
     },
     {
       title: 'Route tab #2',
-      route: '/pages/extra-components/tabs/tab2',
-    },
+      route: '/pages/extra-components/tabs/tab2'
+    }
   ];
 
 }

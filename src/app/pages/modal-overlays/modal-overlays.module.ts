@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-
 // modules
 import { ThemeModule } from '../../@theme/theme.module';
 import { ModalOverlaysRoutingModule } from './modal-overlays-routing.module';
-
 // components
 import { ModalOverlaysComponent } from './modal-overlays.component';
 import { DialogComponent } from './dialog/dialog.component';
@@ -14,10 +12,7 @@ import { WindowComponent } from './window/window.component';
 import { WindowFormComponent } from './window/window-form/window-form.component';
 import { ToastrComponent } from './toastr/toastr.component';
 import { PopoversComponent } from './popovers/popovers.component';
-import {
-  NgxPopoverCardComponent, NgxPopoverFormComponent,
-  NgxPopoverTabsComponent,
-} from './popovers/popover-examples.component';
+import { NgxPopoverCardComponent, NgxPopoverFormComponent, NgxPopoverTabsComponent } from './popovers/popover-examples.component';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
 
@@ -33,7 +28,7 @@ const COMPONENTS = [
   NgxPopoverCardComponent,
   NgxPopoverFormComponent,
   NgxPopoverTabsComponent,
-  TooltipComponent,
+  TooltipComponent
 ];
 
 const ENTRY_COMPONENTS = [
@@ -42,32 +37,31 @@ const ENTRY_COMPONENTS = [
   WindowFormComponent,
   NgxPopoverCardComponent,
   NgxPopoverFormComponent,
-  NgxPopoverTabsComponent,
+  NgxPopoverTabsComponent
 ];
 
 const MODULES = [
   ThemeModule,
   ModalOverlaysRoutingModule,
   NbDialogModule.forChild(),
-  NbWindowModule.forChild(),
+  NbWindowModule.forChild()
 ];
 
-const SERVICES = [
-];
+const SERVICES = [];
 
 @NgModule({
   imports: [
-    ...MODULES,
+    ...MODULES
   ],
   declarations: [
-    ...COMPONENTS,
+    ...COMPONENTS
   ],
   providers: [
-    ...SERVICES,
+    ...SERVICES
   ],
   entryComponents: [
-    ...ENTRY_COMPONENTS,
-  ],
+    ...ENTRY_COMPONENTS
+  ]
 })
 export class ModalOverlaysModule {
 }

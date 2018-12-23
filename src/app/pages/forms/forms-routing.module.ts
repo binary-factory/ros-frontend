@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { FormsComponent } from './forms.component';
 import { FormInputsComponent } from './form-inputs/form-inputs.component';
@@ -13,34 +13,34 @@ const routes: Routes = [{
   children: [
     {
       path: 'inputs',
-      component: FormInputsComponent,
+      component: FormInputsComponent
     },
     {
       path: 'layouts',
-      component: FormLayoutsComponent,
+      component: FormLayoutsComponent
     },
     {
       path: 'layouts',
-      component: FormLayoutsComponent,
+      component: FormLayoutsComponent
     },
     {
       path: 'buttons',
-      component: ButtonsComponent,
+      component: ButtonsComponent
     },
     {
       path: 'datepicker',
-      component: DatepickerComponent,
-    },
-  ],
+      component: DatepickerComponent
+    }
+  ]
 }];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
   exports: [
-    RouterModule,
-  ],
+    RouterModule
+  ]
 })
 export class FormsRoutingModule {
 
@@ -50,5 +50,5 @@ export const routedComponents = [
   FormsComponent,
   FormInputsComponent,
   FormLayoutsComponent,
-  DatepickerComponent,
+  DatepickerComponent
 ];

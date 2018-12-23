@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ngx-button-groups',
   styleUrls: ['./button-groups.component.scss'],
-  templateUrl: './button-groups.component.html',
+  templateUrl: './button-groups.component.html'
 })
 export class ButtonGroupsComponent {
 
@@ -12,7 +12,7 @@ export class ButtonGroupsComponent {
   checkboxModel = {
     left: false,
     middle: false,
-    right: false,
+    right: false
   };
 
   dividedCheckboxModel = {
@@ -21,7 +21,7 @@ export class ButtonGroupsComponent {
     wednesday: false,
     thursday: false,
     friday: false,
-    saturday: false,
+    saturday: false
   };
 
   paginationModel = 1;
@@ -31,7 +31,7 @@ export class ButtonGroupsComponent {
     two: false,
     three: true,
     four: false,
-    five: false,
+    five: false
   };
 
   dividedButtonGroupOne = 'left';
@@ -39,6 +39,6 @@ export class ButtonGroupsComponent {
   dividedButtonGroupTwo = {
     left: false,
     middle: false,
-    right: false,
+    right: false
   };
 }

@@ -4,7 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 @Component({
   selector: 'ngx-kitten',
   styleUrls: ['./kitten.component.scss'],
-  templateUrl: './kitten.component.html',
+  templateUrl: './kitten.component.html'
 })
 export class KittenComponent implements OnDestroy {
 

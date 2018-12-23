@@ -5,7 +5,7 @@ import { NbThemeService } from '@nebular/theme';
   selector: 'ngx-chartjs-pie',
   template: `
     <chart type="pie" [data]="data" [options]="options"></chart>
-  `,
+  `
 })
 export class ChartjsPieComponent implements OnDestroy {
   data: any;
@@ -22,8 +22,8 @@ export class ChartjsPieComponent implements OnDestroy {
         labels: ['Download Sales', 'In-Store Sales', 'Mail Sales'],
         datasets: [{
           data: [300, 500, 100],
-          backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight],
-        }],
+          backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight]
+        }]
       };
 
       this.options = {
@@ -32,20 +32,20 @@ export class ChartjsPieComponent implements OnDestroy {
         scales: {
           xAxes: [
             {
-              display: false,
-            },
+              display: false
+            }
           ],
           yAxes: [
             {
-              display: false,
-            },
-          ],
+              display: false
+            }
+          ]
         },
         legend: {
           labels: {
-            fontColor: chartjs.textColor,
-          },
-        },
+            fontColor: chartjs.textColor
+          }
+        }
       };
     });
   }

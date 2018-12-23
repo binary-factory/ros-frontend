@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@nebular/theme';
+import { NbMediaBreakpoint, NbMediaBreakpointsService, NbThemeService } from '@nebular/theme';
 
 import { UserService } from '../../../@core/data/users.service';
 
 @Component({
   selector: 'ngx-contacts',
   styleUrls: ['./contacts.component.scss'],
-  templateUrl: './contacts.component.html',
+  templateUrl: './contacts.component.html'
 })
 export class ContactsComponent implements OnInit, OnDestroy {
 
@@ -37,7 +37,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
           {user: users.jack, type: 'mobile'},
           {user: users.lee, type: 'mobile'},
           {user: users.alan, type: 'home'},
-          {user: users.kate, type: 'work'},
+          {user: users.kate, type: 'work'}
         ];
 
         this.recent = [
@@ -48,7 +48,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
           {user: users.jack, type: 'mobile', time: '10:45 am'},
           {user: users.kate, type: 'work', time: '9:42 am'},
           {user: users.kate, type: 'work', time: '9:31 am'},
-          {user: users.jack, type: 'mobile', time: '8:01 am'},
+          {user: users.jack, type: 'mobile', time: '8:01 am'}
         ];
       });
   }

@@ -4,7 +4,7 @@ import { PlayerService, Track } from '../../../../@core/data/player.service';
 @Component({
   selector: 'ngx-player',
   styleUrls: ['./player.component.scss'],
-  templateUrl: './player.component.html',
+  templateUrl: './player.component.html'
 })
 export class PlayerComponent implements OnDestroy {
   @Input()

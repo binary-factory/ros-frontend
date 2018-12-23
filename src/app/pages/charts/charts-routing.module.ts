@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ChartsComponent } from './charts.component';
 import { EchartsComponent } from './echarts/echarts.component';
@@ -11,25 +11,26 @@ const routes: Routes = [{
   component: ChartsComponent,
   children: [{
     path: 'echarts',
-    component: EchartsComponent,
+    component: EchartsComponent
   }, {
     path: 'd3',
-    component: D3Component,
+    component: D3Component
   }, {
     path: 'chartjs',
-    component: ChartjsComponent,
-  }],
+    component: ChartjsComponent
+  }]
 }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class ChartsRoutingModule { }
+export class ChartsRoutingModule {
+}
 
 export const routedComponents = [
   ChartsComponent,
   EchartsComponent,
   D3Component,
-  ChartjsComponent,
+  ChartjsComponent
 ];
