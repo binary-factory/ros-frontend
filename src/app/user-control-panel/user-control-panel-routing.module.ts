@@ -1,13 +1,13 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { UserControlPanelComponent } from './components/user-control-panel/user-control-panel.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [{
   path: '',
-  component: PagesComponent,
+  component: UserControlPanelComponent,
   children: [
     {
       path: 'cockpit',
@@ -28,5 +28,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagesRoutingModule {
+export class UserControlPanelRoutingModule {
 }
