@@ -8,19 +8,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Nodes',
-        link: '/ros/nodes'
+        link: '/pages/ros/nodes'
       },
       {
         title: 'Topics',
-        link: '/ros/topics'
+        link: '/pages/ros/topics'
       },
       {
         title: 'Services',
-        link: '/ros/services'
+        link: '/pages/ros/services'
       },
       {
         title: 'Params',
-        link: '/ros/params'
+        link: '/pages/ros/params'
       }
     ]
   }
