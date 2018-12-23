@@ -2,13 +2,37 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'E-commerce',
-    icon: 'nb-e-commerce',
-    link: '/pages/dashboard',
-    home: true,
+    title: 'IoT Dashboard',
+    icon: 'nb-home',
+    link: '/pages/iot-dashboard',
+    home: true
   },
   {
-    title: 'IoT Dashboard',
+    title: 'ROS',
+    group: true,
+  },
+  {
+    title: 'Übersicht',
+    icon: 'nb-home',
+    link: '/pages/iot-dashboard',
+  },
+  {
+    title: 'Nodes',
+    icon: 'nb-home',
+    link: '/pages/iot-dashboard',
+  },
+  {
+    title: 'Topics',
+    icon: 'nb-home',
+    link: '/pages/iot-dashboard',
+  },
+  {
+    title: 'Services',
+    icon: 'nb-home',
+    link: '/pages/iot-dashboard',
+  },
+  {
+    title: 'Params',
     icon: 'nb-home',
     link: '/pages/iot-dashboard',
   },
@@ -21,20 +45,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-star',
     children: [
       {
-        title: 'Calendar',
-        link: '/pages/extra-components/calendar',
-      },
-      {
         title: 'Stepper',
         link: '/pages/extra-components/stepper',
       },
       {
         title: 'List',
         link: '/pages/extra-components/list',
-      },
-      {
-        title: 'Infinite List',
-        link: '/pages/extra-components/infinite-list',
       },
       {
         title: 'Accordion',
@@ -53,20 +69,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/extra-components/alert',
       },
       {
-        title: 'Tree',
-        link: '/pages/extra-components/tree',
-      },
-      {
         title: 'Tabs',
         link: '/pages/extra-components/tabs',
-      },
-      {
-        title: 'Calendar Kit',
-        link: '/pages/extra-components/calendar-kit',
-      },
-      {
-        title: 'Chat',
-        link: '/pages/extra-components/chat',
       },
     ],
   },
@@ -89,29 +93,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Datepicker',
         link: '/pages/forms/datepicker',
-      },
-    ],
-  },
-  {
-    title: 'UI Features',
-    icon: 'nb-keypad',
-    link: '/pages/ui-features',
-    children: [
-      {
-        title: 'Grid',
-        link: '/pages/ui-features/grid',
-      },
-      {
-        title: 'Icons',
-        link: '/pages/ui-features/icons',
-      },
-      {
-        title: 'Typography',
-        link: '/pages/ui-features/typography',
-      },
-      {
-        title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
       },
     ],
   },
@@ -160,28 +141,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
-    title: 'Maps',
-    icon: 'nb-location',
-    children: [
-      {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
-      },
-      {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
-      },
-    ],
-  },
-  {
     title: 'Charts',
     icon: 'nb-bar-chart',
     children: [
@@ -196,20 +155,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'D3',
         link: '/pages/charts/d3',
-      },
-    ],
-  },
-  {
-    title: 'Editors',
-    icon: 'nb-title',
-    children: [
-      {
-        title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
-      },
-      {
-        title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
       },
     ],
   },

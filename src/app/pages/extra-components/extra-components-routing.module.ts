@@ -2,28 +2,19 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ExtraComponentsComponent } from './extra-components.component';
-import { TreeComponent } from './tree/tree.component';
 import { AlertComponent } from './alert/alert.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { ChatComponent } from './chat/chat.component';
 import { Tab1Component, Tab2Component, TabsComponent } from './tabs/tabs.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { NebularFormInputsComponent } from './form-inputs/nebular-form-inputs.component';
-import { InfiniteListComponent } from './infinite-list/infinite-list.component';
 import { ListComponent } from './list/list.component';
 import { StepperComponent } from './stepper/stepper.component';
-import { CalendarKitFullCalendarShowcaseComponent } from './calendar-kit/calendar-kit.component';
 
 const routes: Routes = [{
   path: '',
   component: ExtraComponentsComponent,
   children: [
-    {
-      path: 'calendar',
-      component: CalendarComponent,
-    },
     {
       path: 'stepper',
       component: StepperComponent,
@@ -31,10 +22,6 @@ const routes: Routes = [{
     {
       path: 'list',
       component: ListComponent,
-    },
-    {
-      path: 'infinite-list',
-      component: InfiniteListComponent,
     },
     {
       path: 'form-inputs',
@@ -57,10 +44,6 @@ const routes: Routes = [{
       component: AlertComponent,
     },
     {
-      path: 'tree',
-      component: TreeComponent,
-    },
-    {
       path: 'tabs',
       component: TabsComponent,
       children: [
@@ -78,14 +61,6 @@ const routes: Routes = [{
           component: Tab2Component,
         },
       ],
-    },
-    {
-      path: 'calendar-kit',
-      component: CalendarKitFullCalendarShowcaseComponent,
-    },
-    {
-      path: 'chat',
-      component: ChatComponent,
     },
   ],
 }];

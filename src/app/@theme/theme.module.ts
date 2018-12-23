@@ -44,12 +44,7 @@ import {
   FooterComponent,
   HeaderComponent,
   SearchInputComponent,
-  ThemeSettingsComponent,
   SwitcherComponent,
-  LayoutDirectionSwitcherComponent,
-  ThemeSwitcherComponent,
-  TinyMCEComponent,
-  ThemeSwitcherListComponent,
 } from './components';
 import {
   CapitalizePipe,
@@ -60,10 +55,7 @@ import {
   EvaIconsPipe,
 } from './pipes';
 import {
-  OneColumnLayoutComponent,
-  SampleLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  OneColumnLayoutComponent
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -109,22 +101,14 @@ const NB_MODULES = [
 
 const COMPONENTS = [
   SwitcherComponent,
-  LayoutDirectionSwitcherComponent,
-  ThemeSwitcherComponent,
-  ThemeSwitcherListComponent,
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
-  ThemeSettingsComponent,
-  TinyMCEComponent,
   OneColumnLayoutComponent,
-  SampleLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
 ];
 
 const ENTRY_COMPONENTS = [
-  ThemeSwitcherListComponent,
+
 ];
 
 const PIPES = [
@@ -141,7 +125,7 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'cosmic',
     },
-    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
+    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
