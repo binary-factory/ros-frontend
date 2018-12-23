@@ -13,8 +13,6 @@
 // loading progress bar theme
 @import './pace.theme';
 
-@import './bootstrap-rtl';
-
 // install the framework and custom global styles
 @include nb-install() {
 
@@ -30,5 +28,4 @@
   .custom-control .custom-control-indicator {
     border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
   }
-  @include bootstrap-rtl();
 };

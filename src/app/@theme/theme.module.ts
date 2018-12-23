@@ -57,9 +57,7 @@ import {
 import {
   OneColumnLayoutComponent
 } from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
-import { CORPORATE_THEME } from './styles/theme.corporate';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -125,7 +123,7 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'cosmic',
     },
-    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
+    [COSMIC_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
