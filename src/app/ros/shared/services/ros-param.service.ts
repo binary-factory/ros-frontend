@@ -3,7 +3,7 @@ import { ROSServiceService } from './ros-service.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ROSClientService } from './ros-client.service';
-import { ROSRequestResponseOptions } from './models/request-response-options';
+import { ROSRequestResponseOptions } from '../models/request-response-options';
 
 @Injectable({
   providedIn: 'root'

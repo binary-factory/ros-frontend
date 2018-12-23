@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ROSClientService } from './ros-client.service';
-import { ROSNodeDetails } from './models/node-details.model';
-import { ROSRequestResponseOptions } from './models/request-response-options';
+import { ROSNodeDetails } from '../models/node-details.model';
+import { ROSRequestResponseOptions } from '../models/request-response-options';
 
 @Injectable({
   providedIn: 'root'

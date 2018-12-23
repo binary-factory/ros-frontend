@@ -6,23 +6,6 @@ import { of as observableOf } from 'rxjs';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
-const socialLinks = [
-  {
-    url: 'https://github.com/akveo/nebular',
-    target: '_blank',
-    icon: 'socicon-github'
-  },
-  {
-    url: 'https://www.facebook.com/akveo/',
-    target: '_blank',
-    icon: 'socicon-facebook'
-  },
-  {
-    url: 'https://twitter.com/akveo_inc',
-    target: '_blank',
-    icon: 'socicon-twitter'
-  }
-];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
   getRole() {
@@ -39,15 +22,7 @@ export const NB_CORE_PROVIDERS = [
         name: 'email',
         delay: 3000
       })
-    ],
-    forms: {
-      login: {
-        socialLinks: socialLinks
-      },
-      register: {
-        socialLinks: socialLinks
-      }
-    }
+    ]
   }).providers,
 
   NbSecurityModule.forRoot({
@@ -66,7 +41,7 @@ export const NB_CORE_PROVIDERS = [
 
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider
-  }
+  },
 ];
 
 @NgModule({
@@ -75,8 +50,7 @@ export const NB_CORE_PROVIDERS = [
   ],
   exports: [
     NbAuthModule
-  ],
-  declarations: []
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

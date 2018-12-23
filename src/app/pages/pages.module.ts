@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
-import { ThemeModule } from '../@theme/theme.module';
+import { ThemeModule } from '../theme/theme.module';
 import { NotFoundModule } from './not-found/not-found.module';
+import { SharedModule } from '../shared/shared.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent
@@ -12,6 +13,7 @@ const PAGES_COMPONENTS = [
 
 @NgModule({
   imports: [
+    SharedModule,
     DashboardModule,
     NotFoundModule,
     PagesRoutingModule,

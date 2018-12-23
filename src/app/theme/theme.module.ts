@@ -1,6 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import {
@@ -39,12 +37,7 @@ import {
 
 import { NbSecurityModule } from '@nebular/security';
 
-import { FooterComponent, HeaderComponent } from './components';
-import { CapitalizePipe, EvaIconsPipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
-import { OneColumnLayoutComponent } from './layouts';
 import { COSMIC_THEME } from './styles/theme.cosmic';
-
-const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
   NbAccordionModule,
@@ -81,23 +74,6 @@ const NB_MODULES = [
   NgbModule
 ];
 
-const COMPONENTS = [
-  FooterComponent,
-  HeaderComponent,
-  OneColumnLayoutComponent
-];
-
-const ENTRY_COMPONENTS = [];
-
-const PIPES = [
-  CapitalizePipe,
-  EvaIconsPipe,
-  NumberWithCommasPipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe
-];
-
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
@@ -114,10 +90,8 @@ const NB_THEME_PROVIDERS = [
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
-  entryComponents: [...ENTRY_COMPONENTS]
+  imports: [...NB_MODULES],
+  exports: [...NB_MODULES]
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

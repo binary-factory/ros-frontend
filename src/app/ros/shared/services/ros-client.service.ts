@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ROSServiceConfig } from './ros-config.model';
 import { Ros } from 'roslib';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
-import { ROSDefaultRequestOptions, ROSRequestOptions } from './models/request-options';
-import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from './models/request-response-options';
+import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-options';
+import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from '../models/request-response-options';
 import { timeout } from 'rxjs/operators';
 
 @Injectable({

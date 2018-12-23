@@ -3,8 +3,8 @@ import { Observable, Observer } from 'rxjs';
 import { Message, Topic } from 'roslib';
 import { ROSClientService } from './ros-client.service';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
-import { ROSRequestResponseOptions } from './models/request-response-options';
-import { ROSDefaultRequestOptions, ROSRequestOptions } from './models/request-options';
+import { ROSRequestResponseOptions } from '../models/request-response-options';
+import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-options';
 
 @Injectable({
   providedIn: 'root'
