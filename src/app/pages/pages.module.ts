@@ -4,7 +4,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
-import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
+import { NotFoundModule } from './not-found/not-found.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent
@@ -12,10 +12,10 @@ const PAGES_COMPONENTS = [
 
 @NgModule({
   imports: [
-    PagesRoutingModule,
-    ThemeModule,
     DashboardModule,
-    MiscellaneousModule
+    NotFoundModule,
+    PagesRoutingModule,
+    ThemeModule
   ],
   declarations: [
     ...PAGES_COMPONENTS

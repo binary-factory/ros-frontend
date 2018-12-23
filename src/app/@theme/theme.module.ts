@@ -12,7 +12,6 @@ import {
   NbCalendarModule,
   NbCalendarRangeModule,
   NbCardModule,
-  NbChatModule,
   NbCheckboxModule,
   NbContextMenuModule,
   NbDatepickerModule,
@@ -40,7 +39,7 @@ import {
 
 import { NbSecurityModule } from '@nebular/security';
 
-import { FooterComponent, HeaderComponent, SearchInputComponent } from './components';
+import { FooterComponent, HeaderComponent } from './components';
 import { CapitalizePipe, EvaIconsPipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { OneColumnLayoutComponent } from './layouts';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -48,45 +47,43 @@ import { COSMIC_THEME } from './styles/theme.cosmic';
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
-  NbCardModule,
-  NbLayoutModule,
-  NbTabsetModule,
-  NbRouteTabsetModule,
-  NbMenuModule,
-  NbUserModule,
+  NbAccordionModule,
   NbActionsModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbCheckboxModule,
-  NbPopoverModule,
-  NbContextMenuModule,
-  NgbModule,
-  NbSecurityModule, // *nbIsGranted directive,
-  NbProgressBarModule,
+  NbAlertModule,
+  NbButtonModule,
+  NbCalendarKitModule,
   NbCalendarModule,
   NbCalendarRangeModule,
-  NbStepperModule,
-  NbButtonModule,
-  NbListModule,
-  NbToastrModule,
-  NbInputModule,
-  NbAccordionModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbContextMenuModule,
   NbDatepickerModule,
   NbDialogModule,
-  NbWindowModule,
-  NbAlertModule,
-  NbSpinnerModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbListModule,
+  NbMenuModule,
+  NbPopoverModule,
+  NbProgressBarModule,
   NbRadioModule,
+  NbRouteTabsetModule,
+  NbSearchModule,
+  NbSecurityModule, // *nbIsGranted directive,
   NbSelectModule,
-  NbChatModule,
+  NbSidebarModule,
+  NbSpinnerModule,
+  NbStepperModule,
+  NbTabsetModule,
+  NbToastrModule,
   NbTooltipModule,
-  NbCalendarKitModule
+  NbUserModule,
+  NbWindowModule,
+  NgbModule
 ];
 
 const COMPONENTS = [
-  HeaderComponent,
   FooterComponent,
-  SearchInputComponent,
+  HeaderComponent,
   OneColumnLayoutComponent
 ];
 
@@ -94,11 +91,11 @@ const ENTRY_COMPONENTS = [];
 
 const PIPES = [
   CapitalizePipe,
+  EvaIconsPipe,
+  NumberWithCommasPipe,
   PluralPipe,
   RoundPipe,
-  TimingPipe,
-  NumberWithCommasPipe,
-  EvaIconsPipe
+  TimingPipe
 ];
 
 const NB_THEME_PROVIDERS = [
@@ -108,15 +105,12 @@ const NB_THEME_PROVIDERS = [
     },
     [COSMIC_THEME]
   ).providers,
-  ...NbSidebarModule.forRoot().providers,
-  ...NbMenuModule.forRoot().providers,
   ...NbDatepickerModule.forRoot().providers,
   ...NbDialogModule.forRoot().providers,
-  ...NbWindowModule.forRoot().providers,
+  ...NbMenuModule.forRoot().providers,
+  ...NbSidebarModule.forRoot().providers,
   ...NbToastrModule.forRoot().providers,
-  ...NbChatModule.forRoot({
-    messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY'
-  }).providers
+  ...NbWindowModule.forRoot().providers
 ];
 
 @NgModule({
