@@ -1,3 +1,5 @@
+import 'roslib';
+
 declare module 'roslib' {
   export interface Ros {
 
