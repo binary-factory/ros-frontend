@@ -44,7 +44,6 @@ import {
   FooterComponent,
   HeaderComponent,
   SearchInputComponent,
-  SwitcherComponent,
 } from './components';
 import {
   CapitalizePipe,
@@ -98,7 +97,6 @@ const NB_MODULES = [
 ];
 
 const COMPONENTS = [
-  SwitcherComponent,
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
