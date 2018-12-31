@@ -1,7 +1,7 @@
-<div class="header-container" [class.left]="position === 'normal'" [class.right]="position === 'inverse'">
+<div [class.left]="position === 'normal'" [class.right]="position === 'inverse'" class="header-container">
   <div class="logo-containter">
-    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
-    <div class="logo" (click)="goToHome()">ros-<span>telepresence</span></div>
+    <a (click)="toggleSidebar()" class="navigation" href="#"><i class="nb-menu"></i></a>
+    <div (click)="goToHome()" class="logo">ros-<span>telepresence</span></div>
   </div>
 </div>
 

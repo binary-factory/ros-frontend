@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ROSServiceService } from './ros-service.service';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ROSClientService } from './ros-client.service';
+import { map } from 'rxjs/operators';
 import { ROSRequestResponseOptions } from '../models/request-response-options';
+import { ROSClientService } from './ros-client.service';
+import { ROSServiceService } from './ros-service.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { EventManager } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

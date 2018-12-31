@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { NbSecurityModule } from '@nebular/security';
 
 import {
   NbAccordionModule,
@@ -34,10 +35,9 @@ import {
   NbUserModule,
   NbWindowModule
 } from '@nebular/theme';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { NbSecurityModule } from '@nebular/security';
-
-import { COSMIC_THEME } from './styles/theme.cosmic';
+import { COSMIC_THEME } from '../../assets/styles/theme.cosmic';
 
 const NB_MODULES = [
   NbAccordionModule,

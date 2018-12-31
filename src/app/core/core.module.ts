@@ -1,5 +1,5 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
 import { NbRoleProvider, NbSecurityModule } from '@nebular/security';
 import { of as observableOf } from 'rxjs';
@@ -40,7 +40,7 @@ export const NB_CORE_PROVIDERS = [
 
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider
-  },
+  }
 ];
 
 @NgModule({

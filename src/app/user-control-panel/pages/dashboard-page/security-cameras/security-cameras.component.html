@@ -1,0 +1,45 @@
+<nb-card size="xlarge">
+  <nb-card-header>
+    <div class="cameras-card-header">
+      <span class="cameras-card-title">Security Cameras</span>
+      <span class="cameras-filter">
+        <a (click)="isSingleView = true" [class.active]="isSingleView">
+          <i class="nb-square"></i>
+        </a>
+        <a (click)="isSingleView = false" [class.active]="!isSingleView">
+          <i class="nb-grid-a"></i>
+        </a>
+      </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div *ngIf="isSingleView" class="cameras single-view">
+      <div [style.background-image]="'url(' + selectedCamera.source + ')'" class="camera">
+        <span>{{ selectedCamera.title }}</span>
+      </div>
+    </div>
+    <div *ngIf="!isSingleView" class="cameras">
+      <div (click)="selectCamera(camera)" *ngFor="let camera of cameras"
+           [style.background-image]="'url(' + camera.source + ')'"
+           class="camera col-sm-6">
+        <span>{{ camera.title }}</span>
+      </div>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <nb-actions fullWidth size="medium">
+      <nb-action>
+        <i class="nb-pause-outline"></i><span>Pause</span>
+      </nb-action>
+      <nb-action>
+        <i class="nb-list"></i><span>Logs</span>
+      </nb-action>
+      <nb-action>
+        <i class="nb-search"></i><span>Search</span>
+      </nb-action>
+      <nb-action>
+        <i class="nb-gear"></i><span>Setup</span>
+      </nb-action>
+    </nb-actions>
+  </nb-card-footer>
+</nb-card>

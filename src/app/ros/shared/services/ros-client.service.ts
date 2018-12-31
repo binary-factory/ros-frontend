@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ROSServiceConfig } from './ros-config.model';
 import { Ros } from 'roslib';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-options';
 import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from '../models/request-response-options';
-import { timeout } from 'rxjs/operators';
+import { ROSServiceConfig } from './ros-config.model';
 
 @Injectable({
   providedIn: 'root'

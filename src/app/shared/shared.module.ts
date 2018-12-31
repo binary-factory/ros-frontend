@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ThemeModule } from '../theme/theme.module';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ThemeModule } from '../theme/theme.module';
 
 const sharedModules = [
   CommonModule,
@@ -12,13 +12,11 @@ const sharedModules = [
   NgxEchartsModule
 ];
 
-const sharedComponents = [
-
-];
+const sharedComponents = [];
 
 @NgModule({
   imports: [
-    ...sharedModules,
+    ...sharedModules
   ],
   exports: [
     ...sharedModules,
