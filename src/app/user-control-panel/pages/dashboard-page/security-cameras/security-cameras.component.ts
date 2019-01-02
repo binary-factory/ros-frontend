@@ -13,12 +13,6 @@ export class SecurityCamerasComponent {
   }, {
     title: 'Camera #2',
     source: 'assets/images/camera2.jpg'
-  }, {
-    title: 'Camera #3',
-    source: 'assets/images/camera3.jpg'
-  }, {
-    title: 'Camera #4',
-    source: 'assets/images/camera4.jpg'
   }];
 
   selectedCamera: any = this.cameras[0];

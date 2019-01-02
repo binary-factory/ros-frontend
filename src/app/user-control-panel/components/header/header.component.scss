@@ -78,33 +78,12 @@
     }
   }
 
-  ngx-layout-direction-switcher {
-    margin: 0 1.5rem;
-  }
-
-  ngx-theme-switcher {
-    margin: nb-theme(layout-padding);
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  @include media-breakpoint-down(xl) {
-    ngx-layout-direction-switcher {
-      display: none;
-    }
-  }
-
-  .toggle-layout /deep/ a {
-    display: block;
-    text-decoration: none;
-    line-height: 1;
-
-    i {
+  .connection-indicator {
       color: nb-theme(color-fg-highlight);
       font-size: 2.25rem;
       border-radius: 50%;
       position: relative;
-      animation-name: pulse-light;
+
 
       &::after {
         content: ' ';
@@ -121,11 +100,18 @@
         height: 13%;
 
         animation: 3s linear infinite pulse;
-
-        @include nb-for-theme(default) {
-          animation-name: pulse-light;
-        }
       }
+
+
+    &--connected {
+      //color: nb-theme(color-fg-highlight)
+    }
+
+    &--disconnected {
+      &::after {
+        animation: 3s linear infinite pulse-red;
+      }
+      color: #ff386a;
     }
   }
 
@@ -141,15 +127,15 @@
     }
   }
 
-  @include keyframes(pulse-light) {
+  @include keyframes(pulse-red) {
     0% {
-      box-shadow: 0 0 1px 0 rgba(115, 255, 208, 0);
+      box-shadow: 0 0 1px 0 rgba(255, 56, 106, 0);
     }
     20% {
-      box-shadow: 0 0 3px 10px rgba(115, 255, 208, 0.4);
+      box-shadow: 0 0 3px 10px rgba(255, 56, 106, 0.4);
     }
     100% {
-      box-shadow: 0 0 5px 20px rgba(115, 255, 208, 0);
+      box-shadow: 0 0 5px 20px rgba(255, 56, 106, 0);
     }
   }
 

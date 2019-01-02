@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ThemeModule } from '../theme/theme.module';
 
@@ -9,7 +10,8 @@ const sharedModules = [
   FormsModule,
   ReactiveFormsModule,
   ThemeModule,
-  NgxEchartsModule
+  NgxEchartsModule,
+  Ng2SmartTableModule
 ];
 
 const sharedComponents = [];

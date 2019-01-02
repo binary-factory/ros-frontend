@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { ROSModule } from './ros/ros.module';
 import { ThemeModule } from './theme/theme.module';
 
 @NgModule({
@@ -23,11 +24,12 @@ import { ThemeModule } from './theme/theme.module';
     AppRoutingModule,
 
     CoreModule.forRoot(),
-    ThemeModule.forRoot()
+    ThemeModule.forRoot(),
+    ROSModule.forRoot({ url: 'ws://192.168.225.226:9090' })
   ],
   bootstrap: [AppComponent],
   providers: [
-    {provide: APP_BASE_HREF, useValue: '/'}
+    { provide: APP_BASE_HREF, useValue: '/' }
   ]
 })
 export class AppModule {

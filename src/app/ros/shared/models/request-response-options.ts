@@ -1,7 +1,7 @@
 import { ROSRequestOptions } from './request-options';
 
 export interface ROSRequestResponseOptions extends ROSRequestOptions {
-  timeout: number;
+  timeout?: number;
 }
 
 export const ROSDefaultRequestResponseOptions: ROSRequestResponseOptions = {

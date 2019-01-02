@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-options';
 import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from '../models/request-response-options';
-import { ROSServiceConfig } from './ros-config.model';
+import { ROSServiceConfig } from '../models/ros-config.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ export class ROSClientService {
   private _connectedSource$ = new BehaviorSubject<boolean>(false);
 
   constructor(config: ROSServiceConfig) {
+    console.log('y');
     this._config = config;
     this._ros = new Ros(config);
 

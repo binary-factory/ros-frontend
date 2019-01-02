@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { ROSClientService } from '../../../ros/shared/services/ros-client.service';
 
 @Component({
   selector: 'ngx-header',
@@ -11,16 +12,17 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: any;
-
-  userMenu = [{title: 'Profile'}, {title: 'Log out'}];
+  isConnected = false;
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService) {
+              private menuService: NbMenuService,
+              private _rosClientService: ROSClientService) {
   }
 
   ngOnInit() {
-
+    this._rosClientService.connected$.subscribe((connected) => {
+      this.isConnected = connected;
+    });
   }
 
   toggleSidebar(): boolean {
@@ -30,16 +32,8 @@ export class HeaderComponent implements OnInit {
     return false;
   }
 
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
-
-    return false;
-  }
-
   goToHome() {
     this.menuService.navigateHome();
   }
 
-  startSearch() {
-  }
 }

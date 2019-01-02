@@ -26,7 +26,7 @@ export class ROSTopicService {
 
     options = Object.assign(ROSDefaultRequestOptions, options || {});
 
-    const topic = new Topic(Object.assign(topicOptions, {ros: this._rosClient.instance}));
+    const topic = new Topic(Object.assign(topicOptions, { ros: this._rosClient.instance }));
 
     const source = new Observable<T>((observer) => {
       topic.subscribe((message) => {

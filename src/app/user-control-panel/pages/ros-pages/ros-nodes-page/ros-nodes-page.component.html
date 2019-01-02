@@ -1,3 +1,8 @@
-<p>
-  ros-nodes-page works!
-</p>
+<nb-card>
+  <nb-card-header>ROS Nodes</nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table (deleteConfirm)="onDeleteConfirm($event)" [settings]="settings" [source]="source">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

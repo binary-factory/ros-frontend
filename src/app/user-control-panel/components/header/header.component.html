@@ -6,7 +6,11 @@
 </div>
 
 <div class="header-container">
-  <nb-actions size="medium" [class.right]="position === 'normal'" [class.left]="position === 'inverse'">
-    <nb-action icon="nb-gear" class="toggle-layout" (click)="toggleSettings()"></nb-action>
-  </nb-actions>
+  <ng-template *ngIf="isConnected;then content else other_content"></ng-template>
+  <ng-template #content>
+    <i nbTooltip="Client verbunden!" nbTooltipPlacement="left" nbTooltipStatus="success" class="connection-indicator connection-indicator--connected fas fa-plug"></i>
+  </ng-template>
+  <ng-template #other_content>
+    <i nbTooltip="Client nicht verbunden!" nbTooltipPlacement="left" nbTooltipStatus="danger" class="connection-indicator connection-indicator--disconnected fas fa-plug"></i>
+  </ng-template>
 </div>

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { ROSNodeDetails } from '../../../../../ros/shared/models/node-details.model';
+import { ROSNodeService } from '../../../../../ros/shared/services/ros-node.service';
 
 @Component({
   selector: 'ngx-ros-node-inspect-page',
@@ -7,10 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RosNodeInspectPageComponent implements OnInit {
 
-  constructor() {
+  nodeDetails: Observable<ROSNodeDetails>;
+
+  constructor(private route: ActivatedRoute, private _rosNodeService: ROSNodeService) {
   }
 
   ngOnInit() {
+    this.nodeDetails = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        console.log(params.get('id'));
+        return this._rosNodeService.getNodeDetails(params.get('id'), { enqueue: true });
+      })
+    );
+
+    this.nodeDetails.subscribe((details) => console.log(details));
   }
 
 }

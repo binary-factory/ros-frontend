@@ -11,14 +11,14 @@ import { RosTopicInspectPageComponent } from './ros-topics-page/ros-topic-inspec
 import { RosTopicsPageComponent } from './ros-topics-page/ros-topics-page.component';
 
 const routes: Routes = [
-  {path: 'nodes', component: RosNodesPageComponent},
-  {path: 'node/:id', component: RosNodeInspectPageComponent},
-  {path: 'params', component: RosParamsPageComponent},
-  {path: 'param/:id', component: RosParamInspectPageComponent},
-  {path: 'services', component: RosServicesPageComponent},
-  {path: 'service/:id', component: RosServiceInspectPageComponent},
-  {path: 'topics', component: RosTopicsPageComponent},
-  {path: 'topics/:id', component: RosTopicInspectPageComponent}
+  { path: 'nodes', component: RosNodesPageComponent },
+  { path: 'node/:id', component: RosNodeInspectPageComponent },
+  { path: 'params', component: RosParamsPageComponent },
+  { path: 'param/:id', component: RosParamInspectPageComponent },
+  { path: 'services', component: RosServicesPageComponent },
+  { path: 'service/:id', component: RosServiceInspectPageComponent },
+  { path: 'topics', component: RosTopicsPageComponent },
+  { path: 'topic/:id', component: RosTopicInspectPageComponent }
 ];
 
 @NgModule({

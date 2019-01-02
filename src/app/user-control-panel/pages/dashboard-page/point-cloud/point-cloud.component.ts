@@ -14,7 +14,7 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
 
   isEnabled = false;
 
-  readonly arrowKeys = {37: 1, 38: 1, 39: 1, 40: 1};
+  readonly arrowKeys = { 37: 1, 38: 1, 39: 1, 40: 1 };
 
   private _scene: THREE.Scene;
 
@@ -26,7 +26,7 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
 
   private _controls: THREE.OrbitControls;
 
-  @ViewChild('container', {read: ElementRef})
+  @ViewChild('container', { read: ElementRef })
   private _container: ElementRef;
 
   constructor(private elementRef: ElementRef,
@@ -51,7 +51,7 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
     this._scene.add(gridHelper);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     this._cube = new THREE.Mesh(geometry, material);
     this._scene.add(this._cube);
 

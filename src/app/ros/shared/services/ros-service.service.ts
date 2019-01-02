@@ -47,7 +47,7 @@ export class ROSServiceService {
     const service = new Service(serviceOptions);
     const source = new Observable<any>((observer) => {
       service.advertise((request, response) => {
-        observer.next({request, response});
+        observer.next({ request, response });
         observer.complete();
       });
 
