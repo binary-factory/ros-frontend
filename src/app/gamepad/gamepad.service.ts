@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventManager } from '@angular/platform-browser';
+import { NGXLogger } from 'ngx-logger';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,31 +8,30 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class GamepadService {
 
-  private _gamepads: Gamepad[] = [];
+  private gamepads: Gamepad[] = [];
 
-  private _gamepadSource$ = new BehaviorSubject<Gamepad[]>([]);
+  private gamepadSource$ = new BehaviorSubject<Gamepad[]>([]);
 
-  constructor(private _eventManager: EventManager) {
-    console.log(_eventManager);
-    _eventManager.addGlobalEventListener('window', 'gamepadconnected', this._handleGamepadConnected.bind(this));
-    _eventManager.addGlobalEventListener('window', 'gamepaddisconnected', this._handleGamepadDisconnected.bind(this));
+  constructor(private eventManager: EventManager, private logger: NGXLogger) {
+    eventManager.addGlobalEventListener('window', 'gamepadconnected', this.handleGamepadConnected.bind(this));
+    eventManager.addGlobalEventListener('window', 'gamepaddisconnected', this.handleGamepadDisconnected.bind(this));
   }
 
   get gamepads$() {
-    return this._gamepadSource$.asObservable();
+    return this.gamepadSource$.asObservable();
   }
 
-  private _handleGamepadConnected(event: GamepadEvent) {
-    console.log('1');
+  private handleGamepadConnected(event: GamepadEvent) {
     const gamepad = event.gamepad;
-    this._gamepads[gamepad.index] = gamepad;
-    this._gamepadSource$.next(this._gamepads);
+    this.logger.info('Gamepad connected!', gamepad);
+    this.gamepads[gamepad.index] = gamepad;
+    this.gamepadSource$.next(this.gamepads);
   }
 
-  private _handleGamepadDisconnected(event: GamepadEvent) {
-    console.log('2');
+  private handleGamepadDisconnected(event: GamepadEvent) {
     const gamepad = event.gamepad;
-    delete this._gamepads[gamepad.index];
-    this._gamepadSource$.next(this._gamepads);
+    this.logger.info('Gamepad disconnected!', gamepad);
+    delete this.gamepads[gamepad.index];
+    this.gamepadSource$.next(this.gamepads);
   }
 }

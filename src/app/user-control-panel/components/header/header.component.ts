@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
+import { GamepadService } from '../../../gamepad/gamepad.service';
 import { ROSClientService } from '../../../ros/shared/services/ros-client.service';
 
 @Component({
@@ -14,20 +15,27 @@ export class HeaderComponent implements OnInit {
 
   isConnected = false;
 
+  isGamepadConnected = false;
+
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private _rosClientService: ROSClientService) {
+              private rosClientService: ROSClientService,
+              private gamepadService: GamepadService) {
   }
 
   ngOnInit() {
-    this._rosClientService.connected$.subscribe((connected) => {
+    this.rosClientService.connected$.subscribe((connected) => {
       this.isConnected = connected;
+    });
+
+    this.gamepadService.gamepads$.subscribe((gamepads) => {
+      this.isGamepadConnected = gamepads.some((gamepad) => gamepad != null);
     });
   }
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
-    //this.layoutService.changeLayoutSize();
+    // this.layoutService.changeLayoutSize();
 
     return false;
   }

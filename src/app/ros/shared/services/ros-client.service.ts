@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { Ros } from 'roslib';
 import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { timeout } from 'rxjs/operators';
@@ -11,43 +12,39 @@ import { ROSServiceConfig } from '../models/ros-config.model';
 })
 export class ROSClientService {
 
-  private _ros: Ros;
-  private _connectedSource$ = new BehaviorSubject<boolean>(false);
+  private readonly ros: Ros;
 
-  constructor(config: ROSServiceConfig) {
-    console.log('y');
-    this._config = config;
-    this._ros = new Ros(config);
+  private readonly config: ROSServiceConfig;
 
-    this._ros.on('connection', this._handleConnection.bind(this));
-    this._ros.on('close', this._handleClose.bind(this));
-    this._ros.on('error', this._handleError.bind(this));
-  }
+  private isConnected: boolean;
 
-  private _config: ROSServiceConfig;
+  private isConnectedSource$ = new BehaviorSubject<boolean>(false);
 
-  get config() {
-    return this._config;
-  }
+  constructor(config: ROSServiceConfig, private logger: NGXLogger) {
+    this.config = config;
+    this.ros = new Ros(config);
 
-  private _connected: boolean;
-
-  get connected() {
-    return this._connected;
+    this.ros.on('connection', this._handleConnection.bind(this));
+    this.ros.on('close', this._handleClose.bind(this));
+    this.ros.on('error', this.handleError.bind(this));
   }
 
   get instance() {
-    return this._ros;
+    return this.ros;
+  }
+
+  get connected() {
+    return this.isConnected;
   }
 
   get connected$() {
-    return this._connectedSource$.asObservable();
+    return this.isConnectedSource$.asObservable();
   }
 
   applyRequestOptions<T>(source: Observable<T> | Subject<T>, options?: ROSRequestOptions) {
     options = Object.assign(ROSDefaultRequestOptions, options || {});
-    if (!this.connected && !options.enqueue) {
-      return throwError('You are not connected! Enque was disabled for this request.');
+    if (!this.isConnected && !options.enqueue) {
+      return throwError('You are not isConnected! Enque was disabled for this request.');
     } else {
       return source;
     }
@@ -65,18 +62,18 @@ export class ROSClientService {
   }
 
   private _handleConnection(event: Event) {
-    console.info('ROS-Client: Connected.', event);
-    this._connected = true;
-    this._connectedSource$.next(this._connected);
+    this.logger.info('ROS-Client: Connected.', event);
+    this.isConnected = true;
+    this.isConnectedSource$.next(this.isConnected);
   }
 
   private _handleClose(event: CloseEvent) {
-    console.info('ROS-Client: Disconnected.', event);
-    this._connected = false;
-    this._connectedSource$.next(this._connected);
+    this.logger.info('ROS-Client: Disconnected.', event);
+    this.isConnected = false;
+    this.isConnectedSource$.next(this.isConnected);
   }
 
-  private _handleError(err: ErrorEvent) {
-    console.log('ROS-Error', err);
+  private handleError(err: ErrorEvent) {
+    this.logger.error('ROS-Error', err);
   }
 }
