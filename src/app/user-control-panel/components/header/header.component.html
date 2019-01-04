@@ -6,11 +6,20 @@
 </div>
 
 <div class="header-container">
-  <ng-template *ngIf="isConnected;then content else other_content"></ng-template>
-  <ng-template #content>
+  <ng-template *ngIf="isGamepadConnected;then gamepad_connected else gamepad_disconnected"></ng-template>
+  <ng-template #gamepad_connected>
+    <i nbTooltip="Gamepad verbunden!" nbTooltipPlacement="left" nbTooltipStatus="success" class="gamepad-indicator gamepad-indicator--connected fas fa-gamepad"></i>
+  </ng-template>
+  <ng-template #gamepad_disconnected>
+    <i nbTooltip="Gamepad nicht verbunden!" nbTooltipPlacement="left" nbTooltipStatus="danger" class="gamepad-indicator gamepad-indicator--disconnected fas fa-gamepad"></i>
+  </ng-template>
+
+  <ng-template *ngIf="isConnected;then connected else disconnected"></ng-template>
+  <ng-template #connected>
     <i nbTooltip="Client verbunden!" nbTooltipPlacement="left" nbTooltipStatus="success" class="connection-indicator connection-indicator--connected fas fa-plug"></i>
   </ng-template>
-  <ng-template #other_content>
+  <ng-template #disconnected>
     <i nbTooltip="Client nicht verbunden!" nbTooltipPlacement="left" nbTooltipStatus="danger" class="connection-indicator connection-indicator--disconnected fas fa-plug"></i>
   </ng-template>
+
 </div>

@@ -78,6 +78,22 @@
     }
   }
 
+  .gamepad-indicator {
+    color: nb-theme(color-fg-highlight);
+    font-size: 2.25rem;
+    border-radius: 50%;
+    position: relative;
+
+    margin-right: 15px;
+
+    &--connected {
+    }
+
+    &--disconnected {
+      color: #ff386a;
+    }
+  }
+
   .connection-indicator {
       color: nb-theme(color-fg-highlight);
       font-size: 2.25rem;
