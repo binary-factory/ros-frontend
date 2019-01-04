@@ -47,7 +47,7 @@ export class ROSClientService {
   applyRequestOptions<T>(source: Observable<T> | Subject<T>, options?: ROSRequestOptions) {
     options = Object.assign(ROSDefaultRequestOptions, options || {});
     if (!this.isConnected && !options.enqueue) {
-      return throwError('You are not isConnected! Enqueue was disabled for this request.');
+      return throwError('You are not connected! Enqueue was disabled for this request.');
     } else {
       return source;
     }
