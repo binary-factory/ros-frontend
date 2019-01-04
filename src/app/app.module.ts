@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxLoadingModule } from 'ngx-loading';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -20,9 +21,17 @@ import { ThemeModule } from './theme/theme.module';
     HttpClientModule,
     AppRoutingModule,
 
+    LoggerModule.forRoot({
+      serverLogLevel: NgxLoggerLevel.OFF,
+      serverLoggingUrl: '',
+      level: NgxLoggerLevel.TRACE,
+      disableConsoleLogging: false
+    }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
-    ROSModule.forRoot({ url: 'ws://192.168.0.141:9090' }),
+    ROSModule.forRoot({
+      url: 'ws://192.168.0.141:9090'
+    }),
     GamepadModule.forRoot(),
     NgxLoadingModule.forRoot({
       primaryColour: '#00d9bf',
