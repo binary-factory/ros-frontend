@@ -22,7 +22,11 @@ import { ThemeModule } from './theme/theme.module';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     ROSModule.forRoot({ url: 'ws://192.168.0.141:9090' }),
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({
+      primaryColour: '#00d9bf',
+      secondaryColour: '#00d977',
+      tertiaryColour: '#2f296b'
+    })
   ],
   bootstrap: [AppComponent],
   providers: [
