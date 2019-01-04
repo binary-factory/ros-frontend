@@ -1,21 +1,19 @@
 <div class="row">
 
-  <div class="col-xxxl-5 col-xxl-12 col-md-7">
+  <div class="col-12">
     <ngx-security-cameras></ngx-security-cameras>
   </div>
 
-  <div class="col-xxxl-5 col-xxl-12 col-md-7">
-    <ngx-security-cameras></ngx-security-cameras>
+  <div class="col-6">
+    <ngx-solar title="12V Batterie" [chartValue]="72"></ngx-solar>
   </div>
 
-  <div class="col-xxxl-2 col-xxl-6 col-lg-5 col-md-6">
-    <ngx-solar [chartValue]="72"></ngx-solar>
+  <div class="col-6">
+    <ngx-solar title="24V Batterie" [chartValue]="72"></ngx-solar>
   </div>
 
-</div>
-
-<div class="row">
   <div class="col-12">
     <ngx-point-cloud></ngx-point-cloud>
   </div>
+
 </div>

@@ -8,20 +8,14 @@ import { Component } from '@angular/core';
 export class SecurityCamerasComponent {
 
   cameras: any[] = [{
-    title: 'Camera #1',
+    title: 'Gegenüber',
     source: 'assets/images/camera1.jpg'
   }, {
-    title: 'Camera #2',
+    title: 'Du',
     source: 'assets/images/camera2.jpg'
   }];
 
   selectedCamera: any = this.cameras[0];
-
-  userMenu = [{
-    title: 'Profile'
-  }, {
-    title: 'Log out'
-  }];
 
   isSingleView = false;
 
