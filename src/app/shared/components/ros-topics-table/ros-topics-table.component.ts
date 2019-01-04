@@ -41,9 +41,13 @@ export class RosTopicsTableComponent implements OnInit {
       .pipe(
         concatMap<string[], string>((x) => x),
         concatMap((topic) => {
-          return this.rosTopicService.getTopicType(topic).pipe(map((type) => {
-            return { name: topic, type };
-          }));
+          return this.rosTopicService
+            .getTopicType(topic)
+            .pipe(
+              map((type) => {
+                return { name: topic, type };
+              })
+            );
         }),
         reduce<any, any[]>((array, value) => {
           array.push(value);

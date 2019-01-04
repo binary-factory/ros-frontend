@@ -54,9 +54,13 @@ export class RosParamsTableComponent implements OnInit {
       .pipe(
         concatMap<string[], string>((x) => x),
         concatMap((param) => {
-          return this.rosParamService.getParam(param).pipe(map((value) => {
-            return { name: param, value };
-          }));
+          return this.rosParamService
+            .getParam(param)
+            .pipe(
+              map((value) => {
+                return { name: param, value };
+              })
+            );
         }),
         reduce<any, any[]>((array, value) => {
           array.push(value);

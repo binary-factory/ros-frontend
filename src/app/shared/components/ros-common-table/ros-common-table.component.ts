@@ -25,6 +25,8 @@ export class RosCommonTableComponent implements OnInit {
 
   isLoading = false;
 
+  err: any;
+
   constructor() {
   }
 
@@ -33,10 +35,13 @@ export class RosCommonTableComponent implements OnInit {
 
   @Input()
   set data(data: Observable<Array<any>>) {
+    this.err = null;
     this.isLoading = true;
 
     data.subscribe((resolved) => {
       this.source.load(resolved);
+    }, (err) => {
+      this.err = err;
     }).add(() => {
       this.isLoading = false;
     });

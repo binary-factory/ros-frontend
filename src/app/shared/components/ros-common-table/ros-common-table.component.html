@@ -9,8 +9,23 @@
       </span>
     </div>
   </nb-card-header>
-  <nb-card-body>
-    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings" [source]="source"></ng2-smart-table>
-    <ngx-loading [show]="isLoading"></ngx-loading>
-  </nb-card-body>
+
+  <ng-template *ngIf="err;then other_content else content"></ng-template>
+  <ng-template #content>
+    <nb-card-body>
+      <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings"
+                       [source]="source"></ng2-smart-table>
+      <ngx-loading [show]="isLoading"></ngx-loading>
+    </nb-card-body>
+  </ng-template>
+
+  <ng-template #other_content>
+    <nb-card-body>
+      <div class="error">
+        <h2>Fehler</h2>
+        <h4>Bitte erneut versuchen.</h4>
+        <h5>Grund: {{ err }}</h5>
+      </div>
+    </nb-card-body>
+  </ng-template>
 </nb-card>
