@@ -30,7 +30,9 @@ import { ThemeModule } from './theme/theme.module';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     ROSModule.forRoot({
-      url: 'ws://192.168.0.141:9090'
+      url: 'ws://192.168.0.141:9090',
+      heartbeat: 1000,
+      reconnect: 1000
     }),
     GamepadModule.forRoot(),
     NgxLoadingModule.forRoot({

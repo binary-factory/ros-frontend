@@ -1,3 +1,5 @@
 export class ROSServiceConfig {
-  url?: string;
+  url: string;
+  reconnect: number;
+  heartbeat?: number;
 }

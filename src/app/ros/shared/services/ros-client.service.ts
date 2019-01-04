@@ -14,18 +14,21 @@ export class ROSClientService {
 
   private readonly ros: Ros;
 
-  private readonly config: ROSServiceConfig;
-
   private isConnected: boolean;
 
   private isConnectedSource$ = new BehaviorSubject<boolean>(false);
 
-  constructor(config: ROSServiceConfig, private logger: NGXLogger) {
+  private heartbeatTimer: any;
+
+  constructor(private config: ROSServiceConfig,
+              private logger: NGXLogger
+  ) {
+
     this.config = config;
     this.ros = new Ros(config);
 
-    this.ros.on('connection', this._handleConnection.bind(this));
-    this.ros.on('close', this._handleClose.bind(this));
+    this.ros.on('connection', this.handleConnection.bind(this));
+    this.ros.on('close', this.handleClose.bind(this));
     this.ros.on('error', this.handleError.bind(this));
   }
 
@@ -44,7 +47,7 @@ export class ROSClientService {
   applyRequestOptions<T>(source: Observable<T> | Subject<T>, options?: ROSRequestOptions) {
     options = Object.assign(ROSDefaultRequestOptions, options || {});
     if (!this.isConnected && !options.enqueue) {
-      return throwError('You are not isConnected! Enque was disabled for this request.');
+      return throwError('You are not isConnected! Enqueue was disabled for this request.');
     } else {
       return source;
     }
@@ -61,16 +64,68 @@ export class ROSClientService {
     }
   }
 
-  private _handleConnection(event: Event) {
+  private handleHeartbeatTick() {
+    let connected = false;
+    this.heartbeatCheck()
+      .subscribe(() => {
+        this.logger.info('Heartbeat successful. Waiting for next one.');
+        connected = true;
+      }, (err) => {
+        this.logger.info('Offline due heartbeat error.', err);
+        connected = false;
+
+      })
+      .add(() => {
+        if (this.isConnected !== connected) {
+          this.logger.info('Connection state changed.');
+          this.isConnected = connected;
+          this.isConnectedSource$.next(this.isConnected);
+        }
+      });
+  }
+
+  private heartbeatCheck() {
+    const source = new Observable((observer) => {
+      this.ros.getNodes((nodes) => {
+        observer.next();
+        observer.complete();
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+
+    return source.pipe(timeout(this.config.heartbeat));
+  }
+
+  private startHeartbeat() {
+    this.heartbeatTimer = setInterval(this.handleHeartbeatTick.bind(this), this.config.heartbeat);
+  }
+
+  private stopHeartbeat() {
+    clearInterval(this.heartbeatTimer);
+  }
+
+  private handleConnection(event: Event) {
     this.logger.info('ROS-Client: Connected.', event);
     this.isConnected = true;
     this.isConnectedSource$.next(this.isConnected);
+
+    if (this.config.heartbeat > 0) {
+      this.logger.info('Starting heartbeat.');
+      this.startHeartbeat();
+    }
   }
 
-  private _handleClose(event: CloseEvent) {
+  private handleClose(event: CloseEvent) {
     this.logger.info('ROS-Client: Disconnected.', event);
     this.isConnected = false;
     this.isConnectedSource$.next(this.isConnected);
+
+    this.stopHeartbeat();
+
+    setTimeout(() => {
+      this.ros.connect(this.config.url);
+    }, 0);
   }
 
   private handleError(err: ErrorEvent) {

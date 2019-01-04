@@ -27,7 +27,6 @@ export class ROSParamService {
           return response;
         }
       }));
-
   }
 
   setParam(name: string, value: any, options?: ROSRequestResponseOptions) {
