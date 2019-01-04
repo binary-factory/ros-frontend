@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { GamepadModule } from './gamepad/gamepad.module';
 import { ROSModule } from './ros/ros.module';
 import { ThemeModule } from './theme/theme.module';
 
@@ -22,6 +23,7 @@ import { ThemeModule } from './theme/theme.module';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     ROSModule.forRoot({ url: 'ws://192.168.0.141:9090' }),
+    GamepadModule.forRoot(),
     NgxLoadingModule.forRoot({
       primaryColour: '#00d9bf',
       secondaryColour: '#00d977',
