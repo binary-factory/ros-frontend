@@ -29,6 +29,7 @@ export class ROSNodeService {
     const source = new Observable<ROSNodeDetails>((observer) => {
       this._rosClient.instance.getNodeDetails(name, (publications, subscriptions, services) => {
         const nodeDetails: ROSNodeDetails = {
+          name,
           publications,
           subscriptions,
           services

@@ -14,14 +14,14 @@ export class RosNodeInspectPageComponent implements OnInit {
 
   nodeDetails: Observable<ROSNodeDetails>;
 
-  constructor(private route: ActivatedRoute, private _rosNodeService: ROSNodeService) {
+  constructor(private route: ActivatedRoute, private rosNodeService: ROSNodeService) {
   }
 
   ngOnInit() {
     this.nodeDetails = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         console.log(params.get('id'));
-        return this._rosNodeService.getNodeDetails(params.get('id'), { enqueue: true });
+        return this.rosNodeService.getNodeDetails(params.get('id'), { enqueue: true });
       })
     );
 

@@ -1,0 +1,16 @@
+<nb-card class="rt-map-card">
+  <nb-card-header>
+    <div class="cameras-card-header">
+      <span class="cameras-card-title">{{ title }}</span>
+      <span class="cameras-filter">
+        <a (click)="onRefresh()" class="active">
+          <i class="nb-loop-circled"></i>
+        </a>
+      </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings" [source]="source"></ng2-smart-table>
+    <ngx-loading [show]="isLoading"></ngx-loading>
+  </nb-card-body>
+</nb-card>
