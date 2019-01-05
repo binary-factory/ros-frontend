@@ -19,11 +19,15 @@
       </div>
     </div>
     <div *ngIf="!isSingleView" class="cameras">
+      <!--
       <div (click)="selectCamera(camera)" *ngFor="let camera of cameras"
            [style.background-image]="'url(' + camera.source + ')'"
            class="camera col-sm-6">
         <span>{{ camera.title }}</span>
       </div>
+      -->
+      <video id="localVideo"></video>
+      <div id="remoteVideos"></div>
     </div>
   </nb-card-body>
   <nb-card-footer>
