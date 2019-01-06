@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78add78f-4631-46c4-9115-00e28bbce8fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -41,11 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+            <state relative-caret-position="240">
+              <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -54,19 +56,28 @@
         <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
-              <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
+              <caret line="24" column="24" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="828">
+              <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts">
+        <entry file="file://$PROJECT_DIR$/node_modules/@angular/core/src/render/api.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-              <folding>
-                <element signature="e#0#80#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="443">
+              <caret line="214" column="23" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -74,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1620">
-              <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+            <state relative-caret-position="466">
+              <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
             </state>
           </provider>
         </entry>
@@ -152,7 +163,6 @@
         <option value="$PROJECT_DIR$/src/app/user-control-panel/components/header/header.component.scss" />
         <option value="$PROJECT_DIR$/src/app/user-control-panel/components/header/header.component.html" />
         <option value="$PROJECT_DIR$/src/app/gamepad/gamepad.module.ts" />
-        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" />
         <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/solar/solar.component.ts" />
         <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/dashboard-page.component.html" />
         <option value="$PROJECT_DIR$/src/app/ros/shared/services/ros-topic.service.ts" />
@@ -165,10 +175,11 @@
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/angular.json" />
         <option value="$PROJECT_DIR$/src/app/ros/shared/services/ros-client.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" />
-        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" />
+        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" />
+        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" />
       </list>
     </option>
   </component>
@@ -195,6 +206,51 @@
             <path>
               <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
               <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="user-control-panel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="user-control-panel" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="user-control-panel" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard-page" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ros-frontend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ros-frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="user-control-panel" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard-page" type="462c0819:PsiDirectoryNode" />
+              <item name="security-cameras" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -304,12 +360,12 @@
       <workItem from="1546601219506" duration="10063000" />
       <workItem from="1546619545138" duration="9223000" />
       <workItem from="1546707878729" duration="9108000" />
-      <workItem from="1546778619781" duration="528000" />
+      <workItem from="1546778619781" duration="2248000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69914000" />
+    <option name="totallyTimeSpent" value="71634000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -351,13 +407,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/shared/components/ros-services-table/ros-services-table.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/shared/components/ros-params-table/ros-params-table.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -694,30 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="24" column="35" selection-start-line="24" selection-start-column="35" selection-end-line="24" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="e#0#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -734,8 +759,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        <state relative-caret-position="240">
+          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@angular/core/src/render/api.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="214" column="23" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" column="24" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="828">
+          <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

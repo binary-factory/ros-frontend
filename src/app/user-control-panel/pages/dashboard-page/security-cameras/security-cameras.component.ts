@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, Renderer2, ViewChild } from '@angular/core';
 import SimpleWebRTC from 'simplewebrtc';
 
 @Component({
@@ -23,6 +24,10 @@ export class SecurityCamerasComponent implements AfterViewInit {
 
   isSingleView = false;
 
+  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document) {
+
+  }
+
   selectCamera(camera: any) {
     this.selectedCamera = camera;
     this.isSingleView = true;
@@ -41,9 +46,12 @@ export class SecurityCamerasComponent implements AfterViewInit {
     });
 
     webrtc.on('videoAdded', (el: HTMLElement) => {
-      console.log(this.cameraContainer);
-      console.log(el);
-      this.cameraContainer.nativeElement.appendChild(el);
+      const remoteVideos = this.document.getElementById('remoteVideos');
+
+      this.renderer.removeChild(remoteVideos, el);
+      el.classList.add('camera');
+      el.classList.add('col-sm-6');
+      this.renderer.appendChild(this.cameraContainer.nativeElement, el);
     });
   }
 }

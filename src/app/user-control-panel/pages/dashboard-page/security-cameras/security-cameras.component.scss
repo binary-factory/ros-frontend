@@ -80,7 +80,8 @@
     background-position: center;
     background-size: cover;
     height: 100%;
-    padding: 0;
+    padding: 0 ;
+    object-fit: fill;
 
     span {
       position: absolute;
