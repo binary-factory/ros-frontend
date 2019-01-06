@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78add78f-4631-46c4-9115-00e28bbce8fc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" afterDir="false" />
     </list>
@@ -56,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
-              <caret line="24" column="24" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="24" />
+              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -64,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+            <state relative-caret-position="848">
+              <caret line="53" column="37" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -76,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/@angular/core/src/render/api.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="214" column="23" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="23" />
+            <state relative-caret-position="496">
+              <caret line="202" column="26" selection-start-line="202" selection-start-column="13" selection-end-line="202" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -85,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+            <state relative-caret-position="60">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -177,8 +177,8 @@
         <option value="$PROJECT_DIR$/src/app/ros/shared/services/ros-client.service.ts" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" />
         <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html" />
+        <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss" />
         <option value="$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts" />
       </list>
     </option>
@@ -360,12 +360,12 @@
       <workItem from="1546601219506" duration="10063000" />
       <workItem from="1546619545138" duration="9223000" />
       <workItem from="1546707878729" duration="9108000" />
-      <workItem from="1546778619781" duration="2248000" />
+      <workItem from="1546778619781" duration="3571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71634000" />
+    <option name="totallyTimeSpent" value="72957000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -407,13 +407,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/shared/components/ros-params-table/ros-params-table.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" lean-forward="true" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/ros-pages/ros-topics-page/ros-topics-page.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -764,31 +757,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@angular/core/src/render/api.d.ts">
+    <entry file="file://$PROJECT_DIR$/node_modules/@nebular/theme/styles/_theming.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="214" column="23" selection-start-line="214" selection-start-column="13" selection-end-line="214" selection-end-column="23" />
+        <state relative-caret-position="303">
+          <caret line="109" column="7" selection-start-line="109" selection-start-column="7" selection-end-line="109" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        <state relative-caret-position="60">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@angular/core/src/render/api.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="202" column="26" selection-start-line="202" selection-start-column="13" selection-end-line="202" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="24" />
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/user-control-panel/pages/dashboard-page/security-cameras/security-cameras.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+        <state relative-caret-position="848">
+          <caret line="53" column="37" selection-start-line="53" selection-start-column="37" selection-end-line="53" selection-end-column="37" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>

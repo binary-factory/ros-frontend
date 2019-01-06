@@ -49,8 +49,10 @@ export class SecurityCamerasComponent implements AfterViewInit {
       const remoteVideos = this.document.getElementById('remoteVideos');
 
       this.renderer.removeChild(remoteVideos, el);
-      el.classList.add('camera');
-      el.classList.add('col-sm-6');
+      this.renderer.addClass(el, 'camera');
+      this.renderer.addClass(el, 'col-sm-6');
+      // TODO: Get component identifier dynamicly
+      el.setAttribute('_ngcontent-c8', '');
       this.renderer.appendChild(this.cameraContainer.nativeElement, el);
     });
   }
