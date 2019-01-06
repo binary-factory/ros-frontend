@@ -25,11 +25,12 @@ export class ROSClientService {
   ) {
 
     this.config = config;
+    /*
     this.ros = new Ros(config);
 
     this.ros.on('connection', this.handleConnection.bind(this));
     this.ros.on('close', this.handleClose.bind(this));
-    this.ros.on('error', this.handleError.bind(this));
+    this.ros.on('error', this.handleError.bind(this));*/
   }
 
   get instance() {

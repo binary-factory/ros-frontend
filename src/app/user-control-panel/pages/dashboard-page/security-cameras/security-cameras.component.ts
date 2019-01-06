@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import SimpleWebRTC from 'simplewebrtc';
 
 @Component({
@@ -7,6 +7,9 @@ import SimpleWebRTC from 'simplewebrtc';
   templateUrl: './security-cameras.component.html'
 })
 export class SecurityCamerasComponent implements AfterViewInit {
+
+  @ViewChild('camera_container')
+  cameraContainer: ElementRef;
 
   cameras: any[] = [{
     title: 'Gegenüber',
@@ -28,17 +31,19 @@ export class SecurityCamerasComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     const webrtc = new SimpleWebRTC({
       url: 'http://192.168.0.10:8888',
-      // the id/element dom element that will hold "our" video
       localVideoEl: 'localVideo',
-      // the id/element dom element that will hold remote videos
       remoteVideosEl: 'remoteVideos',
-      // immediately ask for camera access
       autoRequestMedia: true
     });
+
     webrtc.on('readyToCall', () => {
-      // you can name it anything
-      webrtc.joinRoom('your awesome room name');
+      webrtc.joinRoom('test');
     });
-    webrtc.startLocalVideo();
+
+    webrtc.on('videoAdded', (el: HTMLElement) => {
+      console.log(this.cameraContainer);
+      console.log(el);
+      this.cameraContainer.nativeElement.appendChild(el);
+    });
   }
 }
