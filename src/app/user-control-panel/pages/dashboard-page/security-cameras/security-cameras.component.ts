@@ -27,6 +27,10 @@ export class SecurityCamerasComponent implements AfterViewInit {
 
   isSingleView = false;
 
+  private webRtc = null;
+
+  private videoIspaused: boolean = false;
+
   constructor() {
   }
 
@@ -36,30 +40,32 @@ export class SecurityCamerasComponent implements AfterViewInit {
       this.setupRTCAudioVideoElement(this.localView.nativeElement, this.selectedCamera);
     }, 0);
 
-    const webRtc = new SimpleWebRTC({
+    this.webRtc = new SimpleWebRTC({
       url: 'http://192.168.0.10:8888',
       localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
       autoRemoveVideos: false,
       autoRequestMedia: true
     });
-
-    webRtc.on('readyToCall', () => {
+    this.webRtc.on('readyToCall', () => {
       this.removeRemoteAudioVideoElements();
-      webRtc.joinRoom('test');
+      this.webRtc.joinRoom('test');
     });
 
-    webRtc.on('videoAdded', (el: HTMLElement, peer) => {
+    this.webRtc.on('videoAdded', (el: HTMLElement, peer) => {
       this.setupRTCAudioVideoElement(el, this.remoteVideoName);
     });
 
-    webRtc.on('peerStreamRemoved', (peer) => {
+    this.webRtc.on('peerStreamRemoved', (peer) => {
       this.removeRemoteAudioVideoElements(peer);
     });
 
-    webRtc.on('error', (err) => {
+    this.webRtc.on('error', (err) => {
       console.log(err);
     });
+
+    this.videoIspaused = false;
+
   }
 
   selectCamera(name: string) {
@@ -89,5 +95,19 @@ export class SecurityCamerasComponent implements AfterViewInit {
         this.cameraContainer.remove(i);
       }
     }
+  }
+
+  private stopVideo() {
+    if (!this.videoIspaused) {
+      console.log(this.videoIspaused);
+      this.webRtc.pause();
+      this.videoIspaused = true;
+
+    } else {
+      console.log(this.videoIspaused);
+      this.webRtc.resume();
+      this.videoIspaused = false;
+    }
+
   }
 }
