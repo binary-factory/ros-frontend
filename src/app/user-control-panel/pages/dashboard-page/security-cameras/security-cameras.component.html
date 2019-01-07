@@ -1,4 +1,4 @@
-<nb-card size="xlarge">
+<nb-card size="large">
   <nb-card-header>
     <div class="cameras-card-header">
       <span class="cameras-card-title">Kamera</span>
@@ -13,20 +13,8 @@
     </div>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="isSingleView" class="cameras single-view">
-      <div [style.background-image]="'url(' + selectedCamera.source + ')'" class="camera">
-        <span>{{ selectedCamera.title }}</span>
-      </div>
-    </div>
-    <div *ngIf="!isSingleView" class="cameras" #camera_container>
-      <!--
-      <div (click)="selectCamera(camera)" *ngFor="let camera of cameras"
-           [style.background-image]="'url(' + camera.source + ')'"
-           class="camera col-sm-6">
-        <span>{{ camera.title }}</span>
-      </div>
-      -->
-      <video id="localVideo" class="camera col-sm-6"></video>
+    <div class="cameras">
+      <ng-template #cameraContainer></ng-template>
     </div>
   </nb-card-body>
   <nb-card-footer>
@@ -47,4 +35,14 @@
   </nb-card-footer>
 </nb-card>
 
-<div id="remoteVideos"></div>
+<div class="hidden">
+  <div id="remoteVideos"></div>
+  <video id="localVideo" #localVideo></video>
+</div>
+
+<ng-template #template let-name='name'>
+  <div class="camera" (click)="selectCamera(name)"
+       [ngClass]="{'camera--single': isSingleView && selectedCamera !== name, 'camera--single-selected': isSingleView && selectedCamera === name}">
+    <span>{{ name }}</span>
+  </div>
+</ng-template>

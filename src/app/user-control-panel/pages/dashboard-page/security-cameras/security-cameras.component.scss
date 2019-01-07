@@ -1,7 +1,10 @@
 @import '../../../../../assets/styles/themes';
-@import '../../../../../../node_modules/@nebular/theme/styles/global/breakpoints';
-@import '../../../../../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~bootstrap/scss/mixins/grid';
 
+$grid-columns:      12;
+$grid-gutter-width: 30px;
 
 @include nb-install-component() {
   nb-card-header {
@@ -65,18 +68,12 @@
     height: 100%;
   }
 
-  .cameras.single-view {
-    .camera {
-      height: 100%;
-      width: 100%;
+  ::ng-deep .camera {
+    @include make-col-ready();
 
-      &::before {
-        height: 100%;
-      }
+    @include media-breakpoint-up(sm) {
+      @include make-col(6);
     }
-  }
-
-  .camera {
     position: relative;
     background-position: center;
     background-size: cover;
@@ -84,9 +81,14 @@
     padding: 0 ;
     object-fit: fill;
 
+    video {
+      max-width: 100%;
+    }
+
     span {
       position: absolute;
       bottom: 0;
+      left: 0;
       width: 100%;
       color: white;
       background: rgba(0, 0, 0, 0.4);
@@ -108,6 +110,26 @@
     &:hover::before {
       opacity: 0;
     }
+
+    &.camera--single {
+      display: none;
+    }
+
+    &.camera--single-selected {
+      @include media-breakpoint-up(sm) {
+        @include make-col(12);
+      }
+      video {
+        display: block;
+        height: 100%;
+        margin-right: auto;
+        margin-left: auto;
+      }
+      span {
+        display: none;
+      }
+    }
+
   }
 
   nb-action {

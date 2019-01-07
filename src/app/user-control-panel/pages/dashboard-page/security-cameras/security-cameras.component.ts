@@ -1,5 +1,11 @@
-import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, Renderer2, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import SimpleWebRTC from 'simplewebrtc';
 
 @Component({
@@ -9,31 +15,28 @@ import SimpleWebRTC from 'simplewebrtc';
 })
 export class SecurityCamerasComponent implements AfterViewInit {
 
-  @ViewChild('camera_container')
-  cameraContainer: ElementRef;
+  @ViewChild('localVideo', { read: ElementRef })
+  localView: ElementRef;
 
-  cameras: any[] = [{
-    title: 'Gegenüber',
-    source: 'assets/images/camera1.jpg'
-  }, {
-    title: 'Du',
-    source: 'assets/images/camera2.jpg'
-  }];
+  @ViewChild('cameraContainer', { read: ViewContainerRef })
+  cameraContainer: ViewContainerRef;
 
-  selectedCamera: any = this.cameras[0];
+  @ViewChild('template', { read: TemplateRef })
+  template: TemplateRef<any>;
+
+  selectedCamera: string;
 
   isSingleView = false;
 
-  constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document) {
-
+  constructor() {
   }
 
-  selectCamera(camera: any) {
-    this.selectedCamera = camera;
-    this.isSingleView = true;
-  }
+  ngAfterViewInit() {
+    // Prevents ExpressionChangedAfterItHasBeenCheckedError
+    setTimeout(() => {
+      this.setupRTCAudioVideoElement(this.localView.nativeElement, 'Du');
+    }, 0);
 
-  ngAfterViewInit(): void {
     const webrtc = new SimpleWebRTC({
       url: 'http://192.168.0.10:8888',
       localVideoEl: 'localVideo',
@@ -46,14 +49,22 @@ export class SecurityCamerasComponent implements AfterViewInit {
     });
 
     webrtc.on('videoAdded', (el: HTMLElement) => {
-      const remoteVideos = this.document.getElementById('remoteVideos');
-
-      this.renderer.removeChild(remoteVideos, el);
-      this.renderer.addClass(el, 'camera');
-      this.renderer.addClass(el, 'col-sm-6');
-      // TODO: Get component identifier dynamicly
-      el.setAttribute('_ngcontent-c8', '');
-      this.renderer.appendChild(this.cameraContainer.nativeElement, el);
+      this.setupRTCAudioVideoElement(el, 'Gegenüber');
     });
+  }
+
+  selectCamera(name: string) {
+    this.isSingleView = true;
+    this.selectedCamera = name;
+  }
+
+  private setupRTCAudioVideoElement(audioVideo: HTMLElement, name) {
+    audioVideo.parentElement.removeChild(audioVideo);
+
+    const view = this.template.createEmbeddedView({ name });
+
+    this.cameraContainer.insert(view);
+    const root = view.rootNodes[0] as HTMLElement;
+    root.insertBefore(audioVideo, root.firstChild);
   }
 }
