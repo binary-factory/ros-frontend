@@ -119,17 +119,22 @@ $grid-gutter-width: 30px;
       @include media-breakpoint-up(sm) {
         @include make-col(12);
       }
+
       video {
         display: block;
         height: 100%;
         margin-right: auto;
         margin-left: auto;
       }
+
       span {
         display: none;
       }
-    }
 
+      &::before {
+        opacity: 0;
+      }
+    }
   }
 
   nb-action {

@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EmbeddedViewRef, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import SimpleWebRTC from 'simplewebrtc';
 
 @Component({
@@ -14,6 +7,12 @@ import SimpleWebRTC from 'simplewebrtc';
   templateUrl: './security-cameras.component.html'
 })
 export class SecurityCamerasComponent implements AfterViewInit {
+
+  readonly localVideoId = 'localVideo';
+
+  readonly localVideoName = 'Du';
+
+  readonly remoteVideoName = 'Gegenüber';
 
   @ViewChild('localVideo', { read: ElementRef })
   localView: ElementRef;
@@ -24,7 +23,7 @@ export class SecurityCamerasComponent implements AfterViewInit {
   @ViewChild('template', { read: TemplateRef })
   template: TemplateRef<any>;
 
-  selectedCamera: string;
+  selectedCamera = this.localVideoName;
 
   isSingleView = false;
 
@@ -34,22 +33,32 @@ export class SecurityCamerasComponent implements AfterViewInit {
   ngAfterViewInit() {
     // Prevents ExpressionChangedAfterItHasBeenCheckedError
     setTimeout(() => {
-      this.setupRTCAudioVideoElement(this.localView.nativeElement, 'Du');
+      this.setupRTCAudioVideoElement(this.localView.nativeElement, this.selectedCamera);
     }, 0);
 
-    const webrtc = new SimpleWebRTC({
+    const webRtc = new SimpleWebRTC({
       url: 'http://192.168.0.10:8888',
-      localVideoEl: 'localVideo',
+      localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
+      autoRemoveVideos: false,
       autoRequestMedia: true
     });
 
-    webrtc.on('readyToCall', () => {
-      webrtc.joinRoom('test');
+    webRtc.on('readyToCall', () => {
+      this.removeRemoteAudioVideoElements();
+      webRtc.joinRoom('test');
     });
 
-    webrtc.on('videoAdded', (el: HTMLElement) => {
-      this.setupRTCAudioVideoElement(el, 'Gegenüber');
+    webRtc.on('videoAdded', (el: HTMLElement, peer) => {
+      this.setupRTCAudioVideoElement(el, this.remoteVideoName);
+    });
+
+    webRtc.on('peerStreamRemoved', (peer) => {
+      this.removeRemoteAudioVideoElements(peer);
+    });
+
+    webRtc.on('error', (err) => {
+      console.log(err);
     });
   }
 
@@ -61,10 +70,24 @@ export class SecurityCamerasComponent implements AfterViewInit {
   private setupRTCAudioVideoElement(audioVideo: HTMLElement, name) {
     audioVideo.parentElement.removeChild(audioVideo);
 
-    const view = this.template.createEmbeddedView({ name });
-
+    const id = audioVideo.getAttribute('id'); // Use peer!
+    const view = this.template.createEmbeddedView({ id, name });
     this.cameraContainer.insert(view);
     const root = view.rootNodes[0] as HTMLElement;
     root.insertBefore(audioVideo, root.firstChild);
+  }
+
+  private removeRemoteAudioVideoElements(peer?) {
+    for (let i = 0; i < this.cameraContainer.length; i++) {
+      const view = this.cameraContainer.get(i) as EmbeddedViewRef<any>;
+      if (peer) {
+        if (view.context.id.startsWith(peer.id)) {
+          this.cameraContainer.remove(i);
+        }
+      } else if (view.context.id !== this.localVideoId) {
+        console.log(view.context.id);
+        this.cameraContainer.remove(i);
+      }
+    }
   }
 }
