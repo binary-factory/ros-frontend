@@ -53,6 +53,7 @@
     "three": "^0.99.0",
     "three-orbitcontrols": "^2.99.1",
     "typeface-exo": "0.0.22",
+    "vis": "^4.21.0",
     "web-animations-js": "2.2.5",
     "webrtc-adapter": "^6.4.8",
     "zone.js": "^0.8.26"
@@ -71,6 +72,7 @@
     "@types/node": "6.0.90",
     "@types/roslib": "^0.18.3",
     "@types/three": "^0.93.14",
+    "@types/vis": "^4.21.9",
     "codelyzer": "^4.5.0",
     "jasmine-core": "2.6.4",
     "jasmine-spec-reporter": "4.1.1",

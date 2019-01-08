@@ -1,0 +1,13 @@
+<nb-card size="xlarge">
+  <nb-card-header>
+    <div class="cameras-card-header">
+      <span class="cameras-card-title">ROS Node Graph</span>
+      <span class="cameras-filter">
+        <a (click)="toggleZoom()" [class.active]="isZoomEnabled">
+          <i class="nb-search"></i>
+        </a>
+      </span>
+    </div>
+  </nb-card-header>
+  <nb-card-body #container></nb-card-body>
+</nb-card>
