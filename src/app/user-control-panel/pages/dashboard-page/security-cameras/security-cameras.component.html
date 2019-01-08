@@ -19,7 +19,7 @@
   </nb-card-body>
   <nb-card-footer>
     <nb-actions fullWidth size="medium">
-      <nb-action (click)="stopVideo()" *ngIf="!isSingleView || selectedCamera === localVideoName">
+      <nb-action (click)="toggleAudioVideoStream()" *ngIf="!isSingleView || selectedCamera === localVideoName">
         <ng-template *ngIf="videoIsPaused;then resumeContent else pauseContent"></ng-template>
         <ng-template #resumeContent><i class="nb-play-outline"></i><span>Fortsetzen</span></ng-template>
         <ng-template #pauseContent><i class="nb-pause-outline"></i><span>Pause</span></ng-template>

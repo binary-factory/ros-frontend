@@ -97,14 +97,12 @@ export class SecurityCamerasComponent implements AfterViewInit {
     }
   }
 
-  private stopVideo() {
+  private toggleAudioVideoStream() {
     if (!this.videoIsPaused) {
-      console.log(this.videoIsPaused);
       this.webRtc.pause();
       this.videoIsPaused = true;
 
     } else {
-      console.log(this.videoIsPaused);
       this.webRtc.resume();
       this.videoIsPaused = false;
     }
