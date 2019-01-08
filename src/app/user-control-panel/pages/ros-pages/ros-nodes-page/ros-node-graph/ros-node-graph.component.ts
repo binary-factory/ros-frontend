@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { concatMap, mergeMap, reduce } from 'rxjs/operators';
 import * as vis from 'vis';
 import { ROSNodeDetails } from '../../../../../ros/shared/models/node-details.model';
@@ -22,7 +23,9 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
 
   mapOptions: vis.Options;
 
-  constructor(private rosNodeService: ROSNodeService) {
+  mapData: any;
+
+  constructor(private rosNodeService: ROSNodeService, private router: Router) {
   }
 
   ngOnInit() {
@@ -61,7 +64,8 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
                   from: item.name,
                   to: item2.name,
                   label: publication,
-                  arrows: 'from'
+                  arrows: 'from',
+                  length: 250
                 });
               }
             });
@@ -72,7 +76,7 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
         this.isLoading = false;
       });
 
-    const data = {
+    this.mapData = {
       nodes: nodes,
       edges: edges
     };
@@ -82,7 +86,21 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
       }
     };
 
-    this.map = new vis.Network(this.container.nativeElement, data, this.mapOptions);
+    this.map = new vis.Network(this.container.nativeElement, this.mapData, this.mapOptions);
+    this.map.on('doubleClick', this.handleDoubleClick.bind(this));
+  }
+
+  handleDoubleClick(params) {
+    console.log(params);
+    if (params.nodes && params.nodes.length > 0) {
+      const nodeId = params.nodes[0];
+      this.router.navigate(['/pages/ros/node/', nodeId]);
+
+    } else if (params.edges && params.edges.length > 0) {
+      const edgeId = params.edges[0];
+      const topic = this.mapData.edges.get(edgeId).label;
+      this.router.navigate(['/pages/ros/topic/', topic]);
+    }
   }
 
   toggleZoom() {
