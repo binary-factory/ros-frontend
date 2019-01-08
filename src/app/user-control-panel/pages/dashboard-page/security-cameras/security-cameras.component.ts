@@ -37,7 +37,7 @@ export class SecurityCamerasComponent implements AfterViewInit {
     }, 0);
 
     const webRtc = new SimpleWebRTC({
-      url: 'http://192.168.0.10:8888',
+      url: 'https://robot:8888',
       localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
       autoRemoveVideos: false,

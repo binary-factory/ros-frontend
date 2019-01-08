@@ -64,8 +64,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "ngx-admin-demo:build",
-            "sslKey": "sslcerts/key.pem",
-            "sslCert": "sslcerts/cert.pem"
+            "sslKey": "sslcerts/robot/key.pem",
+            "sslCert": "sslcerts/robot/cert.pem"
           },
           "configurations": {
             "production": {

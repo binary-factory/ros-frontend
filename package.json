@@ -1,7 +1,7 @@
 {
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0 --ssl",
+    "start": "ng serve --host=0.0.0.0 --ssl --publicHost=robot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
