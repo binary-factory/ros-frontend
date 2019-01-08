@@ -19,17 +19,10 @@
   </nb-card-body>
   <nb-card-footer>
     <nb-actions fullWidth size="medium">
-      <nb-action>
-        <i class="nb-pause-outline" (click)="stopVideo()"></i><span>Search</span>
-      </nb-action>
-      <nb-action>
-        <i class="nb-list"></i><span>Logs</span>
-      </nb-action>
-      <nb-action>
-        <i class="nb-search"></i><span>Search</span>
-      </nb-action>
-      <nb-action>
-        <i class="nb-gear"></i><span>Setup</span>
+      <nb-action (click)="stopVideo()" *ngIf="!isSingleView || selectedCamera === localVideoName">
+        <ng-template *ngIf="videoIsPaused;then resumeContent else pauseContent"></ng-template>
+        <ng-template #resumeContent><i class="nb-play-outline"></i><span>Fortsetzen</span></ng-template>
+        <ng-template #pauseContent><i class="nb-pause-outline"></i><span>Pause</span></ng-template>
       </nb-action>
     </nb-actions>
   </nb-card-footer>
@@ -42,7 +35,7 @@
 
 <ng-template #template let-name='name'>
   <div class="camera" (click)="selectCamera(name)"
-       [ngClass]="{'camera--single': isSingleView && selectedCamera !== name, 'camera--single-selected': isSingleView && selectedCamera === name}">
+       [ngClass]="{'camera--single': isSingleView && selectedCamera !== name, 'camera--single-selected': isSingleView && selectedCamera === name, 'camera--self-paused': name === localVideoName && videoIsPaused}">
     <span>{{ name }}</span>
   </div>
 </ng-template>

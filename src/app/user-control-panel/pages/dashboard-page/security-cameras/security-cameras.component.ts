@@ -27,9 +27,9 @@ export class SecurityCamerasComponent implements AfterViewInit {
 
   isSingleView = false;
 
-  private webRtc = null;
+  private webRtc: SimpleWebRTC;
 
-  private videoIspaused: boolean = false;
+  private videoIsPaused = false;
 
   constructor() {
   }
@@ -40,7 +40,7 @@ export class SecurityCamerasComponent implements AfterViewInit {
       this.setupRTCAudioVideoElement(this.localView.nativeElement, this.selectedCamera);
     }, 0);
 
-    const webRtc = new SimpleWebRTC({
+    this.webRtc = new SimpleWebRTC({
       url: 'https://robot:8888',
       localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
@@ -64,7 +64,7 @@ export class SecurityCamerasComponent implements AfterViewInit {
       console.log(err);
     });
 
-    this.videoIspaused = false;
+    this.videoIsPaused = false;
 
   }
 
@@ -98,15 +98,15 @@ export class SecurityCamerasComponent implements AfterViewInit {
   }
 
   private stopVideo() {
-    if (!this.videoIspaused) {
-      console.log(this.videoIspaused);
+    if (!this.videoIsPaused) {
+      console.log(this.videoIsPaused);
       this.webRtc.pause();
-      this.videoIspaused = true;
+      this.videoIsPaused = true;
 
     } else {
-      console.log(this.videoIspaused);
+      console.log(this.videoIsPaused);
       this.webRtc.resume();
-      this.videoIspaused = false;
+      this.videoIsPaused = false;
     }
 
   }

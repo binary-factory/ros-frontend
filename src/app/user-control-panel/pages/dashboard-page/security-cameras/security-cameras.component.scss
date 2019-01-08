@@ -7,6 +7,10 @@ $grid-columns:      12;
 $grid-gutter-width: 30px;
 
 @include nb-install-component() {
+  nb-action {
+    cursor: pointer;
+  }
+  
   nb-card-header {
     padding: 0;
     border: none;
@@ -82,7 +86,8 @@ $grid-gutter-width: 30px;
     object-fit: fill;
 
     video {
-      max-width: 100%;
+      display: block;
+      width: 100%;
     }
 
     span {
@@ -98,6 +103,7 @@ $grid-gutter-width: 30px;
       padding: 0.5rem 1rem;
     }
 
+    /*
     &::before {
       background-color: rgba(255, 255, 255, 0.1);
       content: '';
@@ -106,22 +112,24 @@ $grid-gutter-width: 30px;
       height: 100%;
       opacity: 1;
     }
+    */
 
+    /*
     &:hover::before {
       opacity: 0;
     }
+    */
 
-    &.camera--single {
+    &--single {
       display: none;
     }
 
-    &.camera--single-selected {
+    &--single-selected {
       @include media-breakpoint-up(sm) {
         @include make-col(12);
       }
 
       video {
-        display: block;
         height: 100%;
         margin-right: auto;
         margin-left: auto;
@@ -130,9 +138,23 @@ $grid-gutter-width: 30px;
       span {
         display: none;
       }
+    }
 
+    &--self-paused {
       &::before {
-        opacity: 0;
+        content: '';
+        background-image: url('assets/images/astronaut.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: #4e41a5;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 30000;
       }
     }
   }
@@ -164,13 +186,20 @@ $grid-gutter-width: 30px;
     }
 
     .camera {
+      &:hover {
+        span {
+          background: nb-theme(color-fg-highlight);
+        }
+      }
       span {
-        background: rgba(88, 73, 184, 0.5);
+        background: rgba(88, 73, 184, 1);
       }
 
+      /*
       &::before {
         background-color: rgba(0, 0, 0, 0.2);
       }
+      */
     }
 
     nb-action span {
