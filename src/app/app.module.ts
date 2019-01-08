@@ -24,7 +24,7 @@ import { ThemeModule } from './theme/theme.module';
     LoggerModule.forRoot({
       serverLogLevel: NgxLoggerLevel.OFF,
       serverLoggingUrl: '',
-      level: NgxLoggerLevel.TRACE,
+      level: NgxLoggerLevel.INFO,
       disableConsoleLogging: false
     }),
     CoreModule.forRoot(),

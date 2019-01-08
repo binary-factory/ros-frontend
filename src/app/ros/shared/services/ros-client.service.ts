@@ -69,7 +69,7 @@ export class ROSClientService {
     let connected = false;
     this.heartbeatCheck()
       .subscribe(() => {
-        this.logger.info('Heartbeat successful. Waiting for next one.');
+        this.logger.trace('Heartbeat successful. Waiting for next one.');
         connected = true;
       }, (err) => {
         this.logger.info('Offline due heartbeat error.', err);
