@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-interface HeaderButton {
+export interface CardHeaderButton {
   name: string;
   isActive: boolean;
   icon: string;
@@ -23,16 +23,19 @@ export class CardComponent implements OnInit {
   refreshButton: boolean;
 
   @Input()
-  headerButtons: Array<HeaderButton> = [];
+  headerButtons: Array<CardHeaderButton> = [];
 
   @Input()
   error: Error;
+
+  @Input()
+  size: string;
 
   @Output()
   refresh = new EventEmitter<void>();
 
   @Output()
-  headerClick = new EventEmitter<{ event: MouseEvent, sender: HeaderButton }>();
+  headerClick = new EventEmitter<CardHeaderButton>();
 
   constructor() {
   }
@@ -44,8 +47,8 @@ export class CardComponent implements OnInit {
     this.refresh.emit();
   }
 
-  onHeaderButtonClick(event: MouseEvent, sender: HeaderButton) {
-    this.headerClick.emit({ event, sender });
+  onHeaderButtonClick(event: MouseEvent, sender: CardHeaderButton) {
+    this.headerClick.emit(sender);
   }
 
 }

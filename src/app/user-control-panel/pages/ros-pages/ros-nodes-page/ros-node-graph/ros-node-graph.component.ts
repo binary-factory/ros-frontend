@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { concatMap, mergeMap, reduce } from 'rxjs/operators';
 import * as vis from 'vis';
 import { ROSNodeDetails } from '../../../../../ros/shared/models/node-details.model';
 import { ROSNodeService } from '../../../../../ros/shared/services/ros-node.service';
+import { CardHeaderButton } from '../../../../../shared/components/card/card.component';
 
 @Component({
   selector: 'ngx-ros-node-graph',
@@ -12,12 +13,22 @@ import { ROSNodeService } from '../../../../../ros/shared/services/ros-node.serv
 })
 export class RosNodeGraphComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('container', { read: ElementRef })
+  @ViewChild('container')
   container: ElementRef;
+
+  enableZoomButton: CardHeaderButton = {
+    name: 'enableZoom',
+    icon: 'nb-search',
+    isActive: false
+  };
+
+  cardHeaderButtons: Array<CardHeaderButton> = [this.enableZoomButton];
 
   isLoading = false;
 
   isZoomEnabled = false;
+
+  err: Error;
 
   map: vis.Network;
 
@@ -33,6 +44,17 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    setTimeout(() => this.refresh(), 0);
+  }
+
+  refresh() {
+    this.isLoading = true;
+    this.err = null;
+
+    if (this.map) {
+      this.map.destroy();
+      this.map = null;
+    }
 
     const nodes = new vis.DataSet([]);
     const edges = new vis.DataSet([]);
@@ -65,14 +87,17 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
                   to: item2.name,
                   label: publication,
                   arrows: 'from',
-                  length: 250
+                  length: 500
                 });
               }
             });
           });
         });
+      }, (err) => {
+        this.err = err;
       })
       .add(() => {
+        console.log(this.isLoading);
         this.isLoading = false;
       });
 
@@ -87,10 +112,10 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
     };
 
     this.map = new vis.Network(this.container.nativeElement, this.mapData, this.mapOptions);
-    this.map.on('doubleClick', this.handleDoubleClick.bind(this));
+    this.map.on('doubleClick', this.onDoubleClick.bind(this));
   }
 
-  handleDoubleClick(params) {
+  onDoubleClick(params) {
     console.log(params);
     if (params.nodes && params.nodes.length > 0) {
       const nodeId = params.nodes[0];
@@ -105,6 +130,7 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
 
   toggleZoom() {
     this.isZoomEnabled = !this.isZoomEnabled;
+    this.enableZoomButton.isActive = this.isZoomEnabled;
     this.mapOptions.interaction.zoomView = this.isZoomEnabled;
     this.map.setOptions(this.mapOptions);
   }

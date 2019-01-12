@@ -1,3 +1,4 @@
+<!--
 <nb-card size="xlarge">
   <nb-card-header>
     <div class="cameras-card-header">
@@ -11,3 +12,16 @@
   </nb-card-header>
   <nb-card-body #container></nb-card-body>
 </nb-card>
+-->
+
+<ngx-card
+  title="ROS Node Graph"
+  size="xlarge"
+  [headerButtons]="cardHeaderButtons"
+  [isLoading]="isLoading"
+  [error]="err"
+  (headerClick)="toggleZoom()"
+  (refresh)="refresh()">
+
+  <div #container></div>
+</ngx-card>

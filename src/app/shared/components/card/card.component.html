@@ -1,10 +1,11 @@
-<nb-card class="rt-map-card">
+<nb-card [size]="size">
   <nb-card-header>
     <div class="cameras-card-header">
       <span class="cameras-card-title">{{ title }}</span>
       <span class="cameras-filter">
 
-        <a *ngFor="let headerButton of headerButtons" [class.active]="headerButton.isActive" (click)="onHeaderButtonClick($event, headerButton)">
+        <a *ngFor="let headerButton of headerButtons" [class.active]="headerButton.isActive"
+           (click)="onHeaderButtonClick($event, headerButton)">
           <i [ngClass]="headerButton.icon"></i>
         </a>
         <a (click)="onRefresh()" class="active">
@@ -14,21 +15,21 @@
     </div>
   </nb-card-header>
 
-  <ng-template *ngIf="error;then errorContent else content"></ng-template>
-  <ng-template #content>
-    <nb-card-body>
-      <ng-content></ng-content>
-      <ngx-loading [show]="isLoading"></ngx-loading>
-    </nb-card-body>
-  </ng-template>
+  <nb-card-body>
+    <ng-template *ngIf="error;then errorContent else content"></ng-template>
 
-  <ng-template #errorContent>
-    <nb-card-body>
+    <ng-template #content>
+      <ng-content></ng-content>
+    </ng-template>
+
+    <ng-template #errorContent>
       <div class="error">
         <h2>Fehler</h2>
         <h4>Bitte erneut versuchen.</h4>
         <h5>Grund: {{ error.message }}</h5>
       </div>
-    </nb-card-body>
-  </ng-template>
+    </ng-template>
+
+    <ngx-loading [show]="isLoading && !error"></ngx-loading>
+  </nb-card-body>
 </nb-card>
