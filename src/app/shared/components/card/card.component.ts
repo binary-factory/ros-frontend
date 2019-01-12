@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export interface CardHeaderButton {
   name: string;
@@ -9,7 +9,8 @@ export interface CardHeaderButton {
 @Component({
   selector: 'ngx-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnInit {
 
