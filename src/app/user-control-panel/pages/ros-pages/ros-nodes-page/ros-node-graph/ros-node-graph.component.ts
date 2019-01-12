@@ -97,7 +97,6 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
         this.err = err;
       })
       .add(() => {
-        console.log(this.isLoading);
         this.isLoading = false;
       });
 
