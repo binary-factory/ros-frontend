@@ -23,5 +23,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/ros/params'
       }
     ]
+  },
+  {
+    title: 'Einstellungen',
+    icon: 'nb-gear',
+    link: '/pages/settings'
   }
 ];
