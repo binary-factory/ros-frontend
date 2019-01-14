@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxLoadingModule } from 'ngx-loading';
+import { ROSModule } from '../ros/ros.module';
 import { ThemeModule } from '../theme/theme.module';
 import { CardComponent } from './components/card/card.component';
 import { RosCommonTableComponent } from './components/ros-common-table/ros-common-table.component';
@@ -19,7 +20,8 @@ const sharedModules = [
   ThemeModule,
   NgxEchartsModule,
   Ng2SmartTableModule,
-  NgxLoadingModule
+  NgxLoadingModule,
+  ROSModule
 ];
 
 const sharedComponents = [
