@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PointCloudComponent } from './point-cloud.component';
+import { CardHeaderButtonComponent } from './card-header-button.component';
 
-describe('PointCloudComponent', () => {
-  let component: PointCloudComponent;
-  let fixture: ComponentFixture<PointCloudComponent>;
+describe('CardHeaderButtonComponent', () => {
+  let component: CardHeaderButtonComponent;
+  let fixture: ComponentFixture<CardHeaderButtonComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PointCloudComponent ]
+      declarations: [ CardHeaderButtonComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PointCloudComponent);
+    fixture = TestBed.createComponent(CardHeaderButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

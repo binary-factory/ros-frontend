@@ -1,14 +1,15 @@
-<nb-card class="rt-map-card" size="xlarge">
-  <nb-card-header>
-    <div class="cameras-card-header">
-      <span class="cameras-card-title">Point Cloud</span>
-      <span class="cameras-filter">
-        <a (click)="toggleEnable()" [class.active]="!isEnabled">
-          <i class="nb-locked"></i>
-        </a>
-      </span>
-    </div>
-  </nb-card-header>
-  <nb-card-body #container>
-  </nb-card-body>
-</nb-card>
+<ngx-card
+  title="ROS Node Graph"
+  size="xlarge"
+  [headerButtons]="cardHeaderButtons"
+  [isLoading]="isLoading"
+  [error]="err"
+  (headerClick)="toggleDialog()"
+  (refresh)="refresh()">
+
+
+
+  <ngx-card-header-button header icon="nb-gear" [isActive]="isSettingsVisible" (click)="toggleDialog()"></ngx-card-header-button>
+
+  <ros-point-cloud></ros-point-cloud>
+</ngx-card>

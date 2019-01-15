@@ -6,6 +6,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ROSModule } from '../ros/ros.module';
 import { ThemeModule } from '../theme/theme.module';
+import { CardHeaderButtonComponent } from './components/card-header-button/card-header-button.component';
 import { CardComponent } from './components/card/card.component';
 import { RosCommonTableComponent } from './components/ros-common-table/ros-common-table.component';
 import { RosNodesTableComponent } from './components/ros-nodes-table/ros-nodes-table.component';
@@ -26,6 +27,7 @@ const sharedModules = [
 
 const sharedComponents = [
   CardComponent,
+  CardHeaderButtonComponent,
   RosNodesTableComponent,
   RosParamsTableComponent,
   RosServicesTableComponent,
@@ -42,7 +44,8 @@ const sharedComponents = [
   ],
   declarations: [
     ...sharedComponents,
-    RosCommonTableComponent
+    RosCommonTableComponent,
+    CardHeaderButtonComponent
   ]
 })
 export class SharedModule {

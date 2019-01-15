@@ -1,6 +1,8 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import './ros-typings';
+import './three-extended-typings';
+
 import { RosPointCloudComponent } from './shared/components/ros-point-cloud/ros-point-cloud.component';
 import { RosViewerComponent } from './shared/components/ros-viewer/ros-viewer.component';
 import { ROSServiceConfig } from './shared/models/ros-config.model';

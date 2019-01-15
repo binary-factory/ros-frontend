@@ -4,6 +4,7 @@
       <span class="cameras-card-title">{{ title }}</span>
       <span class="cameras-filter">
 
+        <ng-content select="[header]"></ng-content>
         <a *ngFor="let headerButton of headerButtons" [class.active]="headerButton.isActive"
            (click)="onHeaderButtonClick($event, headerButton)">
           <i [ngClass]="headerButton.icon"></i>
