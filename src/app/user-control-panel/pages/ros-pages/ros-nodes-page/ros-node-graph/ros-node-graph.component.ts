@@ -1,10 +1,9 @@
-import { AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { concatMap, mergeMap, reduce } from 'rxjs/operators';
 import * as vis from 'vis';
 import { ROSNodeDetails } from '../../../../../ros/shared/models/node-details.model';
 import { ROSNodeService } from '../../../../../ros/shared/services/ros-node.service';
-import { CardHeaderButton } from '../../../../../shared/components/card/card.component';
 
 @Component({
   selector: 'ngx-ros-node-graph',
@@ -15,14 +14,6 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
 
   @ViewChild('container')
   container: ElementRef;
-
-  enableZoomButton: CardHeaderButton = {
-    name: 'enableZoom',
-    icon: 'nb-search',
-    isActive: false
-  };
-
-  cardHeaderButtons: Array<CardHeaderButton> = [this.enableZoomButton];
 
   isLoading = false;
 
@@ -87,7 +78,7 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
                   from: item.name,
                   to: item2.name,
                   label: publication,
-                  arrows: 'from',
+                  arrows: 'from'
                   //length: 100
                 });
               }
@@ -176,7 +167,6 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
 
   toggleZoom() {
     this.isZoomEnabled = !this.isZoomEnabled;
-    this.enableZoomButton.isActive = this.isZoomEnabled;
     this.mapOptions.interaction.zoomView = this.isZoomEnabled;
     this.map.setOptions(this.mapOptions);
   }

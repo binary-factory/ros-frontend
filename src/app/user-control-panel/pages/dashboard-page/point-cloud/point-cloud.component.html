@@ -1,15 +1,13 @@
 <ngx-card
   title="ROS Node Graph"
   size="xlarge"
-  [headerButtons]="cardHeaderButtons"
   [isLoading]="isLoading"
-  [error]="err"
-  (headerClick)="toggleDialog()"
-  (refresh)="refresh()">
+  [error]="err">
 
 
 
-  <ngx-card-header-button header icon="nb-gear" [isActive]="isSettingsVisible" (click)="toggleDialog()"></ngx-card-header-button>
+
+  <ngx-card-header-button icon="nb-gear" [isActive]="isSettingsVisible" (click)="toggleDialog()"></ngx-card-header-button>
 
   <ros-point-cloud></ros-point-cloud>
 </ngx-card>

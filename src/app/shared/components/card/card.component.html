@@ -3,15 +3,7 @@
     <div class="cameras-card-header">
       <span class="cameras-card-title">{{ title }}</span>
       <span class="cameras-filter">
-
-        <ng-content select="[header]"></ng-content>
-        <a *ngFor="let headerButton of headerButtons" [class.active]="headerButton.isActive"
-           (click)="onHeaderButtonClick($event, headerButton)">
-          <i [ngClass]="headerButton.icon"></i>
-        </a>
-        <a (click)="onRefresh()" class="active">
-          <i class="nb-loop-circled"></i>
-        </a>
+        <ng-content select="ngx-card-header-button"></ng-content>
       </span>
     </div>
   </nb-card-header>
@@ -24,10 +16,17 @@
     </ng-template>
 
     <ng-template #errorContent>
-      <div class="error">
-        <h2>Fehler</h2>
-        <h4>Bitte erneut versuchen.</h4>
-        <h5>Grund: {{ error.message }}</h5>
+      <div class="error-container">
+        <div class="error">
+          <div class="error-header">
+            <i class="nb-alert"></i>
+            <h2>Fehler</h2>
+          </div>
+          <div class="error-body">
+            <h4>{{ error.message }}</h4>
+            <h5>Bitte erneut versuchen.</h5>
+          </div>
+        </div>
       </div>
     </ng-template>
 

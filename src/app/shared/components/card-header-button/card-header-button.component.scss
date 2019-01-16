@@ -1,3 +1,28 @@
+@import '../../../../assets/styles/themes';
+
 :host {
   display: flex;
+}
+
+@include nb-install-component() {
+  a {
+    font-size: 2.5rem;
+    padding: 0 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: nb-theme(color-fg);
+
+    &.active {
+      background-color: nb-theme(color-bg-active);
+      color: nb-theme(color-fg-heading);
+      border: none;
+    }
+  }
+
+  @include nb-for-theme(cosmic) {
+    a.active {
+      color: nb-theme(color-fg-highlight);
+    }
+  }
 }
