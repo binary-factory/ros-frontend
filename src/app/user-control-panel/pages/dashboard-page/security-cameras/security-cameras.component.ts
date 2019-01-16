@@ -86,6 +86,7 @@ export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestro
 
     this.webRtc.on('peerStreamRemoved', () => {
       this.removeRemoteAudioVideoElements();
+      this.addRemoteDummy();
       this.isRemoteReady = false;
     });
 
