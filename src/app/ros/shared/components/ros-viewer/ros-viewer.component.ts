@@ -42,9 +42,10 @@ export class RosViewerComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.renderer2.appendChild(this.container.nativeElement, this.renderer.domElement);
 
-    this.calculateSize();
-
-    this.enable();
+    setTimeout(() => {
+      this.calculateSize();
+      this.enable();
+    }, 0);
   }
 
   enable() {
