@@ -37,6 +37,10 @@ export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestro
 
   isSingleView = false;
 
+  isLocalReady = false;
+
+  isRemoteReady = false;
+
   webRtc: SimpleWebRTC;
 
   videoIsPaused = false;
@@ -51,6 +55,7 @@ export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestro
     // Prevents ExpressionChangedAfterItHasBeenCheckedError
     setTimeout(() => {
       this.setupRTCAudioVideoElement(this.localView.nativeElement, this.selectedCamera);
+      this.addRemoteDummy();
     }, 0);
 
     this.webRtc = new SimpleWebRTC({
@@ -60,17 +65,28 @@ export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestro
       autoRemoveVideos: false,
       autoRequestMedia: true
     });
+
     this.webRtc.on('readyToCall', () => {
-      this.removeRemoteAudioVideoElements();
       this.webRtc.joinRoom('test');
     });
 
-    this.webRtc.on('videoAdded', (el: HTMLElement, peer) => {
-      this.setupRTCAudioVideoElement(el, this.remoteVideoName);
+    this.webRtc.on('joinedRoom', () => {
+      this.isLocalReady = true;
     });
 
-    this.webRtc.on('peerStreamRemoved', (peer) => {
-      this.removeRemoteAudioVideoElements(peer);
+    this.webRtc.on('leftRoom', () => {
+      this.isLocalReady = false;
+    });
+
+    this.webRtc.on('videoAdded', (el: HTMLElement, peer) => {
+      this.removeRemoteAudioVideoElements();
+      this.setupRTCAudioVideoElement(el, this.remoteVideoName);
+      this.isRemoteReady = true;
+    });
+
+    this.webRtc.on('peerStreamRemoved', () => {
+      this.removeRemoteAudioVideoElements();
+      this.isRemoteReady = false;
     });
 
     this.webRtc.on('error', (err) => {
@@ -89,6 +105,11 @@ export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestro
   selectCamera(name: string) {
     this.isSingleView = true;
     this.selectedCamera = name;
+  }
+
+  private addRemoteDummy() {
+    const view = this.template.createEmbeddedView({ id: this.remoteVideoName, name: this.remoteVideoName });
+    this.cameraContainer.insert(view);
   }
 
   private setupRTCAudioVideoElement(audioVideo: HTMLElement, name) {

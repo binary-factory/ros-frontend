@@ -42,7 +42,9 @@
        [ngClass]="{
           'camera--single': isSingleView && selectedCamera !== name,
           'camera--single-selected': isSingleView && selectedCamera === name,
-          'camera--self-paused': name === localVideoName && videoIsPaused
+          'camera--self-paused': name === localVideoName && videoIsPaused,
+          'camera--self-unavailable': name === localVideoName && !isLocalReady,
+          'camera--remote-unavailable': name === remoteVideoName && !isRemoteReady
        }">
     <span>{{ name }}</span>
   </div>
