@@ -135,6 +135,7 @@ $grid-gutter-width: 30px;
         height: 100%;
         margin-right: auto;
         margin-left: auto;
+        z-index: 100;
       }
 
       span {
@@ -144,11 +145,16 @@ $grid-gutter-width: 30px;
 
     &--self-paused {
       &::before {
-        content: '';
-        background-image: url('assets/images/astronaut.png');
-        background-position: center;
-        background-repeat: no-repeat;
-        background-color: #4e41a5;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: '\f504';
+        font-size: 72px;
+        display:flex;
+        flex-direction:row;
+        align-items: center;
+        justify-content: center;
+        color: nb-theme(color-danger);
+        background-color: nb-theme(color-bg-active);
         position: absolute;
         width: 100%;
         height: 100%;
@@ -156,7 +162,7 @@ $grid-gutter-width: 30px;
         right: 0;
         bottom: 0;
         left: 0;
-        z-index: 30000;
+        z-index: 1000;
       }
     }
   }
