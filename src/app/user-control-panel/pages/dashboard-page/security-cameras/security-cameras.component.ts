@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, EmbeddedViewRef, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EmbeddedViewRef,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import SimpleWebRTC from 'simplewebrtc';
 
 @Component({
@@ -6,7 +16,7 @@ import SimpleWebRTC from 'simplewebrtc';
   styleUrls: ['./security-cameras.component.scss'],
   templateUrl: './security-cameras.component.html'
 })
-export class SecurityCamerasComponent implements AfterViewInit {
+export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   readonly localVideoId = 'localVideo';
 
@@ -27,11 +37,14 @@ export class SecurityCamerasComponent implements AfterViewInit {
 
   isSingleView = false;
 
-  private webRtc: SimpleWebRTC;
+  webRtc: SimpleWebRTC;
 
-  private videoIsPaused = false;
+  videoIsPaused = false;
 
   constructor() {
+  }
+
+  ngOnInit() {
   }
 
   ngAfterViewInit() {
@@ -68,6 +81,11 @@ export class SecurityCamerasComponent implements AfterViewInit {
 
   }
 
+  ngOnDestroy() {
+    this.webRtc.leaveRoom();
+    this.webRtc.disconnect();
+  }
+
   selectCamera(name: string) {
     this.isSingleView = true;
     this.selectedCamera = name;
@@ -91,7 +109,6 @@ export class SecurityCamerasComponent implements AfterViewInit {
           this.cameraContainer.remove(i);
         }
       } else if (view.context.id !== this.localVideoId) {
-        console.log(view.context.id);
         this.cameraContainer.remove(i);
       }
     }
