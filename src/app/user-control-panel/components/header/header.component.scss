@@ -79,7 +79,7 @@
   }
 
   .gamepad-indicator {
-    color: nb-theme(color-fg-highlight);
+    color: nb-theme(color-success);
     font-size: 2.25rem;
     border-radius: 50%;
     position: relative;
@@ -90,16 +90,15 @@
     }
 
     &--disconnected {
-      color: #ff386a;
+      color: nb-theme(color-danger);
     }
   }
 
   .connection-indicator {
-      color: nb-theme(color-fg-highlight);
+      color: nb-theme(color-success);
       font-size: 2.25rem;
       border-radius: 50%;
       position: relative;
-
 
       &::after {
         content: ' ';
@@ -118,7 +117,6 @@
         animation: 3s linear infinite pulse;
       }
 
-
     &--connected {
       //color: nb-theme(color-fg-highlight)
     }
@@ -127,19 +125,19 @@
       &::after {
         animation: 3s linear infinite pulse-red;
       }
-      color: #ff386a;
+      color: nb-theme(color-danger);
     }
   }
 
   @include keyframes(pulse) {
     0% {
-      box-shadow: 0 0 1px 0 rgba(nb-theme(color-fg-highlight), 0);
+      box-shadow: 0 0 1px 0 rgba(nb-theme(color-success), 0);
     }
     20% {
-      box-shadow: 0 0 3px 10px rgba(nb-theme(color-fg-highlight), 0.4);
+      box-shadow: 0 0 3px 10px rgba(nb-theme(color-success), 0.4);
     }
     100% {
-      box-shadow: 0 0 5px 20px rgba(nb-theme(color-fg-highlight), 0);
+      box-shadow: 0 0 5px 20px rgba(nb-theme(color-success), 0);
     }
   }
 
