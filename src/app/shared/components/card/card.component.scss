@@ -5,6 +5,13 @@
 
 @include nb-install-component() {
 
+  // fix ngx-loading backdrop is over sidebar on mobiles
+  ::ng-deep ngx-loading {
+    .backdrop, div {
+      z-index: 500;
+    }
+  }
+
   .cameras-filter {
     display: flex;
 
