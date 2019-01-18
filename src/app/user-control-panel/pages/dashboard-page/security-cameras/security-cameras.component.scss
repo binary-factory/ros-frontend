@@ -6,7 +6,7 @@
 $grid-columns:      12;
 $grid-gutter-width: 30px;
 
-$video-unavailable-height: 200px;
+$video-unavailable-height: 250px;
 $video-unavailable-lg-height: 400px;
 
 @mixin full-cover-icon($icon, $color) {
@@ -156,18 +156,26 @@ $video-unavailable-lg-height: 400px;
       }
     }
 
+   &--self-paused {
+     @include full-cover-icon('\f504', nb-theme(color-danger));
+   }
+
     &--self-unavailable {
       min-height: $video-unavailable-lg-height;
       @include full-cover-icon('\f4e2', nb-theme(color-danger));
-    }
 
-    &--self-paused {
-      @include full-cover-icon('\f504', nb-theme(color-danger));
+      ::ng-deep video {
+        display: none;
+      }
     }
 
    &--remote-unavailable {
      min-height: $video-unavailable-lg-height;
      @include full-cover-icon('\f544', nb-theme(color-danger));
+
+     ::ng-deep video {
+       display: none;
+     }
    }
   }
 
