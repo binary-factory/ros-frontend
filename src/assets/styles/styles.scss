@@ -21,8 +21,26 @@
   // loading progress bar
   @include ngx-pace-theme();
 
-  // fixed in rc.9 and can be removed after upgrade
-  .custom-control .custom-control-indicator {
-    border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
-  }
+}
+
+// attribute is added after global nebula spinner completes
+html[dir] {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: nb-theme(scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  //border-radius: 10px;
+  background-color: nb-theme(scrollbar-fg);
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  //border-radius: 10px;
+  background-color: nb-theme(scrollbar-bg);
 }

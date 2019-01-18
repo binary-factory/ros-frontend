@@ -4,10 +4,9 @@
   [isLoading]="isLoading"
   [error]="err">
 
+  <ng-container headerButtons>
+    <ngx-card-header-button icon="nb-gear" [isActive]="isSettingsVisible" (click)="toggleDialog()"></ngx-card-header-button>
+  </ng-container>
 
-
-
-  <ngx-card-header-button icon="nb-gear" [isActive]="isSettingsVisible" (click)="toggleDialog()"></ngx-card-header-button>
-
-  <ros-point-cloud></ros-point-cloud>
+  <ros-point-cloud [options]="options"></ros-point-cloud>
 </ngx-card>

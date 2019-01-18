@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { ROSClientService } from '../../../../ros/shared/services/ros-client.service';
 import { ROSNodeService } from '../../../../ros/shared/services/ros-node.service';
 
 @Component({

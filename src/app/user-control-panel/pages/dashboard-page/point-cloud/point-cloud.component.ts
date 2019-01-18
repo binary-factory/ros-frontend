@@ -1,7 +1,8 @@
-import { BlockScrollStrategy, ConnectionPositionPair, Overlay, OverlayRef, PositionStrategy, ScrollStrategy } from '@angular/cdk/overlay';
+import { ConnectionPositionPair, Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { RosPointCloudComponent } from '../../../../ros/shared/components/ros-point-cloud/ros-point-cloud.component';
+import * as THREE from 'three';
+import { RosPointCloudComponent, RosPointCloudOptions } from '../../../../ros/shared/components/ros-point-cloud/ros-point-cloud.component';
 import { PointCloudSettingsComponent } from '../point-cloud-settings/point-cloud-settings.component';
 
 @Component({
@@ -17,15 +18,35 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
 
   formComponentPortal: ComponentPortal<PointCloudSettingsComponent>;
 
+  @ViewChild(RosPointCloudComponent)
+  pointCloud: RosPointCloudComponent;
+
   @ViewChild(RosPointCloudComponent, { read: ElementRef })
   buttonRef: ElementRef;
 
   isSettingsVisible = false;
 
+  options: RosPointCloudOptions = {
+    topic: {
+      name: '/rtabmap/cloud_map',
+      messageType: 'sensor_msgs/PointCloud2',
+      compression: 'cbor'
+    },
+    material: {
+      vertexColors: THREE.VertexColors,
+      size: 0.1
+    },
+    isColorful: true
+  };
+
   constructor(public overlay: Overlay, public elementRef: ElementRef) {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.options.material.size = 0.2;
+      this.pointCloud.refreshScene();
+    }, 2500);
   }
 
   ngAfterViewInit() {
@@ -40,9 +61,9 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
     this.overlayRef
       .backdropClick()
       .subscribe(() => {
-      this.overlayRef.detach();
-      this.isSettingsVisible = false;
-    });
+        this.overlayRef.detach();
+        this.isSettingsVisible = false;
+      });
 
     this.formComponentPortal = new ComponentPortal(PointCloudSettingsComponent);
   }
@@ -58,7 +79,6 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
   }
 
   getOverlayPosition(): PositionStrategy {
-    console.log(this.buttonRef);
     this.overlayPosition = this.overlay
       .position()
       .flexibleConnectedTo(this.elementRef)

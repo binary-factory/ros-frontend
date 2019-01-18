@@ -1,17 +1,37 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import * as THREE from 'three';
+import { PointsMaterialParameters } from 'three';
 import { ROSClientService } from '../../services/ros-client.service';
-import { ROSTopicService } from '../../services/ros-topic.service';
+import { RosTopicOptions, ROSTopicService } from '../../services/ros-topic.service';
 import { RosViewerComponent } from '../ros-viewer/ros-viewer.component';
+
+export interface RosPointCloudOptions {
+  topic: RosTopicOptions;
+  material: PointsMaterialParameters;
+  isColorful: boolean;
+}
+
+const RosPointCloudOptionsDefaults: RosPointCloudOptions = {
+  topic: {
+    name: '/rtabmap/cloud_map',
+    messageType: 'sensor_msgs/PointCloud2',
+    compression: 'cbor'
+  },
+  material: {
+    vertexColors: THREE.VertexColors,
+    size: 0.1
+  },
+  isColorful: true
+};
 
 @Component({
   selector: 'ros-point-cloud',
   templateUrl: './ros-point-cloud.component.html',
-  styleUrls: ['./ros-point-cloud.component.scss']
+  styleUrls: ['./ros-point-cloud.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy {
-
   decode64Lookup: any;
 
   @ViewChild(RosViewerComponent)
@@ -27,6 +47,8 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
 
   points: THREE.Points;
 
+  isReady = false;
+
   constructor(private rosTopicService: ROSTopicService, private rosClientService: ROSClientService) {
     const initVector = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     this.decode64Lookup = {};
@@ -35,14 +57,53 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
     }
   }
 
-  ngOnInit() {
-    const options = {
-      name: '/rtabmap/cloud_map',
-      messageType: 'sensor_msgs/PointCloud2',
-      compression: 'cbor'
+  private _options: RosPointCloudOptions = RosPointCloudOptionsDefaults;
+
+  get options(): RosPointCloudOptions {
+    return this._options;
+  }
+
+  @Input()
+  set options(value: RosPointCloudOptions) {
+    this._options = value;
+
+    if (!this.options.isColorful) {
+      this.colors = null;
+    }
+
+    if (this.isReady) {
+      this.refreshScene();
+    }
+  }
+
+  /*
+  @Input('pointsMaterialParams')
+  set material(pointsMaterialParams: PointsMaterialParameters) {
+    let pointMaterialParams: PointsMaterialParameters = {
+      vertexColors: THREE.VertexColors,
+      size: 0.1
     };
 
-    this.mapTopic = this.rosTopicService.createTopicSubject(options);
+    if (true) {
+      const sprite = new THREE.TextureLoader().load('assets/images/disc.png');
+      pointMaterialParams = Object.assign(pointMaterialParams, {
+        map: sprite,
+        alphaTest: 0.8,
+        transparent: true
+      });
+    }
+
+    this.pointsMaterialParams = pointMaterialParams;
+  }
+  */
+
+  ngOnInit() {
+    this.mapTopic = this.rosTopicService.createTopicSubject(this.options.topic);
+  }
+
+  ngAfterViewInit() {
+    this.isReady = true;
+    this.prepareScene();
 
     // TODO: Unsubscribe? Handle in ROSTopicService?
     this.rosClientService.connected$.subscribe((connected) => {
@@ -52,13 +113,7 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
         this.unsubscribe();
       }
     });
-  }
-
-  ngAfterViewInit() {
-    const gridHelper = new THREE.GridHelper(100, 100);
-    this.viewerComponent.scene.add(gridHelper);
-    this.viewerComponent.camera.position.z = 5;
-    this.viewerComponent.controls.enabled = true;
+    console.log(Object.assign({}, this._options));
   }
 
   ngOnDestroy() {
@@ -77,11 +132,7 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   createScene() {
-    const material = new THREE.PointsMaterial({
-      vertexColors: THREE.VertexColors,
-      size: 0.1
-    });
-
+    const material = new THREE.PointsMaterial(this.options.material);
     const geometry = new THREE.BufferGeometry();
     geometry.addAttribute('position', this.positions.setDynamic(true));
     geometry.addAttribute('color', this.colors.setDynamic(true));
@@ -91,6 +142,27 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     this.points = new THREE.Points(geometry, material);
     this.viewerComponent.scene.add(this.points);
+  }
+
+  clearScene() {
+    /*
+    const scene = this.viewerComponent.scene;
+    while (scene.children.length > 0) {
+      scene.remove(scene.children[0]);
+    }*/
+  }
+
+  refreshScene() {
+    this.clearScene();
+    this.prepareScene();
+    this.createScene();
+  }
+
+  private prepareScene() {
+    const gridHelper = new THREE.GridHelper(100, 100);
+    this.viewerComponent.scene.add(gridHelper);
+    this.viewerComponent.camera.position.z = 5;
+    this.viewerComponent.controls.enabled = true;
   }
 
   private onTopicMessage(message: any) {
@@ -108,7 +180,9 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
     }, {});
 
     this.positions = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
-    this.colors = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
+    if (this.options.isColorful) {
+      this.colors = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
+    }
 
     const dataView = new DataView(buffer.buffer);
     const littleEndian = !message.is_bigendian;
@@ -127,17 +201,19 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
       this.positions.setXYZ(i, y, z, x);
 
       // Color.
-      const color = dataView.getFloat32(base + colorOffset, littleEndian);
-      const colorArray = new Float32Array(1);
-      colorArray[0] = color;
-      const colorBytes = new Uint8Array(colorArray.buffer);
-      const red = colorBytes[2] / 255;
-      const green = colorBytes[1] / 255;
-      const blue = colorBytes[0] / 255;
-      this.colors.setXYZ(i, red, green, blue);
+      if (this.options.isColorful) {
+        const color = dataView.getFloat32(base + colorOffset, littleEndian);
+        const colorArray = new Float32Array(1);
+        colorArray[0] = color;
+        const colorBytes = new Uint8Array(colorArray.buffer);
+        const red = colorBytes[2] / 255;
+        const green = colorBytes[1] / 255;
+        const blue = colorBytes[0] / 255;
+        this.colors.setXYZ(i, red, green, blue);
+      }
     }
 
-    this.createScene();
+    this.refreshScene();
   }
 
   private onTopicError(error: Error) {

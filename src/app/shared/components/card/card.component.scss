@@ -10,6 +10,15 @@
     .backdrop, div {
       z-index: 500;
     }
+
+    .backdrop {
+      border-bottom-right-radius: nb-theme(card-border-radius) !important;
+      border-bottom-left-radius: nb-theme(card-border-radius) !important;
+    }
+  }
+
+  nb-card-footer:empty {
+    display: none;
   }
 
   .cameras-filter {
@@ -54,6 +63,8 @@
   .error-container {
     color: nb-theme(color-white);
     background-color: nb-theme(color-danger);
+    border-bottom-right-radius: nb-theme(card-border-radius);
+    border-bottom-left-radius: nb-theme(card-border-radius);
     text-align: center;
     width: 100%;
     height: 100%;

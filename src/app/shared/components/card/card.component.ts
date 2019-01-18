@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-card',
@@ -25,5 +25,4 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -1,23 +1,14 @@
-<nb-card>
-  <nb-card-header>
-    <div class="cameras-card-header">
-      <span class="cameras-card-title">Kamera</span>
-      <span class="cameras-filter">
-        <a (click)="isSingleView = true" [class.active]="isSingleView">
-          <i class="nb-square"></i>
-        </a>
-        <a (click)="isSingleView = false" [class.active]="!isSingleView">
-          <i class="nb-grid-a"></i>
-        </a>
-      </span>
-    </div>
-  </nb-card-header>
-  <nb-card-body>
-    <div class="cameras">
-      <ng-template #cameraContainer></ng-template>
-    </div>
-  </nb-card-body>
-  <nb-card-footer>
+<ngx-card title="Kamera">
+  <ng-container headerButtons>
+    <ngx-card-header-button icon="nb-square" [isActive]="isSingleView" (click)="isSingleView = true"></ngx-card-header-button>
+    <ngx-card-header-button icon="nb-grid-a" [isActive]="!isSingleView" (click)="isSingleView = false"></ngx-card-header-button>
+  </ng-container>
+
+  <div class="cameras">
+    <ng-template #cameraContainer></ng-template>
+  </div>
+
+  <ng-container footer>
     <nb-actions fullWidth size="medium">
       <nb-action (click)="toggleAudioVideoStream()" *ngIf="!isSingleView || selectedCamera === localVideoName">
         <ng-template *ngIf="videoIsPaused;then resumeContent else pauseContent"></ng-template>
@@ -29,8 +20,8 @@
         </ng-template>
       </nb-action>
     </nb-actions>
-  </nb-card-footer>
-</nb-card>
+  </ng-container>
+</ngx-card>
 
 <div class="hidden">
   <div id="remoteVideos"></div>

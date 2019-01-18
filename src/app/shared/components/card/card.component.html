@@ -3,7 +3,7 @@
     <div class="cameras-card-header">
       <span class="cameras-card-title">{{ title }}</span>
       <span class="cameras-filter">
-        <ng-content select="ngx-card-header-button"></ng-content>
+        <ng-content select="ngx-card-header-button,[headerButtons]"></ng-content>
       </span>
     </div>
   </nb-card-header>
@@ -32,4 +32,7 @@
 
     <ngx-loading [show]="isLoading && !error"></ngx-loading>
   </nb-card-body>
+  <nb-card-footer [class.hidden]="!hasFooter">
+    <ng-content select="[footer]"></ng-content>
+  </nb-card-footer>
 </nb-card>

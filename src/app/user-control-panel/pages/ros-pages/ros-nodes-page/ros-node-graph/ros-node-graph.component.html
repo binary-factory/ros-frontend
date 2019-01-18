@@ -4,8 +4,10 @@
   [isLoading]="isLoading"
   [error]="err">
 
-  <ngx-card-header-button icon="nb-search" [isActive]="isZoomEnabled" (click)="toggleZoom()"></ngx-card-header-button>
-  <ngx-card-header-button icon="nb-loop-circled" [isActive]="true" (click)="refresh()"></ngx-card-header-button>
+  <ng-container headerButtons>
+    <ngx-card-header-button icon="nb-search" [isActive]="isZoomEnabled" (click)="toggleZoom()"></ngx-card-header-button>
+    <ngx-card-header-button icon="nb-loop-circled" [isActive]="true" (click)="refresh()"></ngx-card-header-button>
+  </ng-container>
 
   <div #container></div>
 </ngx-card>

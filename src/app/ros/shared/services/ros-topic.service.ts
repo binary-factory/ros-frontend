@@ -6,6 +6,16 @@ import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-o
 import { ROSRequestResponseOptions } from '../models/request-response-options';
 import { ROSClientService } from './ros-client.service';
 
+export interface RosTopicOptions {
+  name: string;
+  messageType: string;
+  compression?: string;
+  throttle_rate?: number;
+  queue_size?: number;
+  latch?: boolean;
+  queue_length?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,15 +24,7 @@ export class ROSTopicService {
   constructor(private _rosClient: ROSClientService) {
   }
 
-  createTopicSubject<T>(topicOptions: {
-    name: string,
-    messageType: string,
-    compression?: string,
-    throttle_rate?: number,
-    queue_size?: number,
-    latch?: boolean,
-    queue_length?: number
-  }, options?: ROSRequestOptions) {
+  createTopicSubject<T>(topicOptions: RosTopicOptions, options?: ROSRequestOptions) {
 
     options = Object.assign(ROSDefaultRequestOptions, options || {});
 
