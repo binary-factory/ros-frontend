@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Ros } from 'roslib';
-import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, throwError } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-options';
 import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from '../models/request-response-options';
@@ -19,6 +19,8 @@ export class ROSClientService {
   private isConnectedSource$ = new BehaviorSubject<boolean>(false);
 
   private heartbeatTimer: any;
+
+  private heartbeatSub: Subscription;
 
   constructor(private config: ROSServiceConfig,
               private logger: NGXLogger
@@ -67,18 +69,16 @@ export class ROSClientService {
 
   private handleHeartbeatTick() {
     let connected = false;
-    this.heartbeatCheck()
+    this.heartbeatSub = this.heartbeatCheck()
       .subscribe(() => {
         this.logger.trace('Heartbeat successful. Waiting for next one.');
         connected = true;
       }, (err) => {
-        this.logger.info('Offline due heartbeat error.', err);
-        connected = false;
-
+        this.logger.trace('Offline due heartbeat error.', err);
       })
       .add(() => {
         if (this.isConnected !== connected) {
-          this.logger.info('Connection state changed.');
+          this.logger.trace(`Connection state changed. ${this.isConnected} => ${connected}`);
           this.isConnected = connected;
           this.isConnectedSource$.next(this.isConnected);
         }
@@ -104,6 +104,9 @@ export class ROSClientService {
 
   private stopHeartbeat() {
     clearInterval(this.heartbeatTimer);
+    if (this.heartbeatSub) {
+      this.heartbeatSub.unsubscribe();
+    }
   }
 
   private handleConnection(event: Event) {
