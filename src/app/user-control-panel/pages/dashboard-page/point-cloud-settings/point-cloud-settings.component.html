@@ -2,17 +2,29 @@
 <nb-card>
   <nb-card-header>Map Optionen</nb-card-header>
   <nb-card-body>
-    <form>
+    <form class="form-horizontal" [formGroup]="settingsForm" #form="ngForm">
       <div class="form-group">
-        <label for="exampleInputEmail1">Point Limit</label>
-        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <label for="exampleInputEmail1">Limit:</label>
+        <input nbInput fullWidth fieldSize="small" type="number" formControlName="pointLimit" id="exampleInputEmail1"
+               aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Hilft bei schlechter Performance 0=unbegrenzt.</small>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="exampleInputPassword1">Größe:</label>
+        <input nbInput fullWidth fieldSize="small" type="number" formControlName="pointSize" id="exampleInputPassword1">
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Speichern</button>
+      <div class="form-group">
+        <label>Form:</label>
+        <nb-radio-group formControlName="pointShape">
+          <nb-radio value="square">Eckig</nb-radio>
+          <nb-radio value="round">Rund</nb-radio>
+        </nb-radio-group>
+      </div>
+      <div class="form-group">
+        <nb-checkbox formControlName="isColorful">Farbig</nb-checkbox>
+      </div>
+
+      <button nbButton fullWidth type="submit">Speichern</button>
     </form>
   </nb-card-body>
 </nb-card>

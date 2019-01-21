@@ -35,8 +35,6 @@ export class RosViewerComponent implements OnInit, AfterViewInit {
     });
     this.controls = new OrbitControls(this.camera, this.container.nativeElement);
     this.controls.enabled = false;
-
-    this.scene.add(new THREE.AmbientLight(0x555555));
   }
 
   ngAfterViewInit() {
@@ -67,8 +65,6 @@ export class RosViewerComponent implements OnInit, AfterViewInit {
     elementHeight -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom);
     elementWidth -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight);
 
-    this.controls.update();
-
     this.camera.aspect = elementWidth / elementHeight;
     this.camera.updateProjectionMatrix();
 
@@ -83,6 +79,7 @@ export class RosViewerComponent implements OnInit, AfterViewInit {
   animate() {
     if (this.isEnabled) {
       this.animationId = requestAnimationFrame(this.animate.bind(this));
+      this.controls.update();
       this.renderer.render(this.scene, this.camera);
     }
   }

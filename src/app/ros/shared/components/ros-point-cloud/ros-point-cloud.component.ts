@@ -1,5 +1,17 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { Subject, Subscription } from 'rxjs';
+import { filter, mergeMap, retryWhen, take, tap } from 'rxjs/operators';
 import * as THREE from 'three';
 import { PointsMaterialParameters } from 'three';
 import { ROSClientService } from '../../services/ros-client.service';
@@ -34,22 +46,28 @@ const RosPointCloudOptionsDefaults: RosPointCloudOptions = {
 export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy {
   decode64Lookup: any;
 
+  @Output()
+  drawn: EventEmitter<{}> = new EventEmitter<{}>();
+
   @ViewChild(RosViewerComponent)
   viewerComponent: RosViewerComponent;
 
   mapTopic: Subject<any>;
 
-  subscription: Subscription;
+  mapTopicSub: Subscription;
 
-  positions: THREE.BufferAttribute;
+  pointsPosition: THREE.BufferAttribute;
 
-  colors: THREE.BufferAttribute;
+  pointsColor: THREE.BufferAttribute;
 
   points: THREE.Points;
 
   isReady = false;
 
-  constructor(private rosTopicService: ROSTopicService, private rosClientService: ROSClientService) {
+  constructor(private rosTopicService: ROSTopicService,
+              private rosClientService: ROSClientService,
+              private logger: NGXLogger) {
+
     const initVector = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
     this.decode64Lookup = {};
     for (let i = 0; i < 64; i++) {
@@ -68,34 +86,13 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
     this._options = value;
 
     if (!this.options.isColorful) {
-      this.colors = null;
+      this.pointsColor = null;
     }
 
     if (this.isReady) {
       this.refreshScene();
     }
   }
-
-  /*
-  @Input('pointsMaterialParams')
-  set material(pointsMaterialParams: PointsMaterialParameters) {
-    let pointMaterialParams: PointsMaterialParameters = {
-      vertexColors: THREE.VertexColors,
-      size: 0.1
-    };
-
-    if (true) {
-      const sprite = new THREE.TextureLoader().load('assets/images/disc.png');
-      pointMaterialParams = Object.assign(pointMaterialParams, {
-        map: sprite,
-        alphaTest: 0.8,
-        transparent: true
-      });
-    }
-
-    this.pointsMaterialParams = pointMaterialParams;
-  }
-  */
 
   ngOnInit() {
     this.mapTopic = this.rosTopicService.createTopicSubject(this.options.topic);
@@ -104,69 +101,90 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
   ngAfterViewInit() {
     this.isReady = true;
     this.prepareScene();
+    this.viewerComponent.camera.position.z = 5;
 
-    // TODO: Unsubscribe? Handle in ROSTopicService?
-    this.rosClientService.connected$.subscribe((connected) => {
-      if (connected) {
-        this.subscribe();
-      } else {
-        this.unsubscribe();
-      }
-    });
-    console.log(Object.assign({}, this._options));
+    this.subscribe();
   }
 
   ngOnDestroy() {
-
+    this.unsubscribe();
   }
 
   subscribe() {
-    this.subscription = this.mapTopic.subscribe(this.onTopicMessage.bind(this), this.onTopicError.bind(this));
+    this.mapTopicSub = this.mapTopic
+      .pipe(
+        retryWhen((errors) => {
+          return errors.pipe(
+            tap((error) => {
+              this.onTopicError(error);
+            }),
+            take(1),
+            mergeMap(() => {
+              return this.rosClientService.connected$;
+            }),
+            filter((connected) => {
+              return connected === true;
+            }),
+            tap((connected) => {
+              this.logger.trace('Connected! Retry!');
+            })
+          );
+        })
+      )
+      .subscribe(this.onTopicMessage.bind(this), this.onTopicError.bind(this));
   }
 
   unsubscribe() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-      this.subscription = null;
+    if (this.mapTopicSub) {
+      this.mapTopicSub.unsubscribe();
+      this.mapTopicSub = null;
     }
   }
 
   createScene() {
+    if (!this.pointsPosition) {
+      return;
+    }
+
     const material = new THREE.PointsMaterial(this.options.material);
     const geometry = new THREE.BufferGeometry();
-    geometry.addAttribute('position', this.positions.setDynamic(true));
-    geometry.addAttribute('color', this.colors.setDynamic(true));
+    geometry.addAttribute('position', this.pointsPosition.setDynamic(true));
+    if (this.pointsColor) {
+      geometry.addAttribute('color', this.pointsColor.setDynamic(true));
+    }
 
     if (this.points) {
       this.viewerComponent.scene.remove(this.points);
     }
     this.points = new THREE.Points(geometry, material);
     this.viewerComponent.scene.add(this.points);
+
+    this.drawn.emit();
   }
 
   clearScene() {
-    /*
     const scene = this.viewerComponent.scene;
     while (scene.children.length > 0) {
       scene.remove(scene.children[0]);
-    }*/
+    }
   }
 
   refreshScene() {
+    this.logger.info('refreshScene');
     this.clearScene();
     this.prepareScene();
     this.createScene();
   }
 
   private prepareScene() {
+    this.viewerComponent.scene.add(new THREE.AmbientLight(0x555555));
     const gridHelper = new THREE.GridHelper(100, 100);
     this.viewerComponent.scene.add(gridHelper);
-    this.viewerComponent.camera.position.z = 5;
     this.viewerComponent.controls.enabled = true;
   }
 
   private onTopicMessage(message: any) {
-    console.log(message);
+    this.logger.info('Got map data!');
     const pointCount = message.height * message.row_step / message.point_step;
     const pointBytes = pointCount * message.point_step;
     const pointRatio = 1;
@@ -179,9 +197,9 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
       return map;
     }, {});
 
-    this.positions = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
+    this.pointsPosition = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
     if (this.options.isColorful) {
-      this.colors = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
+      this.pointsColor = new THREE.BufferAttribute(new Float32Array(n * 3), 3, false);
     }
 
     const dataView = new DataView(buffer.buffer);
@@ -198,7 +216,7 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
       const x = dataView.getFloat32(base + xOffset, littleEndian);
       const y = dataView.getFloat32(base + yOffset, littleEndian);
       const z = dataView.getFloat32(base + zOffset, littleEndian);
-      this.positions.setXYZ(i, y, z, x);
+      this.pointsPosition.setXYZ(i, y, z, x);
 
       // Color.
       if (this.options.isColorful) {
@@ -209,7 +227,7 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
         const red = colorBytes[2] / 255;
         const green = colorBytes[1] / 255;
         const blue = colorBytes[0] / 255;
-        this.colors.setXYZ(i, red, green, blue);
+        this.pointsColor.setXYZ(i, red, green, blue);
       }
     }
 
@@ -217,7 +235,8 @@ export class RosPointCloudComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private onTopicError(error: Error) {
-    console.error(error);
+    this.logger.error(error);
+    this.drawn.error(error);
   }
 
   private decode64(inbytes, outbytes, record_size, pointRatio) {

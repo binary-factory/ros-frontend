@@ -2,10 +2,12 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/breakpoints';
 
+/*
 @include nb-install-component() {
 
   nb-card-body {
     overflow: visible;
+    padding: 2rem;
   }
 
   .input-group {
@@ -108,6 +110,7 @@
 
   .form-group label {
     padding: 0 0 0.75rem;
+    line-height: 3rem;
   }
 
   ngb-rating {
@@ -129,6 +132,16 @@
   }
 }
 
+*/
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+nb-radio-group {
+  display: flex;
+}
 
 .form {
   background: nb-theme(color-fg);

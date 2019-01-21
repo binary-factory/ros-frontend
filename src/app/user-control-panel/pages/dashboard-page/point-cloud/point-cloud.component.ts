@@ -1,9 +1,23 @@
 import { ConnectionPositionPair, Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ComponentPortal, PortalInjector } from '@angular/cdk/portal';
+import { AfterViewInit, Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import * as THREE from 'three';
 import { RosPointCloudComponent, RosPointCloudOptions } from '../../../../ros/shared/components/ros-point-cloud/ros-point-cloud.component';
-import { PointCloudSettingsComponent } from '../point-cloud-settings/point-cloud-settings.component';
+import { PointCloudSettingsComponent, PointCloudSettingsData } from '../point-cloud-settings/point-cloud-settings.component';
+
+export interface PointCloudSettings {
+  isColorful: boolean;
+  pointSize: number;
+  pointLimit: number;
+  pointShape: 'round' | 'square';
+}
+
+const PointCloudSettingsDefaults: PointCloudSettings = {
+  isColorful: true,
+  pointSize: 0.1,
+  pointLimit: 10000,
+  pointShape: 'round'
+};
 
 @Component({
   selector: 'ngx-point-cloud',
@@ -15,8 +29,6 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
   overlayRef: OverlayRef;
 
   overlayPosition: PositionStrategy;
-
-  formComponentPortal: ComponentPortal<PointCloudSettingsComponent>;
 
   @ViewChild(RosPointCloudComponent)
   pointCloud: RosPointCloudComponent;
@@ -34,59 +46,109 @@ export class PointCloudComponent implements OnInit, AfterViewInit {
     },
     material: {
       vertexColors: THREE.VertexColors,
-      size: 0.1
+      size: PointCloudSettingsDefaults.pointSize
     },
-    isColorful: true
+    isColorful: PointCloudSettingsDefaults.isColorful
   };
 
-  constructor(public overlay: Overlay, public elementRef: ElementRef) {
+  settingsData: PointCloudSettings = PointCloudSettingsDefaults;
+
+  constructor(public overlay: Overlay,
+              public elementRef: ElementRef,
+              public injector: Injector) {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.options.material.size = 0.2;
-      this.pointCloud.refreshScene();
-    }, 2500);
   }
 
   ngAfterViewInit() {
     this.overlayRef = this.overlay.create({
       positionStrategy: this.getOverlayPosition(),
-      width: 200,
+      width: 300,
       hasBackdrop: true,
-      backdropClass: 'hidden',
-      scrollStrategy: this.overlay.scrollStrategies.close()
+      scrollStrategy: this.overlay.scrollStrategies.reposition({ autoClose: true })
     });
 
     this.overlayRef
       .backdropClick()
       .subscribe(() => {
         this.overlayRef.detach();
-        this.isSettingsVisible = false;
       });
 
-    this.formComponentPortal = new ComponentPortal(PointCloudSettingsComponent);
+    this.overlayRef
+      .attachments()
+      .subscribe(() => {
+        this.isSettingsVisible = true;
+      });
+
+
+    this.overlayRef
+      .detachments()
+      .subscribe(() => {
+        this.isSettingsVisible = false;
+      });
   }
 
   toggleDialog() {
     if (!this.overlayRef.hasAttached()) {
-      this.overlayRef.attach(this.formComponentPortal);
-      this.isSettingsVisible = true;
+      const formComponentPortal = new ComponentPortal(PointCloudSettingsComponent, null, this.createOverlayInjector());
+      const component = this.overlayRef.attach(formComponentPortal);
+
+      component.instance.form.ngSubmit.subscribe(() => {
+        const settings = component.instance.form.value as PointCloudSettings;
+        this.settingsData = settings;
+        this.overlayRef.detach();
+        this.applySettings(settings);
+      });
     } else {
       this.overlayRef.detach();
-      this.isSettingsVisible = false;
     }
   }
 
-  getOverlayPosition(): PositionStrategy {
+  applySettings(settings: PointCloudSettings) {
+    const newOptions = Object.assign({}, this.options) as RosPointCloudOptions;
+    newOptions.material = { vertexColors: THREE.VertexColors };
+    newOptions.isColorful = settings.isColorful;
+    newOptions.material.size = settings.pointSize;
+    if (settings.pointShape === 'round') {
+      const sprite = new THREE.TextureLoader().load('assets/images/disc.png');
+      newOptions.material = Object.assign(newOptions.material, {
+        map: sprite,
+        alphaTest: 0.8,
+        transparent: true
+      });
+    }
+    // TODO: If from no color to colorfulk refresh map because we need new data old is deleted due memory savings.
+    this.options = newOptions;
+    this.refresh();
+  }
+
+  refresh() {
+    this.pointCloud.unsubscribe();
+    this.pointCloud.subscribe();
+  }
+
+  private getOverlayPosition(): PositionStrategy {
     this.overlayPosition = this.overlay
       .position()
       .flexibleConnectedTo(this.elementRef)
       .withPositions([
-        new ConnectionPositionPair({ originX: 'center', originY: 'center' }, { overlayX: 'center', overlayY: 'center' })
-      ]);
+        new ConnectionPositionPair({
+          originX: 'center',
+          originY: 'center'
+        }, {
+          overlayX: 'center',
+          overlayY: 'center'
+        })
+      ])
+      .withPush(false);
 
     return this.overlayPosition;
   }
 
+  private createOverlayInjector() {
+    const injectorTokens = new WeakMap();
+    injectorTokens.set(PointCloudSettingsData, this.settingsData);
+    return new PortalInjector(this.injector, injectorTokens);
+  }
 }

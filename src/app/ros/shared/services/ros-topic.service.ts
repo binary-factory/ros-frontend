@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NGXLogger } from 'ngx-logger';
 import { Message, Topic } from 'roslib';
 import { Observable, Observer } from 'rxjs';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
@@ -16,40 +17,60 @@ export interface RosTopicOptions {
   queue_length?: number;
 }
 
+let uidCounter = 0;
+
 @Injectable({
   providedIn: 'root'
 })
 export class ROSTopicService {
 
-  constructor(private _rosClient: ROSClientService) {
+  constructor(private _rosClient: ROSClientService,
+              private logger: NGXLogger) {
   }
 
   createTopicSubject<T>(topicOptions: RosTopicOptions, options?: ROSRequestOptions) {
 
     options = Object.assign(ROSDefaultRequestOptions, options || {});
 
-    const topic = new Topic(Object.assign(topicOptions, { ros: this._rosClient.instance }));
+    const uid = ++uidCounter;
+
+    const topic = new Topic(Object.assign(topicOptions, {
+      ros: this._rosClient.instance,
+      reconnect_on_close: false
+    }));
+
+    // Hack due to bug in roslibjs.
+    (topic as any).reconnect_on_close = false;
+    (topic as any).callForSubscribeAndAdvertise = (message) => {
+      this._rosClient.instance.callOnConnection(message);
+    };
+    console.log(topic);
 
     const source = new Observable<T>((observer) => {
-      topic.subscribe((message) => {
-        observer.next(message as T);
-      });
+      let topicId;
 
-      const sub = this._rosClient.connected$.subscribe((connected) => {
+      const callback = (message) => {
+        this.logger.trace(`topic[${topicId}] message`);
+        observer.next(message as T);
+      };
+
+      topic.subscribe(callback);
+      topicId = (topic as any).subscribeId;
+      this.logger.trace(`topic[${topicId}] subscribed`);
+
+      const connectedSub = this._rosClient.connected$.subscribe((connected) => {
         if (!connected) {
+          this.logger.trace(`topic[${topicId}] connection lost`);
           observer.error('connection lost!');
         }
       });
 
       return () => {
-        sub.unsubscribe();
+        topic.unsubscribe(callback);
+        this.logger.trace(`topic[${topicId}] unsubscribed`);
+        connectedSub.unsubscribe();
       };
     });
-
-    const teardown = () => {
-      topic.unsubscribe();
-      topic.unadvertise();
-    };
 
     const destination: Observer<T> = {
       next: (value) => {
@@ -60,11 +81,11 @@ export class ROSTopicService {
 
         topic.publish(message);
       },
-      error: (err) => {
-        teardown();
+      error: (error) => {
+        topic.unadvertise();
       },
       complete: () => {
-        teardown();
+        topic.unadvertise();
       }
     };
 
@@ -88,7 +109,6 @@ export class ROSTopicService {
   getTopicType(name: string, options?: ROSRequestResponseOptions) {
     const source = new Observable<string>((observer) => {
       this._rosClient.instance.getTopicType(name, (topicType) => {
-        console.log(topicType);
         observer.next(topicType);
         observer.complete();
       }, (err) => {
