@@ -7,6 +7,7 @@ import { PointCloudSettingsComponent } from './point-cloud-settings/point-cloud-
 import { PointCloudComponent } from './point-cloud/point-cloud.component';
 import { VideoComponent } from './video/video.component';
 import { BatteryComponent } from './battery/battery.component';
+import { SupersonicSensorComponent } from './supersonic-sensor/supersonic-sensor.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { BatteryComponent } from './battery/battery.component';
     VideoComponent,
     BatteryComponent,
     PointCloudComponent,
-    PointCloudSettingsComponent
+    PointCloudSettingsComponent,
+    SupersonicSensorComponent
   ],
   entryComponents: [
     PointCloudSettingsComponent
