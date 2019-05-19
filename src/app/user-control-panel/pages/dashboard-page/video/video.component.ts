@@ -12,11 +12,11 @@ import {
 import SimpleWebRTC from 'simplewebrtc';
 
 @Component({
-  selector: 'ngx-security-cameras',
-  styleUrls: ['./security-cameras.component.scss'],
-  templateUrl: './security-cameras.component.html'
+  selector: 'ngx-video',
+  styleUrls: ['./video.component.scss'],
+  templateUrl: './video.component.html'
 })
-export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestroy {
+export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   readonly localVideoId = 'localVideo';
 
@@ -59,7 +59,7 @@ export class SecurityCamerasComponent implements OnInit, AfterViewInit, OnDestro
     }, 0);
 
     this.webRtc = new SimpleWebRTC({
-      url: 'https://robot:8888',
+      url: 'https://robot:8443',
       localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
       autoRemoveVideos: false,

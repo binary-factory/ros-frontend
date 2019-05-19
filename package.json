@@ -6,7 +6,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "docs": "compodoc -p src/tsconfig.app.json -d docs"
+    "docs": "compodoc -p src/tsconfig.app.json -d docs",
+    "server:prod": "cross-env NODE_ENV=production node server/server.js",
+    "server:dev": "cross-env NODE_ENV=development node server/server.js"
   },
   "dependencies": {
     "@agm/core": "^1.0.0-beta.5",
@@ -34,6 +36,8 @@
     "core-js": "2.5.1",
     "echarts": "^4.0.2",
     "eva-icons": "^1.1.0",
+    "express": "^4.17.0",
+    "express-basic-auth": "^1.2.0",
     "intl": "1.2.5",
     "ionicons": "2.0.1",
     "nebular-icons": "1.1.0",
@@ -48,6 +52,7 @@
     "roslib": "^0.20.0",
     "rxjs": "6.3.0",
     "rxjs-compat": "6.3.0",
+    "signal-master": "^1.0.1",
     "simplewebrtc": "^3.0.2",
     "socicon": "3.0.5",
     "three": "^0.99.0",
@@ -74,6 +79,7 @@
     "@types/three": "^0.93.14",
     "@types/vis": "^4.21.9",
     "codelyzer": "^4.5.0",
+    "cross-env": "^5.2.0",
     "jasmine-core": "2.6.4",
     "jasmine-spec-reporter": "4.1.1",
     "karma": "1.7.1",

@@ -1,0 +1,15 @@
+{
+    "server": {
+        "port": 8443,
+        "key": "./certs/robot/key.pem",
+        "cert": "./certs/robot/cert.pem"
+    },
+    "users": {
+        "admin": "supersecret"
+    },
+    "rooms": {
+        "maxClients": 0
+    },
+    "stunservers": [],
+    "turnservers": []
+}

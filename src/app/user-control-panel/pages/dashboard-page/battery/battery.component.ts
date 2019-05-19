@@ -5,25 +5,11 @@ import { delay } from 'rxjs/operators';
 declare const echarts: any;
 
 @Component({
-  selector: 'ngx-solar',
-  styleUrls: ['./solar.component.scss'],
-  template: `
-    <nb-card size="xsmall" class="solar-card">
-      <nb-card-header>{{ title }}</nb-card-header>
-      <nb-card-body>
-        <div echarts [options]="option" class="echart">
-        </div>
-        <!--
-        <div class="info">
-          <div class="value">6. 421 kWh</div>
-          <div class="details"><span>out of</span> 8.421 kWh</div>
-        </div>
-        -->
-      </nb-card-body>
-    </nb-card>
-  `
+  selector: 'ngx-battery',
+  styleUrls: ['./battery.component.scss'],
+  templateUrl: './battery.component.html'
 })
-export class SolarComponent implements AfterViewInit, OnDestroy {
+export class BatteryComponent implements AfterViewInit, OnDestroy {
 
   option: any = {};
   themeSubscription: any;
