@@ -1,6 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators';
+import { filter, mergeMap, retryWhen, take, tap } from 'rxjs/operators';
+import { ROSClientService } from '../../../ros/shared/services/ros-client.service';
+import { ROSTopicService } from '../../../ros/shared/services/ros-topic.service';
 
 interface CardSettings {
   title: string;
@@ -15,70 +17,64 @@ interface CardSettings {
 })
 export class DashboardPageComponent implements OnDestroy {
 
-  lightCard: CardSettings = {
-    title: 'Light',
-    iconClass: 'nb-lightbulb',
-    type: 'primary'
-  };
-  rollerShadesCard: CardSettings = {
-    title: 'Roller Shades',
-    iconClass: 'nb-roller-shades',
-    type: 'success'
-  };
-  wirelessAudioCard: CardSettings = {
-    title: 'Wireless Audio',
-    iconClass: 'nb-audio',
-    type: 'info'
-  };
-  coffeeMakerCard: CardSettings = {
-    title: 'Coffee Maker',
-    iconClass: 'nb-coffee-maker',
-    type: 'warning'
-  };
-  statusCards: string;
-  commonStatusCardsSet: CardSettings[] = [
-    this.lightCard,
-    this.rollerShadesCard,
-    this.wirelessAudioCard,
-    this.coffeeMakerCard
-  ];
-  statusCardsByThemes: {
-    default: CardSettings[];
-    cosmic: CardSettings[];
-    corporate: CardSettings[];
-  } = {
-    default: this.commonStatusCardsSet,
-    cosmic: this.commonStatusCardsSet,
-    corporate: [
-      {
-        ...this.lightCard,
-        type: 'warning'
-      },
-      {
-        ...this.rollerShadesCard,
-        type: 'primary'
-      },
-      {
-        ...this.wirelessAudioCard,
-        type: 'danger'
-      },
-      {
-        ...this.coffeeMakerCard,
-        type: 'secondary'
-      }
-    ]
-  };
-  private alive = true;
+  v12Percentage: number = 0;
+  v24Percentage: number = 0;
 
-  constructor(private themeService: NbThemeService) {
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.statusCards = this.statusCardsByThemes[theme.name];
-      });
+  constructor(private themeService: NbThemeService, private rosTopicService: ROSTopicService, private rosClientService: ROSClientService) {
+
+
+    this.rosTopicService.createTopicSubject({
+      name: '/12V/battery_lvl',
+      messageType: 'std_msgs/UInt8'
+    }).pipe(retryWhen((errors) => {
+        return errors.pipe(
+          tap((error) => {
+            //this.onTopicError(error);
+          }),
+          take(1),
+          mergeMap(() => {
+            return this.rosClientService.connected$;
+          }),
+          filter((connected) => {
+            return connected === true;
+          }),
+          tap((connected) => {
+            //this.logger.trace('Connected! Retry!');
+          })
+        );
+      })
+    ).subscribe((level: any) => {
+      let percentage = level.data / 255;
+      this.v12Percentage = Math.floor(percentage * 100);
+    });
+
+
+    this.rosTopicService.createTopicSubject({
+      name: '/24V/battery_lvl',
+      messageType: 'std_msgs/UInt8'
+    }).pipe(retryWhen((errors) => {
+        return errors.pipe(
+          tap((error) => {
+            //this.onTopicError(error);
+          }),
+          take(1),
+          mergeMap(() => {
+            return this.rosClientService.connected$;
+          }),
+          filter((connected) => {
+            return connected === true;
+          }),
+          tap((connected) => {
+            //this.logger.trace('Connected! Retry!');
+          })
+        );
+      })
+    ).subscribe((level: any) => {
+      let percentage = level.data / 255;
+      this.v24Percentage = Math.floor(percentage * 100);
+    });
   }
 
   ngOnDestroy() {
-    this.alive = false;
   }
 }

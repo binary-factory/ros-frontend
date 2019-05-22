@@ -29,6 +29,8 @@ export class BatteryComponent implements AfterViewInit, OnDestroy {
       this.option.series[0].data[1].value = 100 - value;
       this.option.series[1].data[0].value = value;
     }
+
+    this.option = Object.assign({}, this.option);
   }
 
   ngAfterViewInit() {
