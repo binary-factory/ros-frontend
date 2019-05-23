@@ -10,6 +10,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import SimpleWebRTC from 'simplewebrtc';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'ngx-video',
@@ -59,7 +60,7 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 0);
 
     this.webRtc = new SimpleWebRTC({
-      url: 'https://robot:8443',
+      url: environment.webRTCUrl,
       localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
       autoRemoveVideos: false,

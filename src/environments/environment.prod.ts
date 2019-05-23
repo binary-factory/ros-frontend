@@ -5,4 +5,6 @@
  */
 export const environment = {
   production: true,
+  rosbridgeUrl: 'wss://robot:9090',
+  webRTCUrl: 'https://robot:8443'
 };

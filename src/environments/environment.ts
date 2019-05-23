@@ -10,4 +10,6 @@
 
 export const environment = {
   production: false,
+  rosbridgeUrl: 'wss://virtualbox:9090',
+  webRTCUrl: 'https://localhost:8443'
 };

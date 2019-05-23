@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { GamepadModule } from './gamepad/gamepad.module';
 import { ROSModule } from './ros/ros.module';
 import { ThemeModule } from './theme/theme.module';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import { ThemeModule } from './theme/theme.module';
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
     ROSModule.forRoot({
-      url: 'wss://virtualbox:9090',
+      url: environment.rosbridgeUrl,
       heartbeat: 1000,
       reconnect: 1000
     }),
