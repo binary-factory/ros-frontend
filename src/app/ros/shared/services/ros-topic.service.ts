@@ -74,11 +74,11 @@ export class ROSTopicService {
 
     const destination: Observer<T> = {
       next: (value) => {
-        const message = new Message(value);
         if (!options.enqueue && !this._rosClient.connected) {
           return;
         }
 
+        const message = new Message(value);
         topic.publish(message);
       },
       error: (error) => {

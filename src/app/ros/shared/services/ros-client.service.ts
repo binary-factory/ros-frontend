@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NGXLogger } from 'ngx-logger';
 import { Ros } from 'roslib';
-import { BehaviorSubject, Observable, Subject, Subscription, throwError } from 'rxjs';
-import { timeout } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
+import { timeout, switchMap } from 'rxjs/operators';
 import { ROSDefaultRequestOptions, ROSRequestOptions } from '../models/request-options';
 import { ROSDefaultRequestResponseOptions, ROSRequestResponseOptions } from '../models/request-response-options';
 import { ROSServiceConfig } from '../models/ros-config.model';
@@ -24,7 +24,7 @@ export class ROSClientService {
   private heartbeatSub: Subscription;
 
   constructor(private config: ROSServiceConfig,
-              private logger: NGXLogger
+    private logger: NGXLogger
   ) {
 
     this.config = config;
@@ -49,11 +49,17 @@ export class ROSClientService {
 
   applyRequestOptions<T>(source: Observable<T> | Subject<T>, options?: ROSRequestOptions) {
     options = Object.assign(ROSDefaultRequestOptions, options || {});
-    if (!this.isConnected && !options.enqueue) {
-      return throwError('You are not connected! Enqueue was disabled for this request.');
-    } else {
-      return source;
-    }
+
+    const checkIfConnected = new Observable((subscriber) => {
+      if (!this.isConnected && !options.enqueue) {
+        subscriber.error('You are not connected! Enqueue was disabled for this request.');
+      } else {
+        subscriber.next();
+        subscriber.complete();
+      }
+    });
+
+    return checkIfConnected.pipe(switchMap(() => source));
   }
 
   applyRequestResponseOptions<T>(source: Observable<T> | Subject<T>, options?: ROSRequestResponseOptions) {
@@ -89,6 +95,14 @@ export class ROSClientService {
     }
   }
 
+  private createHeartbeat() {
+    return timer(0, this.config.heartbeat)
+      .pipe(
+        switchMap(() => this.heartbeatCheck()),
+        timeout(this.config.heartbeat)
+      )
+  }
+
   private heartbeatCheck() {
     const source = new Observable((observer) => {
       this.ros.getNodes((nodes) => {
@@ -99,11 +113,17 @@ export class ROSClientService {
       });
     });
 
-    return source.pipe(timeout(this.config.heartbeat));
+    return source;
   }
 
   private startHeartbeat() {
-    this.heartbeatTimer = setInterval(this.handleHeartbeatTick.bind(this), this.config.heartbeat);
+    this.heartbeatSub = this.createHeartbeat()
+      .subscribe(() => {
+        this.logger.trace('Heartbeat successful. Waiting for next one.');
+      }, (err) => {
+        this.logger.info('Offline due heartbeat error.', err);
+        this.ros.close();
+      });
   }
 
   private stopHeartbeat() {

@@ -1,13 +1,12 @@
 <ngx-card [title]="title" [isLoading]="isLoading" [error]="err">
 
   <ng-container headerButtons>
-    <ngx-card-header-button icon="nb-loop-circled" [isActive]="isLoading" (click)="onRefresh()"></ngx-card-header-button>
+    <ngx-card-header-button icon="nb-loop-circled" [isActive]="isLoading" (click)="onRefresh()">
+    </ngx-card-header-button>
   </ng-container>
 
   <ng-container *ngIf="true">
-    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)"
-                     [settings]="settings"
-                     [source]="source">
+    <ng2-smart-table (userRowSelect)="onUserRowSelect($event)" [settings]="settings" [source]="source">
     </ng2-smart-table>
   </ng-container>
 
