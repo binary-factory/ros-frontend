@@ -19,8 +19,6 @@ export class ROSClientService {
 
   private isConnectedSource$ = new BehaviorSubject<boolean>(false);
 
-  private heartbeatTimer: any;
-
   private heartbeatSub: Subscription;
 
   constructor(private config: ROSServiceConfig,
@@ -30,9 +28,10 @@ export class ROSClientService {
     this.config = config;
 
     this.ros = new Ros(config);
-    this.ros.callOnConnection = this.sendMessage.bind(this);
 
-    this.resetEventListeners();
+    this.ros.on('connection', this.onConnection.bind(this));
+    this.ros.on('close', this.onClose.bind(this));
+    this.ros.on('error', this.onError.bind(this));
   }
 
   get instance() {
@@ -73,28 +72,6 @@ export class ROSClientService {
     }
   }
 
-  private handleHeartbeatTick() {
-    this.heartbeatSub = this.heartbeatCheck()
-      .subscribe(() => {
-        this.logger.trace('Heartbeat successful. Waiting for next one.');
-      }, (err) => {
-        this.logger.info('Offline due heartbeat error.', err);
-        this.isConnected = false;
-        this.isConnectedSource$.next(this.isConnected);
-        this.stopHeartbeat();
-        this.resetEventListeners();
-        this.ros.close();
-      });
-  }
-
-  private sendMessage(message) {
-    if (this.isConnected) {
-      (this.ros as any).socket.send(JSON.stringify(message));
-    } else {
-      this.logger.warn('ROS-Client: dropping message.', message);
-    }
-  }
-
   private createHeartbeat() {
     return timer(0, this.config.heartbeat)
       .pipe(
@@ -122,29 +99,20 @@ export class ROSClientService {
         this.logger.trace('Heartbeat successful. Waiting for next one.');
       }, (err) => {
         this.logger.info('Offline due heartbeat error.', err);
+        this.connectionTearddown();
         this.ros.close();
       });
   }
 
   private stopHeartbeat() {
-    clearInterval(this.heartbeatTimer);
     if (this.heartbeatSub) {
       this.heartbeatSub.unsubscribe();
     }
   }
 
-  private resetEventListeners() {
-    this.logger.trace('ROS-Client: resetEventListeners().');
-    (this.ros as any).removeAllListeners();
-    this.ros.on('connection', this.onConnection.bind(this));
-    this.ros.on('close', this.onClose.bind(this));
-    this.ros.on('error', this.onError.bind(this));
-  }
-
   private onConnection(event: Event) {
     this.logger.info('ROS-Client: Connected.', event);
 
-    this.resetEventListeners();
     this.isConnected = true;
     this.isConnectedSource$.next(this.isConnected);
 
@@ -157,11 +125,7 @@ export class ROSClientService {
   private onClose(event: CloseEvent) {
     this.logger.info('ROS-Client: Disconnected.', event);
 
-    this.stopHeartbeat();
-
-    this.resetEventListeners();
-    this.isConnected = false;
-    this.isConnectedSource$.next(this.isConnected);
+    this.connectionTearddown();
 
     setTimeout(() => {
       this.ros.connect(this.config.url);
@@ -170,5 +134,12 @@ export class ROSClientService {
 
   private onError(error: ErrorEvent) {
     this.logger.error('ROS-Error', error);
+  }
+
+  private connectionTearddown() {
+    this.stopHeartbeat();
+
+    this.isConnected = false;
+    this.isConnectedSource$.next(this.isConnected);
   }
 }
