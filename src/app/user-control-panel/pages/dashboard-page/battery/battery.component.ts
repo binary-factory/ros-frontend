@@ -12,11 +12,10 @@ declare const echarts: any;
 export class BatteryComponent implements AfterViewInit, OnDestroy {
 
   option: any = {};
+  
   themeSubscription: any;
-  private value = 0;
 
-  @Input()
-  title = '';
+  private value = 0;
 
   constructor(private theme: NbThemeService) {
   }
