@@ -164,6 +164,9 @@ export class GamepadService {
 
   enable() {
     this.enabled = true;
+    for (let i = 0; i < this.gamepads.length; i++) {
+      this.gamepadTwist$(i).subscribe((twist) => this.controlTopic.next(twist));
+    }
   }
 
   disable() {

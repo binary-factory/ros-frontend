@@ -39,13 +39,6 @@ export class ROSTopicService {
       reconnect_on_close: false
     }));
 
-    // Hack due to bug in roslibjs.
-    (topic as any).reconnect_on_close = false;
-    (topic as any).callForSubscribeAndAdvertise = (message) => {
-      this._rosClient.instance.callOnConnection(message);
-    };
-    console.log(topic);
-
     const source = new Observable<T>((observer) => {
       let topicId;
 
