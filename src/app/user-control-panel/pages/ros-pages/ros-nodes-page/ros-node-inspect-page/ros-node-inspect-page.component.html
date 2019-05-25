@@ -1,3 +1,7 @@
-<p>
-  ros-node-inspect-page works!
-</p>
+<nb-card>
+  <nb-card-header>Node: {{ node?.name }}</nb-card-header>
+</nb-card>
+
+<ngx-ros-topics-table title="Abonnierte Topics" [filter]="publications"></ngx-ros-topics-table>
+<ngx-ros-topics-table title="Veröffentlichte  Topics" [filter]="subscriptions"></ngx-ros-topics-table>
+<ngx-ros-services-table title="Veröffentlichte Services" [filter]="services"></ngx-ros-services-table>

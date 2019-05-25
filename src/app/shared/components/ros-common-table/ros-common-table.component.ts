@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { debounceTime, buffer, map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-ros-common-table',
@@ -29,11 +30,27 @@ export class RosCommonTableComponent implements OnInit, OnDestroy {
 
   sub: Subscription;
 
+  click$ = new Subject();
+
+  selected: any;
+
+  doubleClick$ = this.click$.pipe(
+    buffer(this.click$.pipe(
+      debounceTime(250),
+    )),
+    map(list => {
+      return list.length;
+    }),
+    filter(x => x === 2),
+  )
+
   constructor() {
   }
 
   ngOnInit() {
-    this.source.onAdded().subscribe(console.log)
+    this.doubleClick$.subscribe(_ =>{
+      this.rowClick.emit(this.selected);
+    })
   }
 
   ngOnDestroy(): void {
@@ -66,6 +83,7 @@ export class RosCommonTableComponent implements OnInit, OnDestroy {
   }
 
   onUserRowSelect(selected: any) {
-    this.rowClick.emit(selected);
+    this.selected = selected;
+    this.click$.next();
   }
 }

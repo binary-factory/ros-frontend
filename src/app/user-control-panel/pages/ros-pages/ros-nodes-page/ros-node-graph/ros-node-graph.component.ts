@@ -153,7 +153,6 @@ export class RosNodeGraphComponent implements OnInit, AfterViewInit {
   }
 
   onDoubleClick(params) {
-    console.log(params);
     if (params.nodes && params.nodes.length > 0) {
       const nodeId = params.nodes[0];
       this.router.navigate(['/pages/ros/node/', nodeId]);

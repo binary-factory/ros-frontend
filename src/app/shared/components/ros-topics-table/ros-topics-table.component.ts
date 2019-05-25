@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { concatMap, map, reduce } from 'rxjs/operators';
+import { concatMap, map, reduce, filter } from 'rxjs/operators';
 import { ROSTopicService } from '../../../ros/shared/services/ros-topic.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-ros-topics-table',
@@ -28,18 +29,39 @@ export class RosTopicsTableComponent implements OnInit {
 
   data: Observable<Array<any>>;
 
-  constructor(private rosTopicService: ROSTopicService) {
+  @Input()
+  title = 'ROS Topics';
+
+  @Input()
+  _filter: string[];
+
+  constructor(private rosTopicService: ROSTopicService,
+    private router: Router) {
   }
 
   ngOnInit() {
     this.refresh();
   }
 
+  @Input()
+  set filter(filterVal: string[]) {
+    this._filter = filterVal;
+    this.refresh();
+  }
+
+
   refresh() {
     this.data = this.rosTopicService
       .getTopicNames()
       .pipe(
         concatMap<string[], string>((x) => x),
+        filter((topic) => {
+          if (this._filter) {
+            return this._filter.indexOf(topic) > -1;
+          } else {
+            return true;
+          }
+        }),
         concatMap((topic) => {
           return this.rosTopicService
             .getTopicType(topic)
@@ -57,7 +79,7 @@ export class RosTopicsTableComponent implements OnInit {
   }
 
   onRowClick(event: any) {
-    console.log(event);
+    this.router.navigate(['/pages/ros/topic/', event.data.name]);
   }
 
 }
