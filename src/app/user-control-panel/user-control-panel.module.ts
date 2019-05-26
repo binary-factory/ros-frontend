@@ -7,7 +7,6 @@ import { OneColumnLayoutComponent } from './components/one-column-layout/one-col
 import { UserControlPanelComponent } from './components/user-control-panel/user-control-panel.component';
 import { DashboardPageModule } from './pages/dashboard-page/dashboard-page.module';
 import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
-import { SettingsPageModule } from './pages/settings-page/settings-page.module';
 import { UserControlPanelRoutingModule } from './user-control-panel-routing.module';
 
 const PAGES_COMPONENTS = [
@@ -22,7 +21,6 @@ const PAGES_COMPONENTS = [
     SharedModule,
     DashboardPageModule,
     NotFoundPageModule,
-    SettingsPageModule,
     UserControlPanelRoutingModule
   ],
   declarations: [
