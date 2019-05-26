@@ -5,6 +5,7 @@ import { BehaviorSubject, timer, Observable } from 'rxjs';
 import { ROSTopicService } from '../ros/shared/services/ros-topic.service';
 import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { takeWhile, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 interface XboxControllerInputs {
   readonly A: boolean;
@@ -60,10 +61,7 @@ export class GamepadService {
     this.eventManager.addGlobalEventListener('window', 'gamepadconnected', this.handleGamepadConnected.bind(this));
     this.eventManager.addGlobalEventListener('window', 'gamepaddisconnected', this.handleGamepadDisconnected.bind(this));
 
-    this.controlTopic = this.rosTopicService.createTopicSubject({
-      name: '/turtle1/cmd_vel',
-      messageType: 'geometry_msgs/Twist'
-    });
+    this.controlTopic = this.rosTopicService.createTopicSubject(environment.controlTopic);
   }
 
   get gamepads$() {

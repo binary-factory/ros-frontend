@@ -1,0 +1,80 @@
+$width: 100px;
+$height: 80px;
+$sensorHeight: 50px;
+$sensorWidth: 20px;
+
+nb-card-body {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .robot {
+        width: $width;
+        height: $height;
+        background-color: white;
+        position: relative;
+        margin: $sensorHeight / 2;
+    
+        .sensor {
+            position: absolute;
+            width: $sensorWidth;
+            height: $sensorHeight;
+            background-color: greenyellow;
+    
+            &-disabled {
+                background-color: grey;
+            }
+
+            &-triggered {
+                background-color: red;
+            }
+
+            &-0 {
+                top: -$sensorHeight / 2;
+                left: $width / 2 - $sensorWidth / 2;
+            }
+    
+            &-1 {
+                bottom: -$sensorHeight / 2;
+                left: $width / 2 - $sensorWidth / 2;
+            }
+    
+            &-2 {
+                top: 5px;
+                left: - $sensorHeight / 2;
+                transform: rotate(-90deg)
+            }
+    
+            &-3 {
+                top: 5px;
+                right: - $sensorHeight / 2;
+                transform: rotate(90deg)
+            }
+    
+            &-4 {
+                top: -$sensorHeight / 2;
+                left: 5px;
+                transform: rotate(-22.5deg)
+            }
+    
+            &-5 {
+                top: -$sensorHeight / 2;
+                right: 5px;
+                transform: rotate(22.5deg)
+            }
+    
+            &-6 {
+                bottom: -$sensorHeight / 2;
+                left: 5px;
+                transform: rotate(22.5deg)
+            }
+    
+            &-7 {
+                bottom: -$sensorHeight / 2;
+                right: 5px;
+                transform: rotate(-22.5deg)
+            }
+        }
+    }
+}

@@ -1,3 +1,11 @@
-<p>
-  supersonic-sensor works!
-</p>
+<nb-card size="xsmall" class="suprsonic-card">
+  <nb-card-header>Sensoren</nb-card-header>
+  <nb-card-body>
+    <div class="robot">
+      <div *ngFor="let item of sensorArray; let i = index" [className]="'sensor sensor-' + i"
+        [class.sensor-disabled]="isSensorDisabled(i)"
+        [class.sensor-triggered]="isSensorTriggered(i)" (click)="toggleSensor(i);">
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -11,5 +11,25 @@
 export const environment = {
   production: false,
   rosbridgeUrl: 'wss://virtualbox:9090',
-  webRTCUrl: 'https://robot:8443'
+  webRTCUrl: 'https://robot:8443',
+  controlTopic: {
+    name: '/turtle1/cmd_vel',
+    messageType: 'geometry_msgs/Twist'
+  },
+  batteryTopic12v: {
+    name: '/12V/battery_lvl',
+    messageType: 'std_msgs/UInt8'
+  },
+  batteryTopic24v: {
+    name: '/24V/battery_lvl',
+    messageType: 'std_msgs/UInt8'
+  },
+  sensorObstacleTopic: {
+    name: '/robot0/obstacles',
+    messageType: 'std_msgs/UInt16MultiArray'
+  },
+  sensorDisableTopic: {
+    name: '/robot0/deactivate_sensor',
+    messageType: 'std_msgs/UInt16MultiArray'
+  }
 };

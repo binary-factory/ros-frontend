@@ -15,6 +15,9 @@ export class BatteryComponent implements AfterViewInit, OnDestroy {
   
   themeSubscription: any;
 
+  @Input()
+  title: string;
+
   private value = 0;
 
   constructor(private theme: NbThemeService) {
