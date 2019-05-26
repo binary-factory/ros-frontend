@@ -33,12 +33,10 @@ export class RosNodeInspectPageComponent implements OnInit {
     );
 
     this.nodeDetails.pipe(take(1)).subscribe((details) => {
-      console.log(details)
       this.node = details;
       this.subscriptions = details.subscriptions;
       this.publications = details.publications;
       this.services = details.services;
-      console.log(details);
     });
   }
 

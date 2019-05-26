@@ -1,3 +1,49 @@
-<p>
-  ros-topic-inspect-page works!
-</p>
+<div class="row">
+
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>Topic: {{ name }} ({{type}})</nb-card-header>
+    </nb-card>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <ngx-card title="Nachricht senden" [isLoading]="isSending" [error]="sendingError" id="topicCard">
+
+      <ng-container headerButtons>
+        <ngx-card-header-button icon="nb-paper-plane" [isActive]="isSending" (click)="sendMessage()">
+        </ngx-card-header-button>
+      </ng-container>
+
+      <ng-container>
+        <json-editor [options]="pubEditorOptions" [data]="pubData" (change)="getPubData($event)"></json-editor>
+      </ng-container>
+
+    </ngx-card>
+  </div>
+
+  <div class="col-12 col-lg-6">
+      <ngx-card title="Abonnieren" id="topicCard">
+  
+        <ng-container headerButtons>
+          <ngx-card-header-button icon="nb-compose" [isActive]="sub" (click)="subunsub()">
+          </ngx-card-header-button>
+        </ng-container>
+  
+        <ng-container>
+          <json-editor [options]="subEditorOptions" [data]="subData"></json-editor>
+        </ng-container>
+  
+      </ngx-card>
+    </div>
+
+  <div class="col-12 col-lg-6">
+    <ngx-loading [show]="loading"></ngx-loading>
+    <ngx-ros-nodes-table title="Abonnierende Nodes" [filter]="subscribingNodes"></ngx-ros-nodes-table>
+  </div>
+
+  <div class="col-12 col-lg-6">
+      <ngx-loading [show]="loading"></ngx-loading>
+      <ngx-ros-nodes-table title="Publizierende Nodes" [filter]="publishingNodes"></ngx-ros-nodes-table>
+    </div>
+
+</div>

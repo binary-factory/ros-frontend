@@ -66,6 +66,105 @@ export class ROSClientService {
     }
   }
 
+  getParamObject(type: any) {
+    const typeDict = this.getServiceTypeObject(type);
+    const iterate = (obj: any) => {
+      for (let property in obj) {
+        if (obj.hasOwnProperty(property)) {
+          if (typeof obj[property] == 'object') {
+            iterate(obj[property]);
+          }
+          else {
+            let type: string;
+            if (Array.isArray(obj[property])) {
+              type = obj[property][0];
+            } else {
+              type = obj[property];
+            }
+            type = type.toLowerCase();
+
+            let example: any = '';
+            switch (type) {
+              case 'string':
+                example = '';
+                break;
+              case 'bool':
+                example = false;
+                break;
+              case 'time':
+                let date = new Date();
+                example = date.toISOString();
+                break;
+              case 'byte':
+              case 'int8':
+              case 'int16':
+              case 'int32':
+              case 'int64':
+              case 'uint8':
+              case 'uint16':
+              case 'uint32':
+              case 'uint64':
+                example = 0;
+                break;
+              case 'float32':
+              case 'float64':
+                example = 0.0;
+                break;
+            }
+
+            if (Array.isArray(obj[property])) {
+              obj[property][0] = example;
+            } else {
+              obj[property] = example;
+            }
+          }
+        }
+      }
+    }
+    iterate(typeDict);
+
+    return typeDict;
+  }
+
+  getServiceTypeObject(defs: any) {
+    const decodeTypeDefsRec = (theType, hints) => {
+      const typeDefDict = {};
+      for (let i = 0; i < theType.fieldnames.length; i++) {
+        const arrayLen = theType.fieldarraylen[i];
+        const fieldName = theType.fieldnames[i];
+        const fieldType = theType.fieldtypes[i];
+        if (fieldType.indexOf('/') === -1) {
+          if (arrayLen === -1) {
+            typeDefDict[fieldName] = fieldType;
+          } else {
+            typeDefDict[fieldName] = [fieldType];
+          }
+        } else {
+          let sub = false;
+          for (let j = 0; j < hints.length; j++) {
+            if (hints[j].type.toString() === fieldType.toString()) {
+              sub = hints[j];
+              break;
+            }
+          }
+          if (sub) {
+            const subResult = decodeTypeDefsRec(sub, hints);
+            if (arrayLen === -1) {
+              typeDefDict[fieldName] = subResult;
+            } else {
+              typeDefDict[fieldName] = [subResult];
+            }
+          } else {
+            this.logger.error(`Cannot find ${fieldType} in decodeTypeDefs`);
+          }
+        }
+      }
+      return typeDefDict;
+    };
+
+    return decodeTypeDefsRec(defs[0], defs);
+  }
+
   private handleHeartbeatTick() {
     this.heartbeatSub = this.heartbeatCheck()
       .subscribe(() => {

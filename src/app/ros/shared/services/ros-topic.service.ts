@@ -117,4 +117,19 @@ export class ROSTopicService {
 
     return this._rosClient.applyRequestResponseOptions(source, options);
   }
+
+
+  getTopicTypeDef(type: string, options?: ROSRequestResponseOptions) {
+    const source = new Observable<string>((observer) => {
+      this._rosClient.instance.getMessageDetails(type, (typeDef) => {
+        observer.next(typeDef);
+        observer.complete();
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
+  }
+
 }
