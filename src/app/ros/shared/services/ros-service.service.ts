@@ -14,8 +14,6 @@ export class ROSServiceService {
   }
 
   callService(name: string, type: string, args: any, options?: ROSRequestResponseOptions) {
-    options = Object.assign(options || {}, ROSDefaultRequestResponseOptions);
-
     const serviceOptions = {
       ros: this._rosClient.instance,
       name,
@@ -63,6 +61,45 @@ export class ROSServiceService {
     const source = new Observable<string[]>((observer) => {
       this._rosClient.instance.getServices((services) => {
         observer.next(services);
+        observer.complete();
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
+  }
+
+  getServiceType(service: string, options?: ROSRequestResponseOptions) {
+    const source = new Observable<string>((observer) => {
+      this._rosClient.instance.getServiceType(service, (serviceType) => {
+        observer.next(serviceType);
+        observer.complete();
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
+  }
+
+  getServiceResponseDetails(serviceType: string, options?: ROSRequestResponseOptions) {
+    const source = new Observable<string>((observer) => {
+      (this._rosClient.instance as any).getServiceResponseDetails(serviceType, (serviceType) => {
+        observer.next(serviceType);
+        observer.complete();
+      }, (err) => {
+        observer.error(err);
+      });
+    });
+
+    return this._rosClient.applyRequestResponseOptions(source, options);
+  }
+
+  getServiceRequestDetails(serviceType: string, options?: ROSRequestResponseOptions) {
+    const source = new Observable<string>((observer) => {
+      (this._rosClient.instance as any).getServiceRequestDetails(serviceType, (serviceType) => {
+        observer.next(serviceType);
         observer.complete();
       }, (err) => {
         observer.error(err);

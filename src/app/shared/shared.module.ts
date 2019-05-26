@@ -13,6 +13,8 @@ import { RosNodesTableComponent } from './components/ros-nodes-table/ros-nodes-t
 import { RosParamsTableComponent } from './components/ros-params-table/ros-params-table.component';
 import { RosServicesTableComponent } from './components/ros-services-table/ros-services-table.component';
 import { RosTopicsTableComponent } from './components/ros-topics-table/ros-topics-table.component';
+import { NgJsonEditorModule } from 'ang-jsoneditor' 
+
 
 const sharedModules = [
   CommonModule,
@@ -22,7 +24,8 @@ const sharedModules = [
   NgxEchartsModule,
   Ng2SmartTableModule,
   NgxLoadingModule,
-  ROSModule
+  ROSModule,
+  NgJsonEditorModule
 ];
 
 const sharedComponents = [

@@ -32,6 +32,7 @@
               "node_modules/nebular-icons/scss/nebular-icons.scss",
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "node_modules/vis/dist/vis.css",
+              "node_modules/jsoneditor/dist/jsoneditor.min.css",
               "src/assets/styles/styles.scss"
             ],
             "scripts": [

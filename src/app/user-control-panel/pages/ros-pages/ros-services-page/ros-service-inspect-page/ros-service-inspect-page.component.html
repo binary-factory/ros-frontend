@@ -1,3 +1,31 @@
-<p>
-  ros-service-inspect-page works!
-</p>
+<div class="row">
+
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>Service: {{ name }}</nb-card-header>
+    </nb-card>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <nb-card id="paramCard">
+      <nb-card-header>Parameter</nb-card-header>
+      <nb-card-body>
+          <json-editor [options]="editorOptionsParams" [data]="paramData" (change)="getParamData($event)"></json-editor>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
+  <div class="col-12 col-lg-6">
+      <nb-card id="resultCard" [nbSpinner]="loading">
+          <nb-card-header>Ergebnis</nb-card-header>
+          <nb-card-body>
+              <json-editor [options]="editorOptionsResult" [data]="resultData"></json-editor>
+          </nb-card-body>
+        </nb-card>
+  </div>
+
+  <div class="col-12">
+      <button [disabled]="loading" (click)="callService()" nbButton fullWidth status="info">Senden</button>
+  </div>
+
+</div>

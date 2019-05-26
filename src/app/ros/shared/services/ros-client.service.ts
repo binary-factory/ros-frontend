@@ -59,7 +59,6 @@ export class ROSClientService {
   applyRequestResponseOptions<T>(source: Observable<T> | Subject<T>, options?: ROSRequestResponseOptions) {
     options = Object.assign(ROSDefaultRequestResponseOptions, options || {});
     source = this.applyRequestOptions(source, options);
-
     if (options.timeout > 0) {
       return source.pipe(timeout(options.timeout));
     } else {
