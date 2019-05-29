@@ -5,7 +5,7 @@ import { ROSClientService } from '../../../ros/shared/services/ros-client.servic
 import { ROSTopicService } from '../../../ros/shared/services/ros-topic.service';
 import { GamepadService } from '../../../gamepad/gamepad.service';
 import { Subscription } from 'rxjs';
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment';
 
 interface CardSettings {
   title: string;
