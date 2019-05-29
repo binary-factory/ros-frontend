@@ -25,8 +25,6 @@ export class DashboardPageComponent implements OnDestroy, OnInit {
     private rosTopicService: ROSTopicService,
     private rosClientService: ROSClientService,
     private gamepadService: GamepadService) {
-
-
   }
 
   ngOnInit(): void {

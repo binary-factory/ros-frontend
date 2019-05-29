@@ -36,15 +36,15 @@ interface XboxControllerInputs {
 })
 export class GamepadService {
 
-  readonly fpsPolling: number = 25;
+  readonly fpsPolling: number = environment.controller.fpsPolling;
 
-  readonly deadZoneX: number = 0.2;
+  readonly deadZoneX: number = environment.controller.deadZoneX;
 
-  readonly deadZoneY: number = 0.2;
+  readonly deadZoneY: number = environment.controller.deadZoneY;
 
-  readonly speedAngular: number = 2;
+  readonly speedAngular: number = environment.controller.speedAngular;
 
-  readonly speedLinear: number = 2;
+  readonly speedLinear: number = environment.controller.speedLinear;
 
   private gamepads: Gamepad[] = [];
 
@@ -61,7 +61,7 @@ export class GamepadService {
     this.eventManager.addGlobalEventListener('window', 'gamepadconnected', this.handleGamepadConnected.bind(this));
     this.eventManager.addGlobalEventListener('window', 'gamepaddisconnected', this.handleGamepadDisconnected.bind(this));
 
-    this.controlTopic = this.rosTopicService.createTopicSubject(environment.controlTopic);
+    this.controlTopic = this.rosTopicService.createTopicSubject(environment.controller.topic);
   }
 
   get gamepads$() {

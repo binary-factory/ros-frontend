@@ -7,9 +7,16 @@ export const environment = {
   production: true,
   rosbridgeUrl: 'wss://robot:9090',
   webRTCUrl: 'https://robot:8443',
-  controlTopic: {
-    name: '/robot0/cmd_vel',
-    messageType: 'geometry_msgs/Twist'
+  controller: {
+    fpsPolling: 5,
+    speedAngular: 1,
+    speedLinear: 1,
+    deadZoneX: 0.2,
+    deadZoneY: 0.2,
+    topic: {
+      name: '/robot0/cmd_vel',
+      messageType: 'geometry_msgs/Twist'
+    }
   },
   batteryTopic12v: {
     name: '/12V/battery_lvl',
