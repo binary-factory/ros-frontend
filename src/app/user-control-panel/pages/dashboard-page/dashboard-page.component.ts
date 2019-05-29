@@ -7,11 +7,6 @@ import { GamepadService } from '../../../gamepad/gamepad.service';
 import { Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
-interface CardSettings {
-  title: string;
-  iconClass: string;
-  type: string;
-}
 
 @Component({
   selector: 'ngx-dashboard',
