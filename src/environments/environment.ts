@@ -11,7 +11,16 @@
 export const environment = {
   production: false,
   rosbridgeUrl: 'wss://virtualbox:9090',
-  webRTCUrl: 'https://robot:8443',
+  webrtc: {
+    url: 'https://robot:8443',
+    media: {
+      audio: true,
+      video: {
+        width: 1280,
+        height: 720
+      }
+    }
+  },
   controller: {
     fpsPolling: 5,
     speedAngular: 1,

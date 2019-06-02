@@ -60,11 +60,12 @@ export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 0);
 
     this.webRtc = new SimpleWebRTC({
-      url: environment.webRTCUrl,
+      url: environment.webrtc.url,
       localVideoEl: this.localVideoId,
       remoteVideosEl: 'remoteVideos',
       autoRemoveVideos: false,
-      autoRequestMedia: true
+      autoRequestMedia: true,
+      media: environment.webrtc.media
     });
 
     this.webRtc.on('readyToCall', () => {

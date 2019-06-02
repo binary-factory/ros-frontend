@@ -18,11 +18,12 @@ export class TprVideoPageComponent implements AfterViewInit {
   ngAfterViewInit() {
     (this.spinnerService as any).hideSpinner();
     this.webRtc = new SimpleWebRTC({
-      url: environment.webRTCUrl,
+      url: environment.webrtc.url,
       localVideoEl: 'localVideo',
       remoteVideosEl: 'remoteVideos',
       autoRemoveVideos: true,
-      autoRequestMedia: true
+      autoRequestMedia: true,
+      media: environment.webrtc.media
     });
 
     this.webRtc.on('readyToCall', () => {
